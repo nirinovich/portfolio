@@ -1,5 +1,6 @@
 # build output
 dist/
+.agents/skills
 
 # generated types
 .astro/
