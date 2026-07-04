@@ -9,7 +9,7 @@ import { Icon } from 'astro-icon/components';
       
       <!-- Profile Image Card -->
       <div class="flex-shrink-0">
-        <div class="w-72 h-[22rem] bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="profile-card w-72 h-[22rem] bg-white rounded-2xl shadow-lg overflow-hidden" style="opacity: 0;">
           <img 
             src="/Design sans titre (1).png" 
             alt="Nikita Nirinovich" 
@@ -20,47 +20,47 @@ import { Icon } from 'astro-icon/components';
 
       <!-- Content -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left">
-        <h1 class="text-5xl md:text-6xl font-bold text-[#2d3748] tracking-tight">
+        <h1 class="hero-name text-5xl md:text-6xl font-bold text-[#2d3748] tracking-tight" style="opacity: 0;">
           Nikita Nirinovich
         </h1>
         
-        <p class="text-xl md:text-2xl text-[#718096] mt-3 font-medium flex items-center gap-2">
+        <p class="hero-subtitle text-xl md:text-2xl text-[#718096] mt-3 font-medium flex items-center gap-2" style="opacity: 0;">
           CS Student @
           <a href="https://esti.mg/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg px-3 py-1 flex items-center justify-center shadow-sm hover:shadow-md hover:scale-105 transition-all">
             <img src="/logo-ESTI1-foot.svg" alt="ESTI" class="h-7 inline-block" />
           </a>
         </p>
         
-        <p class="text-base md:text-lg text-[#4a5568] mt-6 max-w-lg leading-relaxed">
+        <p class="hero-p1 text-base md:text-lg text-[#4a5568] mt-6 max-w-lg leading-relaxed" style="opacity: 0;">
           À la fois <strong class="text-[#2d3748] font-semibold">étudiant</strong>, <strong class="text-[#2d3748] font-semibold">développeur web</strong> et <strong class="text-[#2d3748] font-semibold">visionnaire</strong> : je vous partage mon parcours dans le monde de l'informatique.
         </p>
-        <p class="text-sm md:text-base text-[#718096] mt-3 max-w-lg leading-relaxed italic">
-          Ce portfolio abrite mes <strong class="text-[#4a5568] not-italic font-semibold">projets</strong>, des <strong class="text-[#4a5568] not-italic font-semibold">mini-jeux</strong> et un <strong class="text-[#4a5568] not-italic font-semibold">OS interactif</strong> à explorer.
+        <p class="hero-p2 text-sm md:text-base text-[#718096] mt-3 max-w-lg leading-relaxed italic" style="opacity: 0;">
+          Ce portfolio abrite mes projets, des mini-jeux et un OS Windows XP interactif à explorer.
         </p>
 
         <!-- Navigation Links -->
         <div class="flex items-center justify-between w-full mt-10">
-          <nav class="flex items-center gap-8">
-            <a href="#work" class="relative text-[#4a5568] hover:text-[#2d3748] transition-colors text-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#2d3748] after:transition-all after:duration-300 hover:after:w-full">
+          <nav class="flex items-center gap-3">
+            <a href="#work" class="nav-link text-[#4a5568] hover:text-[#2d3748] text-base px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-[#dde3ec] transition-all duration-200" style="opacity: 0;">
               work
             </a>
-            <a href="#projects" class="relative text-[#4a5568] hover:text-[#2d3748] transition-colors text-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#2d3748] after:transition-all after:duration-300 hover:after:w-full">
+            <a href="#projects" class="nav-link text-[#4a5568] hover:text-[#2d3748] text-base px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-[#dde3ec] transition-all duration-200" style="opacity: 0;">
               projects
             </a>
-            <a href="#resume" class="relative text-[#4a5568] hover:text-[#2d3748] transition-colors text-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#2d3748] after:transition-all after:duration-300 hover:after:w-full">
+            <a href="/resume.pdf" target="_blank" class="nav-link text-[#4a5568] hover:text-[#2d3748] text-base px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-[#dde3ec] transition-all duration-200" style="opacity: 0;">
               resume
             </a>
           </nav>
 
           <!-- Social Icons -->
           <div class="flex items-center gap-5">
-            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="text-[#4a5568] hover:text-[#2d3748] transition-colors">
+            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;">
               <Icon name="mdi:github" class="w-6 h-6" />
             </a>
-            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="text-[#4a5568] hover:text-[#2d3748] transition-colors">
+            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;">
               <Icon name="mdi:linkedin" class="w-6 h-6" />
             </a>
-            <a href="mailto:nikita@nirinovich.com" class="text-[#4a5568] hover:text-[#2d3748] transition-colors">
+            <a href="mailto:nikita@nirinovich.com" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;">
               <Icon name="mdi:email" class="w-6 h-6" />
             </a>
           </div>
