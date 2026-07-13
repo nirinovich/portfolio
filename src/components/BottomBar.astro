@@ -1,0 +1,56 @@
+---
+import { Icon } from 'astro-icon/components';
+import { useTranslations, type Locale } from '../i18n/translations';
+
+const locale = (Astro.currentLocale ?? 'fr') as Locale;
+const t = useTranslations(locale);
+const currentPath = Astro.url.pathname;
+const basePath = currentPath.replace(/^\/en(\/|$)/, '/');
+const prefix = locale === 'en' ? '/en' : '';
+
+const langSwitchHref = locale === 'en'
+  ? basePath
+  : `/en${basePath === '/' ? '' : basePath}`;
+
+const tabs = [
+  { href: prefix + '/', icon: 'mdi:home', key: 'nav.home' as const, match: '/' },
+  { href: prefix + '/about', icon: 'mdi:account', key: 'nav.about' as const, match: '/about' },
+  { href: prefix + '/blog', icon: 'mdi:post-outline', key: 'nav.blog' as const, match: '/blog' },
+  { href: prefix + '/contact', icon: 'mdi:email-outline', key: 'nav.contact' as const, match: '/contact' },
+];
+---
+
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-t border-[#dde3ec]/60 safe-bottom">
+  <div class="max-w-lg mx-auto flex items-center justify-around px-2 py-2">
+    {tabs.map(tab => {
+      const isActive = basePath === tab.match || (tab.match !== '/' && basePath.startsWith(tab.match));
+      return (
+        <a
+          href={tab.href}
+          class:list={[
+            'flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all duration-200 min-w-[3rem]',
+            isActive
+              ? 'text-[#2d3748]'
+              : 'text-[#718096] hover:text-[#2d3748]',
+          ]}
+        >
+          <Icon name={tab.icon} class="w-5 h-5" />
+          <span class="text-[10px] font-medium">{t(tab.key)}</span>
+        </a>
+      );
+    })}
+    <a
+      href={langSwitchHref}
+      class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl text-[#718096] hover:text-[#2d3748] transition-all duration-200 min-w-[3rem]"
+    >
+      <Icon name="mdi:translate" class="w-5 h-5" />
+      <span class="text-[10px] font-medium">{locale === 'fr' ? 'EN' : 'FR'}</span>
+    </a>
+  </div>
+</nav>
+
+<style>
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+</style>

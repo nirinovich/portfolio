@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
-import FloatingNav from '../components/FloatingNav.astro';
-import NavSelector from '../components/NavSelector.astro';
+import BottomBar from '../components/BottomBar.astro';
 import { useTranslations, type Locale } from '../i18n/translations';
 
 interface Props {
@@ -20,7 +19,7 @@ const alternateEn = `/en${basePath === '/' ? '' : basePath}`;
 <html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="alternate" hreflang="fr" href={alternateFr} />
@@ -28,10 +27,9 @@ const alternateEn = `/en${basePath === '/' ? '' : basePath}`;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
-		<FloatingNav />
-		<NavSelector />
+	<body class="pb-16">
 		<slot />
+		<BottomBar />
 		<script>
 			import '../scripts/animations.js';
 		</script>

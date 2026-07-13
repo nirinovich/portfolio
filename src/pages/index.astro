@@ -9,6 +9,17 @@ const t = useTranslations(locale);
 
 const allProjects = await getCollection('projects');
 const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const techStack = [
+  { name: 'React', icon: 'mdi:react' },
+  { name: 'JavaScript', icon: 'mdi:language-javascript' },
+  { name: 'TypeScript', icon: 'mdi:language-typescript' },
+  { name: 'Django', icon: 'mdi:language-python' },
+  { name: 'Firebase', icon: 'mdi:firebase' },
+  { name: 'Git', icon: 'mdi:git' },
+  { name: 'Tailwind CSS', icon: 'mdi:tailwind' },
+  { name: 'Node.js', icon: 'mdi:nodejs' },
+];
 ---
 
 <Layout>
@@ -16,18 +27,12 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
   <section id="hero" class="min-h-screen bg-[#e8ecf1] flex items-center justify-center px-8 relative">
     <div class="max-w-4xl w-full flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16">
       
-      <!-- Profile Image Card -->
       <div class="flex-shrink-0">
         <div class="profile-card w-72 h-[22rem] bg-white rounded-2xl shadow-lg overflow-hidden" style="opacity: 0;">
-          <img 
-            src="/profile.png" 
-            alt="Nikita Nirinovich" 
-            class="w-full h-full object-cover"
-          />
+          <img src="/profile.png" alt="Nikita Nirinovich" class="w-full h-full object-cover" />
         </div>
       </div>
 
-      <!-- Content -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left">
         <h1 class="hero-name text-5xl md:text-6xl font-bold text-[#2d3748] tracking-tight" style="opacity: 0;">
           Nikita Nirinovich
@@ -45,7 +50,6 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
           {t('hero.bio2')}
         </p>
 
-        <!-- Navigation Links -->
         <div class="flex items-center justify-between w-full mt-10">
           <nav class="flex items-center gap-3">
             <a href="#work" class="nav-link text-[#4a5568] hover:text-[#2d3748] text-base px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-[#dde3ec] transition-all duration-200" style="opacity: 0;">
@@ -58,29 +62,70 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
               {t('nav.resume')}
             </a>
           </nav>
-
-          <!-- Social Icons -->
           <div class="flex items-center gap-5">
-            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;">
-              <Icon name="mdi:github" class="w-6 h-6" />
-            </a>
-            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;">
-              <Icon name="mdi:linkedin" class="w-6 h-6" />
-            </a>
-            <a href="mailto:nikita@nirinovich.com" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;">
-              <Icon name="mdi:email" class="w-6 h-6" />
-            </a>
+            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;"><Icon name="mdi:github" class="w-6 h-6" /></a>
+            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;"><Icon name="mdi:linkedin" class="w-6 h-6" /></a>
+            <a href="mailto:nikita@nirinovich.com" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;"><Icon name="mdi:email" class="w-6 h-6" /></a>
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- Scroll Indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
       <span class="text-xs text-[#718096]">{t('hero.scrollIndicator')}</span>
       <div class="scroll-indicator w-6 h-10 border-2 border-[#718096]/40 rounded-full flex items-start justify-center p-1.5">
         <div class="w-1.5 h-1.5 bg-[#718096]/60 rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section id="featured" class="scroll-reveal py-24 px-8 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-12 text-center">
+        {t('section.featured.title')}
+      </h2>
+      <div class="stagger-container grid grid-cols-1 md:grid-cols-2 gap-8">
+        {sortedProjects.filter(p => ['malitix', 'exotika', 'smartservice'].includes(p.id)).map(project => (
+          <a href={`/projects/${project.id}`} class="stagger-item group block bg-[#e8ecf1] rounded-2xl hover:shadow-xl transition-all duration-300 overflow-hidden">
+            <div class="aspect-video bg-white overflow-hidden flex items-center justify-center p-8">
+              <img src={project.data.thumbnail} alt={project.data.title} class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-2">
+                <h3 class="text-xl font-bold text-[#2d3748] group-hover:text-[#4a5568] transition-colors">{project.data.title}</h3>
+                {project.data.links?.live && (
+                  <span class="text-xs px-2 py-0.5 bg-[#2d3748] text-white rounded-full">Live</span>
+                )}
+              </div>
+              <p class="text-sm text-[#718096] mb-4">{project.data.description}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {project.data.techStack.map(tech => (
+                  <span class="text-xs px-2 py-0.5 bg-white text-[#4a5568] rounded-full">{tech}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Marquee -->
+  <section class="scroll-reveal py-12 bg-[#e8ecf1] overflow-hidden">
+    <div class="max-w-6xl mx-auto px-8 mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-[#2d3748] text-center">
+        {t('section.techStack.title')}
+      </h2>
+    </div>
+    <div class="relative">
+      <div class="flex animate-marquee whitespace-nowrap">
+        {[...techStack, ...techStack].map(tech => (
+          <div class="flex items-center gap-2 mx-8 text-[#718096]">
+            <Icon name={tech.icon} class="w-8 h-8" />
+            <span class="text-sm font-medium">{tech.name}</span>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -92,10 +137,8 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
         {t('section.work.title')}
       </h2>
       <div class="stagger-container relative">
-        <!-- Timeline line -->
         <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#dde3ec] -translate-x-1/2"></div>
         
-        <!-- eTech -->
         <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
           <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
             <h3 class="text-xl font-semibold text-[#2d3748]">{locale === 'fr' ? 'Alternant : Marketing Analyst & Développeur Web' : 'Intern: Marketing Analyst & Web Developer'}</h3>
@@ -104,12 +147,11 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
           <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-[#4a5568] rounded-full -translate-x-1/2 mt-1.5 border-2 border-white"></div>
           <div class="md:w-1/2 md:pl-12 pl-12">
             <span class="text-sm text-[#718096]">{locale === 'fr' ? 'Septembre 2025 — Mars 2026' : 'September 2025 — March 2026'}</span>
-            <p class="text-[#4a5568] mt-2">{locale === 'fr' ? "Assistant de l'équipe commerciale locale et offshore. Conception de propositions commerciales. Création d'une plateforme web pour l'acquisition de clients offshore." : "Local and offshore commercial team assistant. Designed commercial proposals. Built a web platform for offshore client acquisition."}</p>
+            <p class="text-[#4a5568] mt-2">{locale === 'fr' ? "Assistant de l'équipe commerciale locale et offshore. Création d'une plateforme web pour l'acquisition de clients offshore." : "Local and offshore commercial team assistant. Built a web platform for offshore client acquisition."}</p>
             <a href="https://malitix.com" target="_blank" rel="noopener noreferrer" class="text-sm text-[#718096] hover:text-[#2d3748] transition-colors mt-1 inline-block">malitix.com</a>
           </div>
         </div>
 
-        <!-- Exotika -->
         <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
           <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
             <h3 class="text-xl font-semibold text-[#2d3748]">{locale === 'fr' ? 'Développeur React & JavaScript' : 'React & JavaScript Developer'}</h3>
@@ -123,7 +165,6 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
           </div>
         </div>
 
-        <!-- L'Art Blanc -->
         <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
           <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
             <h3 class="text-xl font-semibold text-[#2d3748]">{locale === 'fr' ? 'Community Manager' : 'Community Manager'}</h3>
@@ -139,7 +180,7 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- All Projects Section -->
   <section id="projects" class="scroll-reveal py-24 px-8 bg-[#e8ecf1]">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-12 text-center">
@@ -159,11 +200,6 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
                   <span class="text-xs px-2 py-0.5 bg-[#dde3ec] text-[#4a5568] rounded-full">{tech}</span>
                 ))}
               </div>
-              <div class="flex flex-wrap gap-1.5 mt-2">
-                {project.data.tags.map(tag => (
-                  <span class="text-xs px-2 py-0.5 bg-[#2d3748]/10 text-[#2d3748] rounded-full">#{tag}</span>
-                ))}
-              </div>
             </div>
           </a>
         ))}
@@ -171,3 +207,13 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
     </div>
   </section>
 </Layout>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+</style>
