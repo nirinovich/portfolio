@@ -17,3 +17,5 @@ Terms specific to this portfolio website project.
 | **Timeline** | The visual representation of work experience entries, showing company, role, dates, and description in chronological order. |
 | **Blog** | Markdown-based blog posts stored in `src/content/blog/`, with index and individual post pages. |
 | **Contact page** | Static page at `/contact` with direct links (email, LinkedIn, GitHub) — no form submission. |
+| **Floating menu** | Navigation component that replaces the fixed navbar. Three variants: Corner FAB, Side Rail, Full-screen Overlay. User selects which to use via A/B testing. |
+| **Nav selector** | A development-only component that lets the user switch between the three floating menu variants to evaluate which works best. |

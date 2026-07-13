@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-import Nav from '../components/Nav.astro';
+import FloatingNav from '../components/FloatingNav.astro';
+import NavSelector from '../components/NavSelector.astro';
 import { useTranslations, type Locale } from '../i18n/translations';
 
 interface Props {
@@ -28,7 +29,8 @@ const alternateEn = `/en${basePath === '/' ? '' : basePath}`;
 		<title>{title}</title>
 	</head>
 	<body>
-		<Nav />
+		<FloatingNav />
+		<NavSelector />
 		<slot />
 		<script>
 			import '../scripts/animations.js';

@@ -95,28 +95,44 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
         <!-- Timeline line -->
         <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#dde3ec] -translate-x-1/2"></div>
         
-        <!-- Timeline items -->
+        <!-- eTech -->
         <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
           <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
-            <h3 class="text-xl font-semibold text-[#2d3748]">Web Developer</h3>
-            <p class="text-[#718096] mt-1">Freelance</p>
+            <h3 class="text-xl font-semibold text-[#2d3748]">{locale === 'fr' ? 'Alternant : Marketing Analyst & Développeur Web' : 'Intern: Marketing Analyst & Web Developer'}</h3>
+            <p class="text-[#718096] mt-1">eTech</p>
           </div>
           <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-[#4a5568] rounded-full -translate-x-1/2 mt-1.5 border-2 border-white"></div>
           <div class="md:w-1/2 md:pl-12 pl-12">
-            <span class="text-sm text-[#718096]">2024 — Present</span>
-            <p class="text-[#4a5568] mt-2">Building web applications and personal projects for clients.</p>
+            <span class="text-sm text-[#718096]">{locale === 'fr' ? 'Septembre 2025 — Mars 2026' : 'September 2025 — March 2026'}</span>
+            <p class="text-[#4a5568] mt-2">{locale === 'fr' ? "Assistant de l'équipe commerciale locale et offshore. Conception de propositions commerciales. Création d'une plateforme web pour l'acquisition de clients offshore." : "Local and offshore commercial team assistant. Designed commercial proposals. Built a web platform for offshore client acquisition."}</p>
+            <a href="https://malitix.com" target="_blank" rel="noopener noreferrer" class="text-sm text-[#718096] hover:text-[#2d3748] transition-colors mt-1 inline-block">malitix.com</a>
           </div>
         </div>
 
+        <!-- Exotika -->
         <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
           <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
-            <h3 class="text-xl font-semibold text-[#2d3748]">CS Student</h3>
-            <p class="text-[#718096] mt-1">ESTI — Université de Fianarantsoa</p>
+            <h3 class="text-xl font-semibold text-[#2d3748]">{locale === 'fr' ? 'Développeur React & JavaScript' : 'React & JavaScript Developer'}</h3>
+            <p class="text-[#718096] mt-1">Exotika.mg</p>
           </div>
           <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-[#4a5568] rounded-full -translate-x-1/2 mt-1.5 border-2 border-white"></div>
           <div class="md:w-1/2 md:pl-12 pl-12">
-            <span class="text-sm text-[#718096]">2022 — Present</span>
-            <p class="text-[#4a5568] mt-2">Studying computer science with a focus on web development and software engineering.</p>
+            <span class="text-sm text-[#718096]">{locale === 'fr' ? 'Juin 2025 — Juillet 2025' : 'June 2025 — July 2025'}</span>
+            <p class="text-[#4a5568] mt-2">{locale === 'fr' ? "Création complète du site internet pour une boutique de vape. Déploiement sur Firebase avec intégration CMS Contentful." : "Built the complete website for a vape shop. Deployed on Firebase with Contentful CMS integration."}</p>
+            <a href="https://exotika.mg" target="_blank" rel="noopener noreferrer" class="text-sm text-[#718096] hover:text-[#2d3748] transition-colors mt-1 inline-block">exotika.mg</a>
+          </div>
+        </div>
+
+        <!-- L'Art Blanc -->
+        <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
+          <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
+            <h3 class="text-xl font-semibold text-[#2d3748]">{locale === 'fr' ? 'Community Manager' : 'Community Manager'}</h3>
+            <p class="text-[#718096] mt-1">L'Art Blanc</p>
+          </div>
+          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-[#4a5568] rounded-full -translate-x-1/2 mt-1.5 border-2 border-white"></div>
+          <div class="md:w-1/2 md:pl-12 pl-12">
+            <span class="text-sm text-[#718096]">{locale === 'fr' ? 'Juillet 2024 — Janvier 2026' : 'July 2024 — January 2026'}</span>
+            <p class="text-[#4a5568] mt-2">{locale === 'fr' ? "Création et publication de contenu digital. Réalisation des éléments graphiques. Élaboration des campagnes publicitaires." : "Created and published digital content. Designed graphic elements. Developed advertising campaigns."}</p>
           </div>
         </div>
       </div>

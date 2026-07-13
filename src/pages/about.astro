@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { useTranslations } from '../i18n/translations';
-import { Icon } from 'astro-icon/components';
 
 const locale = (Astro.currentLocale ?? 'fr') as 'fr' | 'en';
 const t = useTranslations(locale);
@@ -12,43 +11,117 @@ const t = useTranslations(locale);
     <div class="max-w-3xl mx-auto">
       <h1 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-8">{t('about.title')}</h1>
 
+      <!-- Bio -->
       <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
         <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
           <img src="/profile.png" alt="Nikita Nirinovich" class="w-40 h-40 rounded-2xl object-cover shadow-md" />
           <div>
-            <h2 class="text-2xl font-bold text-[#2d3748]">Nikita Nirinovich</h2>
+            <h2 class="text-2xl font-bold text-[#2d3748]">Andrianaritsalama Nikita Nirinovich</h2>
             <p class="text-[#718096] mt-2">
               {locale === 'fr'
-                ? "Étudiant en informatique à ESTI, développeur web passionné par la création d'expériences numériques innovantes."
-                : "Computer Science student at ESTI, web developer passionate about creating innovative digital experiences."}
+                ? "Étudiant en deuxième année de Licence Informatique. Mon objectif est de devenir un ingénieur capable de proposer des solutions technologiques innovantes, tout en ayant un réel impact sur la société."
+                : "Second-year Computer Science student. My goal is to become an engineer capable of proposing innovative technological solutions while having a real impact on society."}
             </p>
+            <div class="flex flex-col gap-1 mt-4 text-sm text-[#718096]">
+              <span>nikita.andrianaritsalama@esti.mg</span>
+              <span>+261 38 62 074 89</span>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Skills -->
       <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
-        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">
-          {locale === 'fr' ? 'Compétences' : 'Skills'}
-        </h2>
+        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">{locale === 'fr' ? 'Compétences Techniques' : 'Technical Skills'}</h2>
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-sm font-medium text-[#718096] mb-2">{locale === 'fr' ? 'Développement Web & Framework' : 'Web Development & Frameworks'}</h3>
+            <div class="flex flex-wrap gap-2">
+              {['React', 'JavaScript', 'Django', 'Odoo'].map(skill => (
+                <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-[#718096] mb-2">SGBD</h3>
+            <div class="flex flex-wrap gap-2">
+              {['MySQL', 'PostgreSQL'].map(skill => (
+                <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-[#718096] mb-2">{locale === 'fr' ? 'Outils' : 'Tools'}</h3>
+            <div class="flex flex-wrap gap-2">
+              {['Git', 'GitHub', 'Firebase'].map(skill => (
+                <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soft Skills -->
+      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">{locale === 'fr' ? 'Soft Skills' : 'Soft Skills'}</h2>
         <div class="flex flex-wrap gap-2">
-          {['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Astro', 'Tailwind CSS', 'GSAP', 'Node.js', 'Git', 'Firebase'].map(skill => (
+          {['LEAN Six Sigma', locale === 'fr' ? 'Excellente Communication' : 'Excellent Communication', 'Business Logic', locale === 'fr' ? 'Polyvalence et adaptation rapide' : 'Versatility and quick adaptation'].map(skill => (
             <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
           ))}
         </div>
       </div>
 
+      <!-- Languages -->
+      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">{locale === 'fr' ? 'Langues' : 'Languages'}</h2>
+        <div class="flex flex-wrap gap-2">
+          {['Français', 'English', 'Русский', 'Malgache'].map(lang => (
+            <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{lang}</span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">{locale === 'fr' ? 'Formation' : 'Education'}</h2>
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <img src="/logo-ESTI1-foot.svg" alt="ESTI" class="h-8 mt-1" />
+            <div>
+              <h3 class="font-semibold text-[#2d3748]">{locale === 'fr' ? 'Licence L2 Informatique en cours' : 'Bachelor\'s L2 Computer Science (in progress)'}</h3>
+              <p class="text-[#718096]">ESTI — Université de Fianarantsoa</p>
+              <p class="text-sm text-[#718096]">2024 — {locale === 'fr' ? 'Présent' : 'Present'}</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 bg-[#dde3ec] rounded-lg flex items-center justify-center mt-1">
+              <span class="text-xs font-bold text-[#4a5568]">CS</span>
+            </div>
+            <div>
+              <h3 class="font-semibold text-[#2d3748]">{locale === 'fr' ? 'Introduction à l\'informatique — Harvard CS50' : 'Introduction to Computer Science — Harvard CS50'}</h3>
+              <p class="text-sm text-[#718096]">{locale === 'fr' ? 'Août 2024' : 'August 2024'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications & Hackathons -->
       <div class="bg-white rounded-2xl shadow-md p-8">
-        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">
-          {locale === 'fr' ? 'Formation' : 'Education'}
-        </h2>
-        <div class="flex items-start gap-4">
-          <img src="/logo-ESTI1-foot.svg" alt="ESTI" class="h-8 mt-1" />
+        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">{locale === 'fr' ? 'Certifications & Hackathons' : 'Certifications & Hackathons'}</h2>
+        <div class="space-y-4">
           <div>
-            <h3 class="font-semibold text-[#2d3748]">
-              {locale === 'fr' ? 'Licence en Informatique' : "Bachelor's in Computer Science"}
-            </h3>
-            <p class="text-[#718096]">ESTI — Université de Fianarantsoa</p>
-            <p class="text-sm text-[#718096]">2022 — {locale === 'fr' ? 'Présent' : 'Present'}</p>
+            <h3 class="font-semibold text-[#2d3748]">{locale === 'fr' ? '3ème place — Hackathon interne ESTI' : '3rd place — ESTI Internal Hackathon'}</h3>
+            <p class="text-[#718096]">{locale === 'fr' ? 'Projet Django' : 'Django Project'}</p>
+            <p class="text-sm text-[#718096]">{locale === 'fr' ? 'Mars 2025' : 'March 2025'}</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#2d3748]">{locale === 'fr' ? 'Hackathon Inter-Universitaire — Techzara' : 'Inter-University Hackathon — Techzara'}</h3>
+            <p class="text-[#718096]">{locale === 'fr' ? 'Création de "SmartService", solution d\'alerte d\'urgence. Développement React + présentation devant 100+ personnes.' : 'Created "SmartService", an emergency alert solution. React development + presentation to 100+ people.'}</p>
+            <p class="text-sm text-[#718096]">{locale === 'fr' ? 'Avril 2025' : 'April 2025'}</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#2d3748]">Pôle Stage — {locale === 'fr' ? 'Syndicat des Industries de Madagascar' : 'Syndicat des Industries de Madagascar'}</h3>
+            <p class="text-sm text-[#718096]">{locale === 'fr' ? 'Mai 2025' : 'May 2025'}</p>
           </div>
         </div>
       </div>
