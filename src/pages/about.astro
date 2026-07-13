@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations } from '../i18n/translations';
+import { Icon } from 'astro-icon/components';
+
+const locale = (Astro.currentLocale ?? 'fr') as 'fr' | 'en';
+const t = useTranslations(locale);
+---
+
+<Layout title={`${t('about.title')} — Nikita Nirinovich`}>
+  <main class="min-h-screen bg-[#e8ecf1] pt-24 pb-16 px-8">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-8">{t('about.title')}</h1>
+
+      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+          <img src="/profile.png" alt="Nikita Nirinovich" class="w-40 h-40 rounded-2xl object-cover shadow-md" />
+          <div>
+            <h2 class="text-2xl font-bold text-[#2d3748]">Nikita Nirinovich</h2>
+            <p class="text-[#718096] mt-2">
+              {locale === 'fr'
+                ? "Étudiant en informatique à ESTI, développeur web passionné par la création d'expériences numériques innovantes."
+                : "Computer Science student at ESTI, web developer passionate about creating innovative digital experiences."}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">
+          {locale === 'fr' ? 'Compétences' : 'Skills'}
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Astro', 'Tailwind CSS', 'GSAP', 'Node.js', 'Git', 'Firebase'].map(skill => (
+            <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-8">
+        <h2 class="text-xl font-semibold text-[#2d3748] mb-4">
+          {locale === 'fr' ? 'Formation' : 'Education'}
+        </h2>
+        <div class="flex items-start gap-4">
+          <img src="/logo-ESTI1-foot.svg" alt="ESTI" class="h-8 mt-1" />
+          <div>
+            <h3 class="font-semibold text-[#2d3748]">
+              {locale === 'fr' ? 'Licence en Informatique' : "Bachelor's in Computer Science"}
+            </h3>
+            <p class="text-[#718096]">ESTI — Université de Fianarantsoa</p>
+            <p class="text-sm text-[#718096]">2022 — {locale === 'fr' ? 'Présent' : 'Present'}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

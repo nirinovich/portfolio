@@ -1,0 +1,110 @@
+---
+import { useTranslations, type Locale } from '../i18n/translations';
+
+const locale = (Astro.currentLocale ?? 'fr') as Locale;
+const t = useTranslations(locale);
+const currentPath = Astro.url.pathname;
+
+const basePath = currentPath.replace(/^\/en(\/|$)/, '/');
+
+const navLinks = [
+  { href: basePath === '/' ? '#hero' : '/', key: 'nav.home' as const },
+  { href: '#work', key: 'nav.work' as const },
+  { href: '#projects', key: 'nav.projects' as const },
+  { href: '/about', key: 'nav.about' as const },
+  { href: '/blog', key: 'nav.blog' as const },
+  { href: '/games', key: 'nav.games' as const },
+  { href: '/contact', key: 'nav.contact' as const },
+];
+
+const prefix = locale === 'en' ? '/en' : '';
+
+const langSwitchHref = locale === 'en'
+  ? basePath
+  : `/en${basePath === '/' ? '' : basePath}`;
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#e8ecf1]/80 backdrop-blur-md border-b border-[#dde3ec]/50">
+  <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+    <a href={prefix + '/'} class="text-lg font-bold text-[#2d3748] hover:text-[#4a5568] transition-colors">
+      nirinovich
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-1">
+      {navLinks.map(link => {
+        const href = link.href.startsWith('#')
+          ? (basePath === '/' ? link.href : '/' + link.href)
+          : prefix + link.href;
+        const isActive = !link.href.startsWith('#') && basePath === link.href;
+        return (
+          <a
+            href={href}
+            class:list={[
+              'text-sm px-3 py-1.5 rounded-lg transition-all duration-200',
+              isActive
+                ? 'text-[#2d3748] bg-[#dde3ec] font-medium'
+                : 'text-[#718096] hover:text-[#2d3748] hover:bg-[#dde3ec]/60',
+            ]}
+          >
+            {t(link.key)}
+          </a>
+        );
+      })}
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        class="text-sm px-3 py-1.5 rounded-lg text-[#718096] hover:text-[#2d3748] hover:bg-[#dde3ec]/60 transition-all duration-200"
+      >
+        {t('nav.resume')}
+      </a>
+      <a
+        href={langSwitchHref}
+        class="text-sm px-3 py-1.5 rounded-lg text-[#718096] hover:text-[#2d3748] hover:bg-[#dde3ec]/60 transition-all duration-200 ml-1 border-l border-[#dde3ec]"
+      >
+        {t('language.switch')}
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="nav-toggle"
+      class="md:hidden text-[#4a5568] hover:text-[#2d3748] p-2"
+      aria-label="Toggle navigation"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="nav-mobile" class="hidden md:hidden bg-[#e8ecf1]/95 backdrop-blur-md border-t border-[#dde3ec]/50">
+    <div class="flex flex-col px-6 py-4 gap-2">
+      {navLinks.map(link => {
+        const href = link.href.startsWith('#')
+          ? (basePath === '/' ? link.href : '/' + link.href)
+          : prefix + link.href;
+        return (
+          <a href={href} class="text-sm text-[#718096] hover:text-[#2d3748] py-2 transition-colors">
+            {t(link.key)}
+          </a>
+        );
+      })}
+      <a href="/resume.pdf" target="_blank" class="text-sm text-[#718096] hover:text-[#2d3748] py-2 transition-colors">
+        {t('nav.resume')}
+      </a>
+      <a href={langSwitchHref} class="text-sm text-[#718096] hover:text-[#2d3748] py-2 transition-colors border-t border-[#dde3ec] mt-2 pt-3">
+        {t('language.switch')}
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const mobileMenu = document.getElementById('nav-mobile');
+  toggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

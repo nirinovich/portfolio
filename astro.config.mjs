@@ -5,7 +5,14 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-	vite: {
+  i18n: {
+    locales: ["fr", "en"],
+    defaultLocale: "fr",
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
+  vite: {
     plugins: [tailwindcss()]
   },
   integrations: [icon()]

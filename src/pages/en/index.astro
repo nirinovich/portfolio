@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
-import { useTranslations } from '../i18n/translations';
+import { useTranslations } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
 
-const locale = (Astro.currentLocale ?? 'fr') as 'fr' | 'en';
+const locale = (Astro.currentLocale ?? 'en') as 'fr' | 'en';
 const t = useTranslations(locale);
 
 const allProjects = await getCollection('projects');
@@ -131,7 +131,7 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
       </h2>
       <div class="stagger-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sortedProjects.map(project => (
-          <a href={`/projects/${project.id}`} class="stagger-item group block bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+          <a href={`/en/projects/${project.id}`} class="stagger-item group block bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
             <div class="aspect-video bg-[#dde3ec] overflow-hidden">
               <img src={project.data.thumbnail} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             </div>
