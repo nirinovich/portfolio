@@ -30,18 +30,18 @@ const tabs = [
           class:list={[
             'flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all duration-200 min-w-[3rem]',
             isActive
-              ? 'text-[#2d3748]'
-              : 'text-[#718096] hover:text-[#2d3748]',
+              ? 'text-accent'
+              : 'text-[#718096] hover:text-accent',
           ]}
         >
           <Icon name={tab.icon} class="w-5 h-5" />
-          <span class="text-[10px] font-medium">{t(tab.key)}</span>
+          <span class:list={['text-[10px] font-medium', isActive && 'font-semibold']}>{t(tab.key)}</span>
         </a>
       );
     })}
     <a
       href={langSwitchHref}
-      class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl text-[#718096] hover:text-[#2d3748] transition-all duration-200 min-w-[3rem]"
+      class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl text-[#718096] hover:text-accent transition-all duration-200 min-w-[3rem]"
     >
       <Icon name="mdi:translate" class="w-5 h-5" />
       <span class="text-[10px] font-medium">{locale === 'fr' ? 'EN' : 'FR'}</span>

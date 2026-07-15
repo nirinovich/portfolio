@@ -8,39 +8,39 @@ const t = useTranslations(locale);
 ---
 
 <Layout title={`${t('contact.title')} — Nikita Nirinovich`}>
-  <main class="min-h-screen bg-[#e8ecf1] pt-24 pb-16 px-8">
+  <main class="min-h-screen bg-[#e8ecf1] pt-24 pb-16 px-4 md:px-8">
     <div class="max-w-2xl mx-auto">
       <h1 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-4">{t('contact.title')}</h1>
-      <p class="text-[#718096] mb-12 text-lg">{t('contact.description')}</p>
+      <p class="text-[#718096] mb-10 md:mb-12 text-lg">{t('contact.description')}</p>
 
       <div class="space-y-4">
-        <a href="mailto:nikita@nirinovich.com" class="flex items-center gap-4 bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow group">
-          <div class="w-12 h-12 bg-[#dde3ec] rounded-xl flex items-center justify-center group-hover:bg-[#2d3748] transition-colors">
-            <Icon name="mdi:email" class="w-6 h-6 text-[#4a5568] group-hover:text-white transition-colors" />
+        <a href="mailto:nikita@nirinovich.com" class="flex items-center gap-4 bg-white rounded-2xl shadow-md p-5 md:p-6 hover:shadow-lg transition-all group border border-transparent hover:border-accent/20">
+          <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center group-hover:bg-accent transition-colors shrink-0">
+            <Icon name="mdi:email" class="w-6 h-6 text-accent group-hover:text-white transition-colors" />
           </div>
-          <div>
+          <div class="min-w-0">
             <h3 class="font-semibold text-[#2d3748]">{t('contact.email')}</h3>
-            <p class="text-[#718096]">nikita@nirinovich.com</p>
+            <p class="text-[#718096] truncate">nikita@nirinovich.com</p>
           </div>
         </a>
 
-        <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow group">
-          <div class="w-12 h-12 bg-[#dde3ec] rounded-xl flex items-center justify-center group-hover:bg-[#2d3748] transition-colors">
-            <Icon name="mdi:linkedin" class="w-6 h-6 text-[#4a5568] group-hover:text-white transition-colors" />
+        <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white rounded-2xl shadow-md p-5 md:p-6 hover:shadow-lg transition-all group border border-transparent hover:border-accent/20">
+          <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center group-hover:bg-accent transition-colors shrink-0">
+            <Icon name="mdi:linkedin" class="w-6 h-6 text-accent group-hover:text-white transition-colors" />
           </div>
-          <div>
+          <div class="min-w-0">
             <h3 class="font-semibold text-[#2d3748]">{t('contact.linkedin')}</h3>
-            <p class="text-[#718096]">linkedin.com/in/nirinovich</p>
+            <p class="text-[#718096] truncate">linkedin.com/in/nirinovich</p>
           </div>
         </a>
 
-        <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow group">
-          <div class="w-12 h-12 bg-[#dde3ec] rounded-xl flex items-center justify-center group-hover:bg-[#2d3748] transition-colors">
-            <Icon name="mdi:github" class="w-6 h-6 text-[#4a5568] group-hover:text-white transition-colors" />
+        <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white rounded-2xl shadow-md p-5 md:p-6 hover:shadow-lg transition-all group border border-transparent hover:border-accent/20">
+          <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center group-hover:bg-accent transition-colors shrink-0">
+            <Icon name="mdi:github" class="w-6 h-6 text-accent group-hover:text-white transition-colors" />
           </div>
-          <div>
+          <div class="min-w-0">
             <h3 class="font-semibold text-[#2d3748]">{t('contact.github')}</h3>
-            <p class="text-[#718096]">github.com/nirinovich</p>
+            <p class="text-[#718096] truncate">github.com/nirinovich</p>
           </div>
         </a>
       </div>

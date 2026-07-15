@@ -7,15 +7,15 @@ const t = useTranslations(locale);
 ---
 
 <Layout title={`${t('about.title')} — Nikita Nirinovich`}>
-  <main class="min-h-screen bg-[#e8ecf1] pt-24 pb-16 px-8">
+  <main class="min-h-screen bg-[#e8ecf1] pt-24 pb-16 px-4 md:px-8">
     <div class="max-w-3xl mx-auto">
       <h1 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-8">{t('about.title')}</h1>
 
-      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
-        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
-          <img src="/profile.png" alt="Nikita Nirinovich" class="w-40 h-40 rounded-2xl object-cover shadow-md" />
+      <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 mb-8">
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
+          <img src="/profile.png" alt="Nikita Nirinovich" class="w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover shadow-md" />
           <div>
-            <h2 class="text-2xl font-bold text-[#2d3748]">Andrianaritsalama Nikita Nirinovich</h2>
+            <h2 class="text-xl md:text-2xl font-bold text-[#2d3748]">Andrianaritsalama Nikita Nirinovich</h2>
             <p class="text-[#718096] mt-2">
               Second-year Computer Science student. My goal is to become an engineer capable of proposing innovative technological solutions while having a real impact on society.
             </p>
@@ -27,14 +27,14 @@ const t = useTranslations(locale);
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+      <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 mb-8">
         <h2 class="text-xl font-semibold text-[#2d3748] mb-4">Technical Skills</h2>
         <div class="space-y-4">
           <div>
             <h3 class="text-sm font-medium text-[#718096] mb-2">Web Development & Frameworks</h3>
             <div class="flex flex-wrap gap-2">
               {['React', 'JavaScript', 'Django', 'Odoo'].map(skill => (
-                <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
+                <span class="px-3 py-1.5 bg-accent-light text-accent-dark rounded-full text-sm font-medium">{skill}</span>
               ))}
             </div>
           </div>
@@ -42,7 +42,7 @@ const t = useTranslations(locale);
             <h3 class="text-sm font-medium text-[#718096] mb-2">Databases</h3>
             <div class="flex flex-wrap gap-2">
               {['MySQL', 'PostgreSQL'].map(skill => (
-                <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
+                <span class="px-3 py-1.5 bg-accent-light text-accent-dark rounded-full text-sm font-medium">{skill}</span>
               ))}
             </div>
           </div>
@@ -50,32 +50,32 @@ const t = useTranslations(locale);
             <h3 class="text-sm font-medium text-[#718096] mb-2">Tools</h3>
             <div class="flex flex-wrap gap-2">
               {['Git', 'GitHub', 'Firebase'].map(skill => (
-                <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
+                <span class="px-3 py-1.5 bg-accent-light text-accent-dark rounded-full text-sm font-medium">{skill}</span>
               ))}
             </div>
           </div>
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+      <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 mb-8">
         <h2 class="text-xl font-semibold text-[#2d3748] mb-4">Soft Skills</h2>
         <div class="flex flex-wrap gap-2">
           {['LEAN Six Sigma', 'Excellent Communication', 'Business Logic', 'Versatility and quick adaptation'].map(skill => (
-            <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{skill}</span>
+            <span class="px-3 py-1.5 bg-accent-ghost text-[#4a5568] rounded-full text-sm">{skill}</span>
           ))}
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+      <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 mb-8">
         <h2 class="text-xl font-semibold text-[#2d3748] mb-4">Languages</h2>
         <div class="flex flex-wrap gap-2">
           {['Français', 'English', 'Русский', 'Malgache'].map(lang => (
-            <span class="px-3 py-1.5 bg-[#dde3ec] text-[#4a5568] rounded-full text-sm">{lang}</span>
+            <span class="px-3 py-1.5 bg-accent-ghost text-[#4a5568] rounded-full text-sm">{lang}</span>
           ))}
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-md p-8 mb-8">
+      <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 mb-8">
         <h2 class="text-xl font-semibold text-[#2d3748] mb-4">Education</h2>
         <div class="space-y-4">
           <div class="flex items-start gap-4">
@@ -83,37 +83,37 @@ const t = useTranslations(locale);
             <div>
               <h3 class="font-semibold text-[#2d3748]">Bachelor's L2 Computer Science (in progress)</h3>
               <p class="text-[#718096]">ESTI — Université de Fianarantsoa</p>
-              <p class="text-sm text-[#718096]">2024 — Present</p>
+              <p class="text-sm text-accent font-medium">2024 — Present</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
-            <div class="w-8 h-8 bg-[#dde3ec] rounded-lg flex items-center justify-center mt-1">
-              <span class="text-xs font-bold text-[#4a5568]">CS</span>
+            <div class="w-8 h-8 bg-accent-light rounded-lg flex items-center justify-center mt-1">
+              <span class="text-xs font-bold text-accent-dark">CS</span>
             </div>
             <div>
               <h3 class="font-semibold text-[#2d3748]">Introduction to Computer Science — Harvard CS50</h3>
-              <p class="text-sm text-[#718096]">August 2024</p>
+              <p class="text-sm text-accent font-medium">August 2024</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-md p-8">
+      <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
         <h2 class="text-xl font-semibold text-[#2d3748] mb-4">Certifications & Hackathons</h2>
         <div class="space-y-4">
-          <div>
+          <div class="pl-4 border-l-2 border-accent">
             <h3 class="font-semibold text-[#2d3748]">3rd place — ESTI Internal Hackathon</h3>
             <p class="text-[#718096]">Django Project</p>
-            <p class="text-sm text-[#718096]">March 2025</p>
+            <p class="text-sm text-accent font-medium">March 2025</p>
           </div>
-          <div>
+          <div class="pl-4 border-l-2 border-accent">
             <h3 class="font-semibold text-[#2d3748]">Inter-University Hackathon — Techzara</h3>
             <p class="text-[#718096]">Created "SmartService", an emergency alert solution. React development + presentation to 100+ people.</p>
-            <p class="text-sm text-[#718096]">April 2025</p>
+            <p class="text-sm text-accent font-medium">April 2025</p>
           </div>
-          <div>
+          <div class="pl-4 border-l-2 border-accent">
             <h3 class="font-semibold text-[#2d3748]">Pôle Stage — Syndicat des Industries de Madagascar</h3>
-            <p class="text-sm text-[#718096]">May 2025</p>
+            <p class="text-sm text-accent font-medium">May 2025</p>
           </div>
         </div>
       </div>

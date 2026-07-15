@@ -24,16 +24,16 @@ const techStack = [
 
 <Layout>
   <!-- Hero Section -->
-  <section id="hero" class="min-h-screen bg-[#e8ecf1] flex items-center justify-center px-8 relative">
+  <section id="hero" class="min-h-screen bg-[#e8ecf1] flex items-center justify-center px-4 md:px-8 relative">
     <div class="max-w-4xl w-full flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16">
       <div class="flex-shrink-0">
-        <div class="profile-card w-72 h-[22rem] bg-white rounded-2xl shadow-lg overflow-hidden" style="opacity: 0;">
+        <div class="profile-card w-56 h-[17rem] md:w-72 md:h-[22rem] bg-white rounded-2xl shadow-lg overflow-hidden" style="opacity: 0;">
           <img src="/profile.png" alt="Nikita Nirinovich" class="w-full h-full object-cover" />
         </div>
       </div>
       <div class="flex flex-col items-center md:items-start text-center md:text-left">
-        <h1 class="hero-name text-5xl md:text-6xl font-bold text-[#2d3748] tracking-tight" style="opacity: 0;">Nikita Nirinovich</h1>
-        <p class="hero-subtitle text-xl md:text-2xl text-[#718096] mt-3 font-medium flex items-center gap-2" style="opacity: 0;">
+        <h1 class="hero-name text-4xl md:text-6xl font-bold text-[#2d3748] tracking-tight" style="opacity: 0;">Nikita Nirinovich</h1>
+        <p class="hero-subtitle text-lg md:text-2xl text-[#718096] mt-3 font-medium flex items-center gap-2" style="opacity: 0;">
           CS Student @
           <a href="https://esti.mg/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg px-3 py-1 flex items-center justify-center shadow-sm hover:shadow-md hover:scale-105 transition-all">
             <img src="/logo-ESTI1-foot.svg" alt="ESTI" class="h-7 inline-block" />
@@ -41,46 +41,46 @@ const techStack = [
         </p>
         <p class="hero-p1 text-base md:text-lg text-[#4a5568] mt-6 max-w-lg leading-relaxed" style="opacity: 0;" set:html={t('hero.bio1')} />
         <p class="hero-p2 text-sm md:text-base text-[#718096] mt-3 max-w-lg leading-relaxed italic" style="opacity: 0;">{t('hero.bio2')}</p>
-        <div class="flex items-center justify-between w-full mt-10">
-          <nav class="flex items-center gap-3">
-            <a href="#work" class="nav-link text-[#4a5568] hover:text-[#2d3748] text-base px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-[#dde3ec] transition-all duration-200" style="opacity: 0;">{t('nav.work')}</a>
-            <a href="#projects" class="nav-link text-[#4a5568] hover:text-[#2d3748] text-base px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-[#dde3ec] transition-all duration-200" style="opacity: 0;">{t('nav.projects')}</a>
-            <a href="/resume.pdf" target="_blank" class="nav-link text-[#4a5568] hover:text-[#2d3748] text-base px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-[#dde3ec] transition-all duration-200" style="opacity: 0;">{t('nav.resume')}</a>
+        <div class="flex flex-col md:flex-row items-center md:items-start md:justify-between w-full mt-10 gap-4 md:gap-0">
+          <nav class="flex flex-wrap justify-center md:justify-start items-center gap-2 md:gap-3">
+            <a href="#work" class="nav-link text-[#4a5568] hover:text-accent text-sm md:text-base px-3 md:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200" style="opacity: 0;">{t('nav.work')}</a>
+            <a href="#projects" class="nav-link text-[#4a5568] hover:text-accent text-sm md:text-base px-3 md:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200" style="opacity: 0;">{t('nav.projects')}</a>
+            <a href="/resume.pdf" target="_blank" class="nav-link text-[#4a5568] hover:text-accent text-sm md:text-base px-3 md:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200" style="opacity: 0;">{t('nav.resume')}</a>
           </nav>
           <div class="flex items-center gap-5">
-            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;"><Icon name="mdi:github" class="w-6 h-6" /></a>
-            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;"><Icon name="mdi:linkedin" class="w-6 h-6" /></a>
-            <a href="mailto:nikita@nirinovich.com" class="social-icon text-[#4a5568] hover:text-[#2d3748] transition-colors" style="opacity: 0;"><Icon name="mdi:email" class="w-6 h-6" /></a>
+            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:github" class="w-6 h-6" /></a>
+            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:linkedin" class="w-6 h-6" /></a>
+            <a href="mailto:nikita@nirinovich.com" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:email" class="w-6 h-6" /></a>
           </div>
         </div>
       </div>
     </div>
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
       <span class="text-xs text-[#718096]">{t('hero.scrollIndicator')}</span>
-      <div class="scroll-indicator w-6 h-10 border-2 border-[#718096]/40 rounded-full flex items-start justify-center p-1.5">
-        <div class="w-1.5 h-1.5 bg-[#718096]/60 rounded-full animate-bounce"></div>
+      <div class="scroll-indicator w-6 h-10 border-2 border-accent-muted/40 rounded-full flex items-start justify-center p-1.5">
+        <div class="w-1.5 h-1.5 bg-accent-muted rounded-full animate-bounce"></div>
       </div>
     </div>
   </section>
 
   <!-- Featured Projects -->
-  <section id="featured" class="scroll-reveal py-24 px-8 bg-white">
+  <section id="featured" class="scroll-reveal py-16 md:py-24 px-4 md:px-8 bg-accent-ghost">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-12 text-center">{t('section.featured.title')}</h2>
-      <div class="stagger-container grid grid-cols-1 md:grid-cols-2 gap-8">
+      <h2 class="text-2xl md:text-4xl font-bold text-[#2d3748] mb-10 md:mb-12 text-center">{t('section.featured.title')}</h2>
+      <div class="stagger-container grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {sortedProjects.filter(p => ['malitix', 'exotika', 'smartservice'].includes(p.id)).map(project => (
-          <a href={`/en/projects/${project.id}`} class="stagger-item group block bg-[#e8ecf1] rounded-2xl hover:shadow-xl transition-all duration-300 overflow-hidden">
-            <div class="aspect-video bg-white overflow-hidden flex items-center justify-center p-8">
+          <a href={`/en/projects/${project.id}`} class="stagger-item group block bg-white rounded-2xl hover:shadow-xl transition-all duration-300 overflow-hidden border border-transparent hover:border-accent/20">
+            <div class="aspect-video bg-[#f1f5f9] overflow-hidden flex items-center justify-center p-6 md:p-8">
               <img src={project.data.thumbnail} alt={project.data.title} class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" />
             </div>
-            <div class="p-6">
+            <div class="p-5 md:p-6">
               <div class="flex items-center gap-3 mb-2">
-                <h3 class="text-xl font-bold text-[#2d3748] group-hover:text-[#4a5568] transition-colors">{project.data.title}</h3>
-                {project.data.links?.live && <span class="text-xs px-2 py-0.5 bg-[#2d3748] text-white rounded-full">Live</span>}
+                <h3 class="text-lg md:text-xl font-bold text-[#2d3748] group-hover:text-accent transition-colors">{project.data.title}</h3>
+                {project.data.links?.live && <span class="text-xs px-2 py-0.5 bg-accent text-white rounded-full">Live</span>}
               </div>
               <p class="text-sm text-[#718096] mb-4">{project.data.description}</p>
               <div class="flex flex-wrap gap-1.5">
-                {project.data.techStack.map(tech => <span class="text-xs px-2 py-0.5 bg-white text-[#4a5568] rounded-full">{tech}</span>)}
+                {project.data.techStack.map(tech => <span class="text-xs px-2 py-0.5 bg-accent-light text-accent-dark rounded-full">{tech}</span>)}
               </div>
             </div>
           </a>
@@ -90,15 +90,15 @@ const techStack = [
   </section>
 
   <!-- Tech Stack Marquee -->
-  <section class="scroll-reveal py-12 bg-[#e8ecf1] overflow-hidden">
-    <div class="max-w-6xl mx-auto px-8 mb-8">
-      <h2 class="text-2xl md:text-3xl font-bold text-[#2d3748] text-center">{t('section.techStack.title')}</h2>
+  <section class="scroll-reveal py-10 md:py-12 bg-white overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 mb-8">
+      <h2 class="text-xl md:text-3xl font-bold text-[#2d3748] text-center">{t('section.techStack.title')}</h2>
     </div>
     <div class="relative">
       <div class="flex animate-marquee whitespace-nowrap">
         {[...techStack, ...techStack].map(tech => (
-          <div class="flex items-center gap-2 mx-8 text-[#718096]">
-            <Icon name={tech.icon} class="w-8 h-8" />
+          <div class="flex items-center gap-2 mx-6 md:mx-8 text-accent">
+            <Icon name={tech.icon} class="w-7 h-7 md:w-8 md:h-8" />
             <span class="text-sm font-medium">{tech.name}</span>
           </div>
         ))}
@@ -107,43 +107,43 @@ const techStack = [
   </section>
 
   <!-- Work Section -->
-  <section id="work" class="scroll-reveal py-24 px-8 bg-white">
+  <section id="work" class="scroll-reveal py-16 md:py-24 px-4 md:px-8 bg-accent-ghost">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-12 text-center">{t('section.work.title')}</h2>
+      <h2 class="text-2xl md:text-4xl font-bold text-[#2d3748] mb-10 md:mb-12 text-center">{t('section.work.title')}</h2>
       <div class="stagger-container relative">
-        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#dde3ec] -translate-x-1/2"></div>
+        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-accent-light -translate-x-1/2"></div>
         <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
-          <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
-            <h3 class="text-xl font-semibold text-[#2d3748]">Intern: Marketing Analyst & Web Developer</h3>
+          <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0">
+            <h3 class="text-lg md:text-xl font-semibold text-[#2d3748]">Intern: Marketing Analyst & Web Developer</h3>
             <p class="text-[#718096] mt-1">eTech</p>
           </div>
-          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-[#4a5568] rounded-full -translate-x-1/2 mt-1.5 border-2 border-white"></div>
-          <div class="md:w-1/2 md:pl-12 pl-12">
-            <span class="text-sm text-[#718096]">September 2025 — March 2026</span>
+          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-accent rounded-full -translate-x-1/2 mt-1.5 border-2 border-white shadow-sm"></div>
+          <div class="md:w-1/2 md:pl-12 pl-10">
+            <span class="text-sm text-accent font-medium">September 2025 — March 2026</span>
             <p class="text-[#4a5568] mt-2">Local and offshore commercial team assistant. Built a web platform for offshore client acquisition.</p>
-            <a href="https://malitix.com" target="_blank" rel="noopener noreferrer" class="text-sm text-[#718096] hover:text-[#2d3748] transition-colors mt-1 inline-block">malitix.com</a>
+            <a href="https://malitix.com" target="_blank" rel="noopener noreferrer" class="text-sm text-accent hover:text-accent-hover transition-colors mt-1 inline-block">malitix.com</a>
           </div>
         </div>
         <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
-          <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
-            <h3 class="text-xl font-semibold text-[#2d3748]">React & JavaScript Developer</h3>
+          <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0">
+            <h3 class="text-lg md:text-xl font-semibold text-[#2d3748]">React & JavaScript Developer</h3>
             <p class="text-[#718096] mt-1">Exotika.mg</p>
           </div>
-          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-[#4a5568] rounded-full -translate-x-1/2 mt-1.5 border-2 border-white"></div>
-          <div class="md:w-1/2 md:pl-12 pl-12">
-            <span class="text-sm text-[#718096]">June 2025 — July 2025</span>
+          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-accent rounded-full -translate-x-1/2 mt-1.5 border-2 border-white shadow-sm"></div>
+          <div class="md:w-1/2 md:pl-12 pl-10">
+            <span class="text-sm text-accent font-medium">June 2025 — July 2025</span>
             <p class="text-[#4a5568] mt-2">Built the complete website for a vape shop. Deployed on Firebase with Contentful CMS integration.</p>
-            <a href="https://exotika.mg" target="_blank" rel="noopener noreferrer" class="text-sm text-[#718096] hover:text-[#2d3748] transition-colors mt-1 inline-block">exotika.mg</a>
+            <a href="https://exotika.mg" target="_blank" rel="noopener noreferrer" class="text-sm text-accent hover:text-accent-hover transition-colors mt-1 inline-block">exotika.mg</a>
           </div>
         </div>
         <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
-          <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
-            <h3 class="text-xl font-semibold text-[#2d3748]">Community Manager</h3>
+          <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0">
+            <h3 class="text-lg md:text-xl font-semibold text-[#2d3748]">Community Manager</h3>
             <p class="text-[#718096] mt-1">L'Art Blanc</p>
           </div>
-          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-[#4a5568] rounded-full -translate-x-1/2 mt-1.5 border-2 border-white"></div>
-          <div class="md:w-1/2 md:pl-12 pl-12">
-            <span class="text-sm text-[#718096]">July 2024 — January 2026</span>
+          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-accent rounded-full -translate-x-1/2 mt-1.5 border-2 border-white shadow-sm"></div>
+          <div class="md:w-1/2 md:pl-12 pl-10">
+            <span class="text-sm text-accent font-medium">July 2024 — January 2026</span>
             <p class="text-[#4a5568] mt-2">Created and published digital content. Designed graphic elements. Developed advertising campaigns.</p>
           </div>
         </div>
@@ -152,20 +152,20 @@ const techStack = [
   </section>
 
   <!-- All Projects -->
-  <section id="projects" class="scroll-reveal py-24 px-8 bg-[#e8ecf1]">
+  <section id="projects" class="scroll-reveal py-16 md:py-24 px-4 md:px-8 bg-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-[#2d3748] mb-12 text-center">{t('section.projects.title')}</h2>
-      <div class="stagger-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <h2 class="text-2xl md:text-4xl font-bold text-[#2d3748] mb-10 md:mb-12 text-center">{t('section.projects.title')}</h2>
+      <div class="stagger-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {sortedProjects.map(project => (
-          <a href={`/en/projects/${project.id}`} class="stagger-item group block bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-            <div class="aspect-video bg-[#dde3ec] overflow-hidden">
+          <a href={`/en/projects/${project.id}`} class="stagger-item group block bg-[#f8fafc] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-transparent hover:border-accent/20">
+            <div class="aspect-video bg-accent-light/50 overflow-hidden">
               <img src={project.data.thumbnail} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             </div>
-            <div class="p-5">
-              <h3 class="text-lg font-semibold text-[#2d3748] group-hover:text-[#4a5568] transition-colors">{project.data.title}</h3>
+            <div class="p-4 md:p-5">
+              <h3 class="text-base md:text-lg font-semibold text-[#2d3748] group-hover:text-accent transition-colors">{project.data.title}</h3>
               <p class="text-sm text-[#718096] mt-2 line-clamp-2">{project.data.description}</p>
               <div class="flex flex-wrap gap-1.5 mt-3">
-                {project.data.techStack.slice(0, 4).map(tech => <span class="text-xs px-2 py-0.5 bg-[#dde3ec] text-[#4a5568] rounded-full">{tech}</span>)}
+                {project.data.techStack.slice(0, 4).map(tech => <span class="text-xs px-2 py-0.5 bg-accent-light text-accent-dark rounded-full">{tech}</span>)}
               </div>
             </div>
           </a>

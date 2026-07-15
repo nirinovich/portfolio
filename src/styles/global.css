@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-light: #dbeafe;
+  --color-accent-muted: #93c5fd;
+  --color-accent-dark: #1e40af;
+  --color-accent-ghost: #eff6ff;
+}
+
 @layer base {
   html, body {
     @apply m-0 p-0 antialiased;

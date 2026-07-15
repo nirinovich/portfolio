@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import BottomBar from '../components/BottomBar.astro';
+
 import { useTranslations, type Locale } from '../i18n/translations';
 
 interface Props {
@@ -27,9 +27,8 @@ const alternateEn = `/en${basePath === '/' ? '' : basePath}`;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="pb-16">
+	<body>
 		<slot />
-		<BottomBar />
 		<script>
 			import '../scripts/animations.js';
 		</script>

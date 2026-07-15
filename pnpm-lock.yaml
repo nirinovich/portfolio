@@ -8,9 +8,21 @@ importers:
 
   .:
     dependencies:
+      '@astrojs/compiler-binding-linux-x64-gnu':
+        specifier: ^0.3.1
+        version: 0.3.1
+      '@bruits/satteri-linux-x64-gnu':
+        specifier: ^0.9.5
+        version: 0.9.5
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
+      '@rolldown/binding-linux-x64-gnu':
+        specifier: ^1.1.5
+        version: 1.1.5
+      '@tailwindcss/oxide-linux-x64-gnu':
+        specifier: ^4.3.2
+        version: 4.3.2
       '@tailwindcss/vite':
         specifier: ^4
         version: 4.3.2(vite@8.1.2(@types/node@26.1.0)(esbuild@0.28.1)(jiti@2.7.0))
@@ -23,6 +35,9 @@ importers:
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
+      lightningcss-linux-x64-gnu:
+        specifier: ^1.32.0
+        version: 1.32.0
       tailwindcss:
         specifier: ^4
         version: 4.3.2
@@ -67,6 +82,12 @@ packages:
     cpu: [x64]
     os: [linux]
     libc: [glibc]
+
+  '@astrojs/compiler-binding-linux-x64-gnu@0.3.1':
+    resolution: {integrity: sha512-1y0StU1qiCuDFH3rmbRJXcxdfHxFPrES1Rd+RLffosvUR7I2cH5SF5SFnBN9vXpzpkmyElZm3Yr47iJBPN7vVA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
 
   '@astrojs/compiler-binding-linux-x64-musl@0.3.0':
     resolution: {integrity: sha512-AEt+bRw8PfImCcyRH1lpXVB8CdmQ1K/wPo5u99iec4/U/XdNvQZ715YVuNzIJpbJXelgQeZ5H2+Ea7XwRyWY5g==}
@@ -158,6 +179,11 @@ packages:
     cpu: [x64]
     os: [linux]
     libc: [glibc]
+
+  '@bruits/satteri-linux-x64-gnu@0.9.5':
+    resolution: {integrity: sha512-F3uO8uFp3pAP5ZGXttwvh57GS7s0lL953tnNdyI2gRyP4kOOkp6pyGojNJzCjkDvWI2Cvb9iNrKok3aqQPauAw==}
+    cpu: [x64]
+    os: [linux]
 
   '@bruits/satteri-linux-x64-musl@0.9.4':
     resolution: {integrity: sha512-T4gxhXve3zyNAZesrXAd/rDZOGRkbfFIUFld4TGsw6BsjoIteCcDji6IMqeXyaWEVSykY2X8Eid2hr6aXGYAaw==}
@@ -628,6 +654,12 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@rolldown/binding-linux-x64-gnu@1.1.5':
+    resolution: {integrity: sha512-FjcpEKUyJygHgs1o50VYNvkt5+7Le/VEdYt0AkRpkL33MnyQfwr8l5mXwMmfmTbyMPr5vJLC+8/Gd9gXnwU1QQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+
   '@rolldown/binding-linux-x64-musl@1.1.4':
     resolution: {integrity: sha512-rT6yQcxUuXs4CnbofqwHRRV0iem349rLMYpTjkgQGLjrY4ado/eDzwPZPTCgTOlF6Nkp8NEv70yLMTn6qkWxsQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -753,7 +785,6 @@ packages:
     engines: {node: '>= 20'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@tailwindcss/oxide-linux-x64-musl@4.3.2':
     resolution: {integrity: sha512-cixpqbh2toJDmkuCRI68nXA8ZxNmdK9Y+9v5h3MC3ZQKy/0BO8AWzlkWyRM7JAFSGBlfig4YVTPsK6MVgqz1uw==}
@@ -1226,7 +1257,6 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   lightningcss-linux-x64-musl@1.32.0:
     resolution: {integrity: sha512-bYcLp+Vb0awsiXg/80uCRezCYHNg1/l3mt0gzHnWV9XP1W5sKa5/TCdGWaR/zBM2PeF/HbsQv/j2URNOiVuxWg==}
@@ -1762,6 +1792,8 @@ snapshots:
   '@astrojs/compiler-binding-linux-x64-gnu@0.3.0':
     optional: true
 
+  '@astrojs/compiler-binding-linux-x64-gnu@0.3.1': {}
+
   '@astrojs/compiler-binding-linux-x64-musl@0.3.0':
     optional: true
 
@@ -1858,6 +1890,8 @@ snapshots:
 
   '@bruits/satteri-linux-x64-gnu@0.9.4':
     optional: true
+
+  '@bruits/satteri-linux-x64-gnu@0.9.5': {}
 
   '@bruits/satteri-linux-x64-musl@0.9.4':
     optional: true
@@ -2189,6 +2223,8 @@ snapshots:
   '@rolldown/binding-linux-x64-gnu@1.1.4':
     optional: true
 
+  '@rolldown/binding-linux-x64-gnu@1.1.5': {}
+
   '@rolldown/binding-linux-x64-musl@1.1.4':
     optional: true
 
@@ -2287,8 +2323,7 @@ snapshots:
   '@tailwindcss/oxide-linux-arm64-musl@4.3.2':
     optional: true
 
-  '@tailwindcss/oxide-linux-x64-gnu@4.3.2':
-    optional: true
+  '@tailwindcss/oxide-linux-x64-gnu@4.3.2': {}
 
   '@tailwindcss/oxide-linux-x64-musl@4.3.2':
     optional: true
@@ -2822,8 +2857,7 @@ snapshots:
   lightningcss-linux-arm64-musl@1.32.0:
     optional: true
 
-  lightningcss-linux-x64-gnu@1.32.0:
-    optional: true
+  lightningcss-linux-x64-gnu@1.32.0: {}
 
   lightningcss-linux-x64-musl@1.32.0:
     optional: true
