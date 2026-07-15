@@ -6,7 +6,7 @@ import { useTranslations } from '../i18n/translations';
 const locale = (Astro.currentLocale ?? 'fr') as 'fr' | 'en';
 const t = useTranslations(locale);
 
-const DEPLOY_TIMESTAMP = new Date('2025-07-15T12:00:00Z').getTime();
+const DEPLOY_TIMESTAMP = Date.now();
 
 const popupTitle = locale === 'fr' ? 'Site temporairement bloqué' : 'Site temporarily blocked';
 const popupBody = locale === 'fr'
