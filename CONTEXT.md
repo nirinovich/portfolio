@@ -33,3 +33,12 @@ _Avoid_: the old manual folder-routes + `useTranslations` approach for new code.
 **Type & tokens (resolved)**: Self-hosted fonts via `@fontsource` (no external requests, no CLS). Display/headings = **Space Grotesk**; body/UI = **Inter**. Accent = refined blue scale anchored on the existing `#2563eb` hue — `accent #2563eb`, `accent-strong #1d4ed8`, `accent-soft #dbeafe` — with tinted neutral surfaces instead of pure white. Resolves the Palette strategy + Design direction into concrete values.
 
 **Content refresh (depth)**: Draft improved copy in BOTH FR and EN for the overhauled surfaces, preserving the facts (name, ESTI, projects, links) but polishing prose/structure for the new design. Existing copy is not kept verbatim; the user can tweak later.
+
+**Project card system**: Three card variants for displaying projects — Metrics-first (metric is dominant, image secondary), Outcome narrative (image dominant, narrative body), Before/after split (side-by-side problem/solution). All cards share a common data shape with optional fields (client, metric, before/after). Cards use the existing panel-card surface style.
+_Avoid_: jos.gg patterns, tab-based SPA routing for projects.
+
+**Mixed feed**: Homepage shows a curated selection of featured projects using the card variants, with a "view all" link to `/projects`. The `/projects` route displays all projects in a filterable grid.
+_Avoid_: timeline layouts, chronologically-sorted project lists.
+
+**Metric flexibility**: Business outcome metrics (revenue, user reach, conversion) are primary; technical metrics (uptime, player counts) are secondary. The metric element is sometimes visually secondary to the project image — not always the largest element.
+_Avoid_: hardcoding metric as always dominant.

@@ -5,6 +5,11 @@ date: 2025-04-01
 thumbnail: "/profile.png"
 techStack: ["React", "JavaScript"]
 tags: ["web", "hackathon", "social-impact"]
+role: "Frontend Developer"
+before: "No quick way to alert authorities during emergencies"
+after: "Geolocation-based alert system matching users to nearest authorities"
+cardVariant: "before-after"
+featured: true
 ---
 
 SmartService is an emergency alert application that allows users to quickly contact the nearest authorities in case of danger.

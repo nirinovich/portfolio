@@ -1,0 +1,103 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import { useTranslations } from '../../../i18n/translations';
+import { getCollection } from 'astro:content';
+
+const locale = (Astro.currentLocale ?? 'en') as 'fr' | 'en';
+const t = useTranslations(locale);
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTags = [...new Set(sortedProjects.flatMap(p => p.data.techStack))];
+---
+
+<Layout title="Projects — Nikita Nirinovich">
+  <section class="min-h-screen bg-[#f8fafc] pt-24 pb-16 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-10 md:mb-12">
+        <h1 class="text-3xl md:text-5xl font-bold text-[#2d3748] mb-4">Projects</h1>
+        <p class="text-lg text-[#718096]">All my projects and work.</p>
+      </div>
+
+      <!-- Tag Filter -->
+      <div class="flex flex-wrap gap-2 mb-8" id="tag-filter">
+        <button
+          type="button"
+          class="tag-pill text-sm px-4 py-2 rounded-full border-2 transition-all duration-200 cursor-pointer bg-accent text-white border-accent"
+          data-tag="all"
+        >
+          All
+        </button>
+        {allTags.map(tag => (
+          <button
+            type="button"
+            class="tag-pill text-sm px-4 py-2 rounded-full border-2 transition-all duration-200 cursor-pointer bg-white text-[#4a5568] border-[#e2e8f0] hover:border-accent hover:text-accent"
+            data-tag={tag}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" id="projects-grid">
+        {sortedProjects.map(project => (
+          <div class="project-card-wrapper" data-tags={project.data.techStack.join(',')}>
+            <ProjectCard
+              title={project.data.title}
+              role={project.data.role}
+              year={project.data.date.getFullYear().toString()}
+              metric={project.data.metric}
+              metricLabel={project.data.metricLabel}
+              outcome={project.data.outcome}
+              tags={project.data.techStack}
+              client={project.data.client}
+              image={project.data.thumbnail}
+              liveUrl={project.data.links?.live}
+              slug={project.id}
+              locale={locale}
+              cardVariant={project.data.cardVariant}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const tagFilter = document.getElementById('tag-filter');
+  const projectCards = document.querySelectorAll('.project-card-wrapper');
+  const tagButtons = document.querySelectorAll('.tag-pill');
+
+  tagFilter?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.classList.contains('tag-pill')) return;
+
+    const selectedTag = target.getAttribute('data-tag');
+
+    // Update button styles
+    tagButtons.forEach(btn => {
+      const btnTag = btn.getAttribute('data-tag');
+      if (btnTag === selectedTag) {
+        btn.classList.remove('bg-white', 'text-[#4a5568]', 'border-[#e2e8f0]');
+        btn.classList.add('bg-accent', 'text-white', 'border-accent');
+      } else {
+        btn.classList.remove('bg-accent', 'text-white', 'border-accent');
+        btn.classList.add('bg-white', 'text-[#4a5568]', 'border-[#e2e8f0]');
+      }
+    });
+
+    // Filter projects
+    projectCards.forEach(card => {
+      const tags = card.getAttribute('data-tags')?.split(',') || [];
+      if (selectedTag === 'all' || tags.includes(selectedTag!)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>

@@ -15,6 +15,15 @@ const projects = defineCollection({
     }).optional(),
     tags: z.array(z.string()),
     gallery: z.array(z.string()).optional(),
+    role: z.string().optional(),
+    metric: z.string().optional(),
+    metricLabel: z.string().optional(),
+    outcome: z.string().optional(),
+    before: z.string().optional(),
+    after: z.string().optional(),
+    client: z.string().optional(),
+    cardVariant: z.enum(["metrics", "narrative", "before-after"]).default("narrative"),
+    featured: z.boolean().default(false),
   }),
 });
 

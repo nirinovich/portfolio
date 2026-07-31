@@ -7,6 +7,11 @@ techStack: ["React", "JavaScript", "Firebase", "Contentful"]
 links:
   live: "https://exotika.mg"
 tags: ["web", "e-commerce"]
+role: "Frontend Developer"
+outcome: "Delivered a complete e-commerce solution with CMS integration, enabling the client to manage products and content independently."
+client: "Exotika.mg"
+cardVariant: "narrative"
+featured: true
 ---
 
 Exotika.mg is a complete e-commerce website for a vape shop based in Madagascar.

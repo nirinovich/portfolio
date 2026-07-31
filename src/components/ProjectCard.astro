@@ -1,0 +1,31 @@
+---
+import ProjectCardMetrics from './ProjectCardMetrics.astro';
+import ProjectCardNarrative from './ProjectCardNarrative.astro';
+import ProjectCardBeforeAfter from './ProjectCardBeforeAfter.astro';
+
+interface Props {
+  title: string;
+  role?: string;
+  year: string;
+  metric?: string;
+  metricLabel?: string;
+  outcome?: string;
+  before?: string;
+  after?: string;
+  tags: string[];
+  client?: string;
+  image?: string;
+  liveUrl?: string;
+  repoUrl?: string;
+  slug: string;
+  locale: string;
+  cardVariant: 'metrics' | 'narrative' | 'before-after';
+}
+
+const props = Astro.props;
+const { cardVariant } = props;
+---
+
+{cardVariant === 'metrics' && <ProjectCardMetrics {...props} />}
+{cardVariant === 'narrative' && <ProjectCardNarrative {...props} />}
+{cardVariant === 'before-after' && <ProjectCardBeforeAfter {...props} />}

@@ -7,6 +7,8 @@ techStack: ["Astro", "Tailwind CSS", "GSAP", "TypeScript"]
 links:
   github: "https://github.com/nirinovich/portfolio"
 tags: ["web", "portfolio"]
+role: "Full-stack Developer"
+cardVariant: "narrative"
 ---
 
 This portfolio website showcases my work and projects. Built with modern web technologies, it features smooth GSAP animations, responsive design, and full internationalization support.
