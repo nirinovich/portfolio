@@ -1,0 +1,26 @@
+---
+// SectionHeader component - Centered section title with accent emphasis
+interface Props {
+  title: string;
+  emphasis?: string;
+  class?: string;
+}
+
+const { title, emphasis, class: className = '' } = Astro.props;
+
+// Split title to insert emphasis if provided
+const titleParts = emphasis ? title.split(emphasis) : [title];
+---
+
+<h2 class:list={[
+  "mx-auto max-w-xl text-balance px-8 py-20 text-center text-3xl font-bold leading-tight tracking-tight sm:text-4xl font-heading",
+  className
+]}>
+  {emphasis ? (
+    <Fragment>
+      {titleParts[0]}<strong class="text-accent">{emphasis}</strong>{titleParts[1]}
+    </Fragment>
+  ) : (
+    <Fragment set:html={title} />
+  )}
+</h2>

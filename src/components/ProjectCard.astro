@@ -1,31 +1,53 @@
 ---
-import ProjectCardMetrics from './ProjectCardMetrics.astro';
-import ProjectCardNarrative from './ProjectCardNarrative.astro';
-import ProjectCardBeforeAfter from './ProjectCardBeforeAfter.astro';
-
+// ProjectCard component - Card for project grid with grayscale image effect
 interface Props {
+  id: string;
   title: string;
-  role?: string;
-  year: string;
-  metric?: string;
-  metricLabel?: string;
-  outcome?: string;
-  before?: string;
-  after?: string;
-  tags: string[];
-  client?: string;
-  image?: string;
-  liveUrl?: string;
-  repoUrl?: string;
-  slug: string;
-  locale: string;
-  cardVariant: 'metrics' | 'narrative' | 'before-after';
+  outcome: string;
+  thumbnail: string;
+  year: number;
+  techStack?: string[];
+  class?: string;
 }
 
-const props = Astro.props;
-const { cardVariant } = props;
+const { 
+  id, 
+  title, 
+  outcome, 
+  thumbnail, 
+  year, 
+  techStack = [],
+  class: className = '' 
+} = Astro.props;
 ---
 
-{cardVariant === 'metrics' && <ProjectCardMetrics {...props} />}
-{cardVariant === 'narrative' && <ProjectCardNarrative {...props} />}
-{cardVariant === 'before-after' && <ProjectCardBeforeAfter {...props} />}
+<a href={`/projects/${id}`} class:list={[
+  "bg-primary-dark group flex h-full flex-col overflow-hidden transition-all hover:bg-slate-900",
+  className
+]}>
+  <div class="relative aspect-video w-full overflow-hidden bg-slate-800 border-b-2 border-slate-800">
+    <img 
+      src={thumbnail} 
+      alt={title} 
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-hover:opacity-80 filter grayscale group-hover:grayscale-0" 
+    />
+    <div class="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-2 py-1 uppercase tracking-wider">
+      {year}
+    </div>
+  </div>
+  <div class="p-7 flex flex-col flex-1">
+    <h3 class="text-xl font-bold leading-snug tracking-tight mb-3 font-heading group-hover:text-accent transition-colors">
+      {title}
+    </h3>
+    <p class="text-sm text-slate-400 mb-4 flex-1 font-sans">
+      {outcome}
+    </p>
+    <div class="flex flex-wrap gap-2 mt-auto">
+      {techStack.slice(0, 3).map(tech => (
+        <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500 border border-slate-700 px-2 py-1 bg-slate-900">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+</a>

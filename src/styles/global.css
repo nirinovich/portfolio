@@ -1,16 +1,24 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;600;700&display=swap');
 
 @theme {
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-light: #dbeafe;
-  --color-accent-muted: #93c5fd;
-  --color-accent-dark: #1e40af;
-  --color-accent-ghost: #eff6ff;
+  --color-accent: #0367ff;
+  --color-accent-hover: #024bcc;
+  --color-accent-light: #4f96ff;
+  --color-accent-muted: #99c2ff;
+  --color-accent-dark: #023899;
+  --color-accent-ghost: #e6f0ff;
+  --color-primary-dark: #0a1128;
+  
+  --font-sans: 'Lato', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
 }
 
 @layer base {
   html, body {
-    @apply m-0 p-0 antialiased;
+    @apply m-0 p-0 antialiased font-sans text-[#2d3748];
+  }
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    @apply font-heading;
   }
 }

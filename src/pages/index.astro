@@ -1,7 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ManifestoSection from '../components/ManifestoSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { Icon } from 'astro-icon/components';
+import TechStackItem from '../components/TechStackItem.astro';
+import CTASection from '../components/CTASection.astro';
 import { useTranslations } from '../i18n/translations';
 import { getCollection } from 'astro:content';
 
@@ -12,232 +16,75 @@ const allProjects = await getCollection('projects');
 const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const featuredProjects = sortedProjects.filter(p => p.data.featured).slice(0, 6);
 
-const DEPLOY_TIMESTAMP = Date.now();
+const techStack = [
+  { name: 'TypeScript & React', desc: 'Type-safe frontends and scalable UI components for modern applications.' },
+  { name: 'Astro & Tailwind', desc: 'High-performance static site generation with utility-first, rapid styling.' },
+  { name: 'Firebase & Node.js', desc: 'Robust backend services, real-time databases, and serverless logic.' }
+];
 
-const popupTitle = locale === 'fr' ? 'Site temporairement bloqué' : 'Site temporarily blocked';
-const popupBody = locale === 'fr'
-  ? "Tu es une des rares personnes à avoir visité mon site pendant la JMCJ. Je t'invite à me voir en personne pour réseauter, ou revenir un peu plus tard pour jouer à des mini-jeux made in Madagascar."
-  : "You're one of the few people who visited my site during JMCJ. Come see me in person to network, or come back later to play mini-games made in Madagascar.";
-const popupCta = locale === 'fr' ? 'Compris !' : 'Got it!';
-const popupTimerLabel = locale === 'fr' ? 'Site débloqué dans' : 'Site unblocked in';
+const manifesto = {
+  heading: 'Engineering fundamentals are your biggest advantage.',
+  paragraphs: [
+    "A lot of people think the rules of software development are being rewritten. They think that code is cheap.",
+    "I build applications that prioritize performance, solid architecture, and measurable business outcomes.",
+    "Code isn't cheap. In fact, bad code is the most expensive it's ever been. If you can design systems well, you can reap the rewards.",
+    "I specialize in bridging the gap between high-fidelity design and robust full-stack engineering."
+  ]
+};
 ---
 
 <Layout>
-  <!-- Hero Section -->
-  <section id="hero" class="min-h-screen bg-[#e8ecf1] flex items-center justify-center px-4 sm:px-6 py-12 relative">
-    <div class="max-w-4xl w-full flex flex-col items-center gap-6 sm:gap-8 md:flex-row md:items-start md:gap-16">
-      
-      <div class="flex-shrink-0">
-        <div class="profile-card w-44 h-56 sm:w-56 sm:h-[17rem] md:w-72 md:h-[22rem] bg-white rounded-2xl shadow-lg overflow-hidden" style="opacity: 0;">
-          <img src="/profile.png" alt="Nikita Nirinovich" class="w-full h-full object-cover" />
-        </div>
-      </div>
+  <main class="bg-primary-dark text-white max-w-[1200px] mx-auto border-x-2 border-slate-800 min-h-screen">
+    
+    <Hero 
+      name="Nikita Nirinovich"
+      subtitle="with Nikita Nirinovich"
+      resumeLabel={t('nav.resume')}
+      githubLabel="GitHub"
+    />
 
-      <div class="flex flex-col items-center md:items-start text-center md:text-left">
-        <h1 class="hero-name text-3xl sm:text-4xl md:text-6xl font-bold text-[#2d3748] tracking-tight" style="opacity: 0;">
-          Nikita Nirinovich
-        </h1>
-        
-        <p class="hero-subtitle text-base sm:text-lg md:text-2xl text-[#718096] mt-2 sm:mt-3 font-medium flex items-center gap-2" style="opacity: 0;">
-          CS Student @
-          <a href="https://esti.mg/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg px-2 py-1 sm:px-3 flex items-center justify-center shadow-sm hover:shadow-md hover:scale-105 transition-all">
-            <img src="/logo-ESTI1-foot.svg" alt="ESTI" class="h-5 sm:h-7 inline-block" />
-          </a>
-        </p>
-        
-        <p class="hero-p1 text-sm sm:text-base md:text-lg text-[#4a5568] mt-4 sm:mt-6 max-w-lg leading-relaxed" style="opacity: 0;" set:html={t('hero.bio1')} />
-        <p class="hero-p2 text-xs sm:text-sm md:text-base text-[#718096] mt-2 sm:mt-3 max-w-lg leading-relaxed italic" style="opacity: 0;">
-          {t('hero.bio2')}
-        </p>
+    <ManifestoSection 
+      heading={manifesto.heading}
+      paragraphs={manifesto.paragraphs}
+    />
 
-        <div class="flex flex-col items-center md:items-start w-full mt-6 sm:mt-10 gap-4">
-          <div class="flex flex-wrap justify-center md:justify-start items-center gap-2 sm:gap-3">
-            <nav class="flex flex-wrap justify-center md:justify-start items-center gap-2 sm:gap-3">
-              <button type="button" class="nav-link blocked-link text-[#4a5568] hover:text-accent text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200 cursor-pointer" style="opacity: 0;">
-                {t('nav.work')}
-              </button>
-              <button type="button" class="nav-link blocked-link text-[#4a5568] hover:text-accent text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200 cursor-pointer" style="opacity: 0;">
-                {t('nav.projects')}
-              </button>
-              <a href="/resume.pdf" target="_blank" class="nav-link text-[#4a5568] hover:text-accent text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200" style="opacity: 0;">
-                {t('nav.resume')}
-              </a>
-            </nav>
-            <div class="hidden md:block w-px h-6 bg-[#dde3ec] mx-1"></div>
-            <div class="flex items-center gap-4 sm:gap-5">
-              <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:github" class="w-5 h-5 sm:w-6 sm:h-6" /></a>
-              <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:linkedin" class="w-5 h-5 sm:w-6 sm:h-6" /></a>
-              <a href="mailto:nikita@nirinovich.com" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:email" class="w-5 h-5 sm:w-6 sm:h-6" /></a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <SectionHeader 
+      title="Featured Projects"
+      emphasis="Projects"
+    />
+    
+    <div class="bg-slate-800 grid w-full grid-cols-1 gap-0.5 border-y-2 border-slate-800 sm:grid-cols-2 lg:grid-cols-3">
+      {featuredProjects.map(project => (
+        <ProjectCard 
+          id={project.id}
+          title={project.data.title}
+          outcome={project.data.outcome}
+          thumbnail={project.data.thumbnail}
+          year={project.data.date.getFullYear()}
+          techStack={project.data.techStack}
+        />
+      ))}
     </div>
-  </section>
 
-  <!-- Featured Projects -->
-  <section id="featured" class="py-16 md:py-24 px-4 md:px-8 bg-accent-ghost">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl md:text-4xl font-bold text-[#2d3748] mb-10 md:mb-12 text-center">{t('section.featured.title')}</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-        {featuredProjects.map(project => (
-          <ProjectCard
-            title={project.data.title}
-            role={project.data.role}
-            year={project.data.date.getFullYear().toString()}
-            metric={project.data.metric}
-            metricLabel={project.data.metricLabel}
-            outcome={project.data.outcome}
-            tags={project.data.techStack}
-            client={project.data.client}
-            image={project.data.thumbnail}
-            liveUrl={project.data.links?.live}
-            slug={project.id}
-            locale={locale}
-            cardVariant={project.data.cardVariant}
-          />
-        ))}
-      </div>
-      <div class="mt-10 text-center">
-        <a href="/projects" class="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-medium transition-colors">
-          Voir tous les projets <span aria-hidden="true">&rarr;</span>
-        </a>
-      </div>
-    </div>
-  </section>
+    <SectionHeader 
+      title="The Arsenal"
+      emphasis="Arsenal"
+    />
 
-  <!-- All Projects -->
-  <section id="projects" class="py-16 md:py-24 px-4 md:px-8 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl md:text-4xl font-bold text-[#2d3748] mb-10 md:mb-12 text-center">{t('section.projects.title')}</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-        {sortedProjects.map(project => (
-          <ProjectCard
-            title={project.data.title}
-            role={project.data.role}
-            year={project.data.date.getFullYear().toString()}
-            metric={project.data.metric}
-            metricLabel={project.data.metricLabel}
-            outcome={project.data.outcome}
-            tags={project.data.techStack}
-            client={project.data.client}
-            image={project.data.thumbnail}
-            liveUrl={project.data.links?.live}
-            slug={project.id}
-            locale={locale}
-            cardVariant={project.data.cardVariant}
-          />
-        ))}
-      </div>
+    <div class="flex flex-col border-y-2 border-slate-800">
+      {techStack.map((item, i) => (
+        <TechStackItem 
+          number={i + 1}
+          name={item.name}
+          description={item.desc}
+        />
+      ))}
     </div>
-  </section>
+    
+    <CTASection 
+      message="Ready to build something real?"
+      emailLabel="Get in touch"
+    />
 
-  <!-- Blocked Content Popup -->
-  <div id="blocked-popup" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
-    <div class="popup-overlay absolute inset-0 bg-black/60 backdrop-blur-md"></div>
-    <div class="popup-content relative w-full max-w-sm overflow-hidden rounded-3xl bg-white shadow-2xl">
-      <div class="bg-gradient-to-br from-accent to-accent-dark px-6 pt-8 pb-6 text-center text-white">
-        <div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
-          <Icon name="mdi:lock-outline" class="h-7 w-7" />
-        </div>
-        <h2 class="text-xl font-bold">{popupTitle}</h2>
-      </div>
-      <div class="px-6 pt-5 pb-6 text-center">
-        <p class="text-sm leading-relaxed text-[#4a5568]">{popupBody}</p>
-        <p class="mt-4 text-xs font-medium uppercase tracking-wider text-[#718096]">{popupTimerLabel}</p>
-        <div class="mt-2 flex items-center justify-center gap-1" id="countdown" data-deploy={DEPLOY_TIMESTAMP}>
-          <div class="flex flex-col items-center rounded-xl bg-[#f0f4f8] px-3 py-2 min-w-[3.2rem]">
-            <span class="text-2xl font-bold tabular-nums text-[#2d3748]" id="cd-h">--</span>
-            <span class="text-[10px] uppercase tracking-wider text-[#718096]">{locale === 'fr' ? 'h' : 'h'}</span>
-          </div>
-          <span class="text-xl font-bold text-[#718096]">:</span>
-          <div class="flex flex-col items-center rounded-xl bg-[#f0f4f8] px-3 py-2 min-w-[3.2rem]">
-            <span class="text-2xl font-bold tabular-nums text-[#2d3748]" id="cd-m">--</span>
-            <span class="text-[10px] uppercase tracking-wider text-[#718096]">{locale === 'fr' ? 'min' : 'min'}</span>
-          </div>
-          <span class="text-xl font-bold text-[#718096]">:</span>
-          <div class="flex flex-col items-center rounded-xl bg-[#f0f4f8] px-3 py-2 min-w-[3.2rem]">
-            <span class="text-2xl font-bold tabular-nums text-[#2d3748]" id="cd-s">--</span>
-            <span class="text-[10px] uppercase tracking-wider text-[#718096]">{locale === 'fr' ? 's' : 's'}</span>
-          </div>
-        </div>
-        <button type="button" id="popup-close" class="mt-6 w-full rounded-xl bg-[#2d3748] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1a202c] cursor-pointer">
-          {popupCta}
-        </button>
-      </div>
-    </div>
-  </div>
+  </main>
 </Layout>
-
-<style>
-  .blocked-link {
-    user-select: none;
-  }
-
-  #blocked-popup.active {
-    display: flex;
-  }
-
-  .popup-content {
-    animation: popup-in 0.3s ease-out;
-  }
-
-  @keyframes popup-in {
-    from {
-      opacity: 0;
-      transform: scale(0.9) translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-</style>
-
-<script>
-  const blockedLinks = document.querySelectorAll('.blocked-link');
-  const popup = document.getElementById('blocked-popup');
-  const popupClose = document.getElementById('popup-close');
-  const popupOverlay = document.querySelector('.popup-overlay');
-
-  blockedLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      popup?.classList.add('active');
-    });
-  });
-
-  popupClose?.addEventListener('click', () => {
-    popup?.classList.remove('active');
-  });
-
-  popupOverlay?.addEventListener('click', () => {
-    popup?.classList.remove('active');
-  });
-
-  // Countdown timer
-  const countdownEl = document.getElementById('countdown');
-  const deployTs = Number(countdownEl?.getAttribute('data-deploy'));
-  const DURATION = 24 * 60 * 60 * 1000;
-  const unlockAt = deployTs + DURATION;
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function tick() {
-    const remaining = unlockAt - Date.now();
-    if (remaining <= 0) {
-      document.getElementById('cd-h')!.textContent = '00';
-      document.getElementById('cd-m')!.textContent = '00';
-      document.getElementById('cd-s')!.textContent = '00';
-      return;
-    }
-    const h = Math.floor(remaining / 3600000);
-    const m = Math.floor((remaining % 3600000) / 60000);
-    const s = Math.floor((remaining % 60000) / 1000);
-    document.getElementById('cd-h')!.textContent = pad(h);
-    document.getElementById('cd-m')!.textContent = pad(m);
-    document.getElementById('cd-s')!.textContent = pad(s);
-  }
-
-  tick();
-  setInterval(tick, 1000);
-</script>

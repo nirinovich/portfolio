@@ -1,6 +1,10 @@
 # build output
 dist/
 .agents/skills
+.claude/
+.codex/
+.github/
+.impeccable/
 
 # generated types
 .astro/
