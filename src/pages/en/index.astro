@@ -43,26 +43,8 @@ const experiences = [
 ---
 
 <Layout>
-  <!-- Nav Variant B: Sticky top navbar (hidden by default) -->
-  <nav id="nav-b" class="hidden fixed top-0 left-0 right-0 z-50 bg-primary-dark/95 backdrop-blur-sm border-b-2 border-slate-800 px-8 py-4">
-    <div class="flex items-center justify-between">
-      <a href="/en" class="text-xl font-bold font-heading text-white">Nirinovich</a>
-      <div class="flex items-center gap-6">
-        <a href="#featured" class="text-sm text-slate-400 hover:text-white transition-colors">{t('nav.work')}</a>
-        <a href="/resume.pdf" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">{t('nav.resume')}</a>
-        <a href="https://github.com/nirinovich" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">GitHub</a>
-        <a href="/" class="text-sm text-slate-400 hover:text-white transition-colors border border-slate-700 px-2.5 py-1 rounded hover:bg-slate-800">
-          {t('language.switch')}
-        </a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Nav/Experience Toggle (dev only) -->
+  <!-- Experience Toggle (dev only) -->
   <div class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2">
-    <button id="nav-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle nav variant (press N)">
-      Nav: <span id="nav-label">A</span>
-    </button>
     <button id="exp-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle experience style (press E)">
       Exp: <span id="exp-label">Marquee</span>
     </button>
@@ -72,6 +54,7 @@ const experiences = [
     
     <Hero 
       name="Nikita Nirinovich"
+      headline={t('hero.headline')}
       resumeLabel={t('nav.resume')}
       githubLabel="GitHub"
       workLabel={t('nav.work')}
@@ -212,31 +195,12 @@ const experiences = [
 </style>
 
 <script>
-  const navA = document.getElementById('nav-a');
-  const navB = document.getElementById('nav-b');
-  const navLabel = document.getElementById('nav-label');
-  const navToggle = document.getElementById('nav-toggle');
-  
   const expMarquee = document.getElementById('exp-marquee');
   const expTimeline = document.getElementById('exp-timeline');
   const expLabel = document.getElementById('exp-label');
   const expToggle = document.getElementById('exp-toggle');
 
-  let navVariant: 'a' | 'b' = 'a';
   let expVariant: 'marquee' | 'timeline' = 'marquee';
-
-  function toggleNav() {
-    navVariant = navVariant === 'a' ? 'b' : 'a';
-    if (navVariant === 'b') {
-      navA?.classList.add('hidden');
-      navB?.classList.remove('hidden');
-      navLabel!.textContent = 'B';
-    } else {
-      navA?.classList.remove('hidden');
-      navB?.classList.add('hidden');
-      navLabel!.textContent = 'A';
-    }
-  }
 
   function toggleExp() {
     expVariant = expVariant === 'marquee' ? 'timeline' : 'marquee';
@@ -251,13 +215,10 @@ const experiences = [
     }
   }
 
-  navToggle?.addEventListener('click', toggleNav);
   expToggle?.addEventListener('click', toggleExp);
   
   document.addEventListener('keydown', (e) => {
     if (e.target instanceof HTMLElement && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
-    
-    if (e.key === 'n' || e.key === 'N') toggleNav();
     if (e.key === 'e' || e.key === 'E') toggleExp();
   });
 </script>
