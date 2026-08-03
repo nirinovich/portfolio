@@ -1,7 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import ManifestoSection from '../../components/ManifestoSection.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import { Icon } from 'astro-icon/components';
+import TechStackItem from '../../components/TechStackItem.astro';
+import CTASection from '../../components/CTASection.astro';
 import { useTranslations } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
 
@@ -13,188 +17,247 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
 const featuredProjects = sortedProjects.filter(p => p.data.featured).slice(0, 6);
 
 const techStack = [
-  { name: 'React', icon: 'mdi:react' },
-  { name: 'JavaScript', icon: 'mdi:language-javascript' },
-  { name: 'TypeScript', icon: 'mdi:language-typescript' },
-  { name: 'Django', icon: 'mdi:language-python' },
-  { name: 'Firebase', icon: 'mdi:firebase' },
-  { name: 'Git', icon: 'mdi:git' },
-  { name: 'Tailwind CSS', icon: 'mdi:tailwind' },
-  { name: 'Node.js', icon: 'mdi:nodejs' },
+  { name: 'TypeScript & React', desc: locale === 'fr' ? 'Frontends typés et composants UI scalables pour applications modernes.' : 'Type-safe frontends and scalable UI components for modern applications.', icon: 'react' },
+  { name: 'Astro & Tailwind', desc: locale === 'fr' ? 'Génération de sites statiques haute performance avec styling utilitaire rapide.' : 'High-performance static site generation with utility-first, rapid styling.', icon: 'astro' },
+  { name: 'Firebase & Node.js', desc: locale === 'fr' ? 'Services backend robustes, bases de données temps réel et logique serverless.' : 'Robust backend services, real-time databases, and serverless logic.', icon: 'firebase' }
+];
+
+const manifesto = {
+  heading: locale === 'fr' ? 'Votre site web devrait travailler pour vous, pas contre vous.' : 'Your website should work for you, not against you.',
+  paragraphs: locale === 'fr' ? [
+    "Je crée des sites web et gère l'IT pour des petites entreprises — pas pour le plaisir, pour des résultats. Chaque projet a un objectif : plus de leads, plus de ventes, moins de maux de tête.",
+    "Vous ne serez pas abandonné. Je livre à temps, communique clairement et reste jusqu'à ce que ça fonctionne.",
+    "Je mesure ce qui compte. Trafic, conversions, uptime — pas les métriques de vitrine."
+  ] : [
+    "I build websites and manage IT for small businesses — not for fun, for results. Every project has a goal: more leads, more sales, less headaches.",
+    "You won't get ghosted. I deliver on time, communicate clearly, and stay until it works.",
+    "I measure what matters. Traffic, conversions, uptime — not vanity metrics."
+  ]
+};
+
+const experiences = [
+  { roleKey: 'experience.1.role' as const, periodKey: 'experience.1.period' as const, descKey: 'experience.1.description' as const },
+  { roleKey: 'experience.2.role' as const, periodKey: 'experience.2.period' as const, descKey: 'experience.2.description' as const },
+  { roleKey: 'experience.3.role' as const, periodKey: 'experience.3.period' as const, descKey: 'experience.3.description' as const },
 ];
 ---
 
 <Layout>
-  <!-- Hero Section -->
-  <section id="hero" class="min-h-screen bg-[#e8ecf1] flex items-center justify-center px-4 md:px-8 relative">
-    <div class="max-w-4xl w-full flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16">
-      <div class="flex-shrink-0">
-        <div class="profile-card w-56 h-[17rem] md:w-72 md:h-[22rem] bg-white rounded-2xl shadow-lg overflow-hidden" style="opacity: 0;">
-          <img src="/profile.png" alt="Nikita Nirinovich" class="w-full h-full object-cover" />
-        </div>
-      </div>
-      <div class="flex flex-col items-center md:items-start text-center md:text-left">
-        <h1 class="hero-name text-4xl md:text-6xl font-bold text-[#2d3748] tracking-tight" style="opacity: 0;">Nikita Nirinovich</h1>
-        <p class="hero-subtitle text-lg md:text-2xl text-[#718096] mt-3 font-medium flex items-center gap-2" style="opacity: 0;">
-          CS Student @
-          <a href="https://esti.mg/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg px-3 py-1 flex items-center justify-center shadow-sm hover:shadow-md hover:scale-105 transition-all">
-            <img src="/logo-ESTI1-foot.svg" alt="ESTI" class="h-7 inline-block" />
-          </a>
-        </p>
-        <p class="hero-p1 text-base md:text-lg text-[#4a5568] mt-6 max-w-lg leading-relaxed" style="opacity: 0;" set:html={t('hero.bio1')} />
-        <p class="hero-p2 text-sm md:text-base text-[#718096] mt-3 max-w-lg leading-relaxed italic" style="opacity: 0;">{t('hero.bio2')}</p>
-        <div class="flex flex-col md:flex-row items-center md:items-start md:justify-between w-full mt-10 gap-4 md:gap-0">
-          <nav class="flex flex-wrap justify-center md:justify-start items-center gap-2 md:gap-3">
-            <a href="#work" class="nav-link text-[#4a5568] hover:text-accent text-sm md:text-base px-3 md:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200" style="opacity: 0;">{t('nav.work')}</a>
-            <a href="#projects" class="nav-link text-[#4a5568] hover:text-accent text-sm md:text-base px-3 md:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200" style="opacity: 0;">{t('nav.projects')}</a>
-            <a href="/resume.pdf" target="_blank" class="nav-link text-[#4a5568] hover:text-accent text-sm md:text-base px-3 md:px-4 py-1.5 rounded-lg bg-[#dde3ec]/60 hover:bg-accent-light transition-all duration-200" style="opacity: 0;">{t('nav.resume')}</a>
-          </nav>
-          <div class="flex items-center gap-5">
-            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:github" class="w-6 h-6" /></a>
-            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:linkedin" class="w-6 h-6" /></a>
-            <a href="mailto:nikita@nirinovich.com" class="social-icon text-[#4a5568] hover:text-accent transition-colors" style="opacity: 0;"><Icon name="mdi:email" class="w-6 h-6" /></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-      <span class="text-xs text-[#718096]">{t('hero.scrollIndicator')}</span>
-      <div class="scroll-indicator w-6 h-10 border-2 border-accent-muted/40 rounded-full flex items-start justify-center p-1.5">
-        <div class="w-1.5 h-1.5 bg-accent-muted rounded-full animate-bounce"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Projects -->
-  <section id="featured" class="scroll-reveal py-16 md:py-24 px-4 md:px-8 bg-accent-ghost">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl md:text-4xl font-bold text-[#2d3748] mb-10 md:mb-12 text-center">{t('section.featured.title')}</h2>
-      <div class="stagger-container grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-        {featuredProjects.map(project => (
-          <div class="stagger-item">
-            <ProjectCard
-              title={project.data.title}
-              role={project.data.role}
-              year={project.data.date.getFullYear().toString()}
-              metric={project.data.metric}
-              metricLabel={project.data.metricLabel}
-              outcome={project.data.outcome}
-              tags={project.data.techStack}
-              client={project.data.client}
-              image={project.data.thumbnail}
-              liveUrl={project.data.links?.live}
-              slug={project.id}
-              locale={locale}
-              cardVariant={project.data.cardVariant}
-            />
-          </div>
-        ))}
-      </div>
-      <div class="mt-10 text-center">
-        <a href="/en/projects" class="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-medium transition-colors">
-          View all projects <span aria-hidden="true">&rarr;</span>
+  <!-- Nav Variant B: Sticky top navbar (hidden by default) -->
+  <nav id="nav-b" class="hidden fixed top-0 left-0 right-0 z-50 bg-primary-dark/95 backdrop-blur-sm border-b-2 border-slate-800 px-8 py-4">
+    <div class="flex items-center justify-between">
+      <a href="/en" class="text-xl font-bold font-heading text-white">Nirinovich</a>
+      <div class="flex items-center gap-6">
+        <a href="#featured" class="text-sm text-slate-400 hover:text-white transition-colors">{t('nav.work')}</a>
+        <a href="/resume.pdf" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">{t('nav.resume')}</a>
+        <a href="https://github.com/nirinovich" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">GitHub</a>
+        <a href="/" class="text-sm text-slate-400 hover:text-white transition-colors border border-slate-700 px-2.5 py-1 rounded hover:bg-slate-800">
+          {t('language.switch')}
         </a>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <!-- Tech Stack Marquee -->
-  <section class="scroll-reveal py-10 md:py-12 bg-white overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 md:px-8 mb-8">
-      <h2 class="text-xl md:text-3xl font-bold text-[#2d3748] text-center">{t('section.techStack.title')}</h2>
+  <!-- Nav/Experience Toggle (dev only) -->
+  <div class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2">
+    <button id="nav-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle nav variant (press N)">
+      Nav: <span id="nav-label">A</span>
+    </button>
+    <button id="exp-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle experience style (press E)">
+      Exp: <span id="exp-label">Marquee</span>
+    </button>
+  </div>
+
+  <main class="bg-primary-dark text-white min-h-screen">
+    
+    <Hero 
+      name="Nikita Nirinovich"
+      resumeLabel={t('nav.resume')}
+      githubLabel="GitHub"
+      workLabel={t('nav.work')}
+      projectsLabel={t('nav.projects')}
+      langSwitchLabel={t('language.switch')}
+      langSwitchHref="/"
+    />
+
+    <!-- Accent spacer -->
+    <div class="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
+
+    <ManifestoSection 
+      heading={manifesto.heading}
+      paragraphs={manifesto.paragraphs}
+    />
+
+    <!-- Featured Projects Section -->
+    <div id="featured">
+      <SectionHeader 
+        title={t('section.featured.title')}
+        emphasis={locale === 'fr' ? 'Sélectionnés' : 'Featured'}
+        link="/en/projects"
+        linkText={t('featured.viewAll')}
+      />
     </div>
-    <div class="relative">
-      <div class="flex animate-marquee whitespace-nowrap">
-        {[...techStack, ...techStack].map(tech => (
-          <div class="flex items-center gap-2 mx-6 md:mx-8 text-accent">
-            <Icon name={tech.icon} class="w-7 h-7 md:w-8 md:h-8" />
-            <span class="text-sm font-medium">{tech.name}</span>
+    
+    <div class="bg-slate-800 grid w-full grid-cols-1 gap-0.5 border-y-2 border-slate-800 sm:grid-cols-2 lg:grid-cols-3">
+      {featuredProjects.map(project => (
+        <ProjectCard 
+          id={project.id}
+          title={project.data.title}
+          outcome={project.data.outcome}
+          thumbnail={project.data.thumbnail}
+          year={project.data.date.getFullYear()}
+          techStack={project.data.techStack}
+        />
+      ))}
+    </div>
+
+    <!-- View all projects CTA -->
+    <div class="py-12 flex justify-center border-b-2 border-slate-800">
+      <a href="/en/projects" class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-medium">
+        {t('featured.viewAll')}
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Experiences Section -->
+    <div id="experiences">
+      <SectionHeader 
+        title={t('section.experience.title')}
+        emphasis={locale === 'fr' ? 'Expérience' : 'Experience'}
+      />
+    </div>
+
+    <!-- Variant A: Marquee -->
+    <div id="exp-marquee" class="py-16 border-y-2 border-slate-800 overflow-hidden relative">
+      <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-primary-dark to-transparent z-10"></div>
+      <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-primary-dark to-transparent z-10"></div>
+      
+      <div class="flex items-center gap-16 whitespace-nowrap">
+        {[0, 1].map(() => (
+          <div class="flex items-center gap-16 animate-[marquee_20s_linear_infinite]">
+            {experiences.map((exp) => (
+              <div class="flex items-center gap-6">
+                <div class="flex flex-col">
+                  <span class="text-xl font-bold font-heading text-white">{t(exp.roleKey)}</span>
+                  <span class="text-sm text-accent">{t(exp.periodKey)}</span>
+                </div>
+                <span class="text-accent text-2xl">✦</span>
+              </div>
+            ))}
           </div>
         ))}
       </div>
     </div>
-  </section>
 
-  <!-- Work Section -->
-  <section id="work" class="scroll-reveal py-16 md:py-24 px-4 md:px-8 bg-accent-ghost">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl md:text-4xl font-bold text-[#2d3748] mb-10 md:mb-12 text-center">{t('section.work.title')}</h2>
-      <div class="stagger-container relative">
-        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-accent-light -translate-x-1/2"></div>
-        <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
-          <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0">
-            <h3 class="text-lg md:text-xl font-semibold text-[#2d3748]">Intern: Marketing Analyst & Web Developer</h3>
-            <p class="text-[#718096] mt-1">eTech</p>
-          </div>
-          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-accent rounded-full -translate-x-1/2 mt-1.5 border-2 border-white shadow-sm"></div>
-          <div class="md:w-1/2 md:pl-12 pl-10">
-            <span class="text-sm text-accent font-medium">September 2025 — March 2026</span>
-            <p class="text-[#4a5568] mt-2">Local and offshore commercial team assistant. Built a web platform for offshore client acquisition.</p>
-            <a href="https://malitix.com" target="_blank" rel="noopener noreferrer" class="text-sm text-accent hover:text-accent-hover transition-colors mt-1 inline-block">malitix.com</a>
-          </div>
-        </div>
-        <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
-          <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0">
-            <h3 class="text-lg md:text-xl font-semibold text-[#2d3748]">React & JavaScript Developer</h3>
-            <p class="text-[#718096] mt-1">Exotika.mg</p>
-          </div>
-          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-accent rounded-full -translate-x-1/2 mt-1.5 border-2 border-white shadow-sm"></div>
-          <div class="md:w-1/2 md:pl-12 pl-10">
-            <span class="text-sm text-accent font-medium">June 2025 — July 2025</span>
-            <p class="text-[#4a5568] mt-2">Built the complete website for a vape shop. Deployed on Firebase with Contentful CMS integration.</p>
-            <a href="https://exotika.mg" target="_blank" rel="noopener noreferrer" class="text-sm text-accent hover:text-accent-hover transition-colors mt-1 inline-block">exotika.mg</a>
-          </div>
-        </div>
-        <div class="stagger-item relative flex flex-col md:flex-row items-start mb-12">
-          <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0">
-            <h3 class="text-lg md:text-xl font-semibold text-[#2d3748]">Community Manager</h3>
-            <p class="text-[#718096] mt-1">L'Art Blanc</p>
-          </div>
-          <div class="absolute left-4 md:left-1/2 w-3 h-3 bg-accent rounded-full -translate-x-1/2 mt-1.5 border-2 border-white shadow-sm"></div>
-          <div class="md:w-1/2 md:pl-12 pl-10">
-            <span class="text-sm text-accent font-medium">July 2024 — January 2026</span>
-            <p class="text-[#4a5568] mt-2">Created and published digital content. Designed graphic elements. Developed advertising campaigns.</p>
-          </div>
+    <!-- Variant B: Vertical Timeline (hidden by default) -->
+    <div id="exp-timeline" class="hidden py-16 border-y-2 border-slate-800">
+      <div class="max-w-3xl mx-auto px-8">
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="absolute left-4 top-0 bottom-0 w-px bg-slate-800"></div>
+          
+          {experiences.map((exp, i) => (
+            <div class="relative flex gap-8 pb-12 last:pb-0 group">
+              <!-- Dot -->
+              <div class="relative z-10 flex-shrink-0">
+                <div class="w-8 h-8 rounded-full bg-slate-900 border-2 border-slate-800 flex items-center justify-center group-hover:border-accent transition-colors">
+                  <div class="w-2 h-2 rounded-full bg-slate-600 group-hover:bg-accent transition-colors"></div>
+                </div>
+              </div>
+              
+              <!-- Content -->
+              <div class="flex-1 pt-1">
+                <span class="text-xs font-mono text-accent uppercase tracking-wider">{t(exp.periodKey)}</span>
+                <h3 class="text-xl font-bold font-heading text-white mt-2">{t(exp.roleKey)}</h3>
+                <p class="text-slate-400 mt-2 text-sm leading-relaxed">{t(exp.descKey)}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- All Projects -->
-  <section id="projects" class="scroll-reveal py-16 md:py-24 px-4 md:px-8 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl md:text-4xl font-bold text-[#2d3748] mb-10 md:mb-12 text-center">{t('section.projects.title')}</h2>
-      <div class="stagger-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-        {sortedProjects.map(project => (
-          <div class="stagger-item">
-            <ProjectCard
-              title={project.data.title}
-              role={project.data.role}
-              year={project.data.date.getFullYear().toString()}
-              metric={project.data.metric}
-              metricLabel={project.data.metricLabel}
-              outcome={project.data.outcome}
-              tags={project.data.techStack}
-              client={project.data.client}
-              image={project.data.thumbnail}
-              liveUrl={project.data.links?.live}
-              slug={project.id}
-              locale={locale}
-              cardVariant={project.data.cardVariant}
-            />
-          </div>
-        ))}
-      </div>
+    <!-- The Arsenal -->
+    <SectionHeader 
+      title={t('section.arsenal.title')}
+      emphasis={locale === 'fr' ? 'Arsenal' : 'Arsenal'}
+    />
+
+    <div class="flex flex-col border-y-2 border-slate-800">
+      {techStack.map((item, i) => (
+        <TechStackItem 
+          number={i + 1}
+          name={item.name}
+          description={item.desc}
+          icon={item.icon}
+        />
+      ))}
     </div>
-  </section>
+    
+    <CTASection 
+      message={t('cta.message')}
+      emailLabel={t('cta.emailLabel')}
+    />
+
+  </main>
 </Layout>
 
 <style>
   @keyframes marquee {
-    0% { transform: translateX(0); }
+    0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }
   }
-  .animate-marquee {
-    animation: marquee 20s linear infinite;
-  }
 </style>
+
+<script>
+  const navA = document.getElementById('nav-a');
+  const navB = document.getElementById('nav-b');
+  const navLabel = document.getElementById('nav-label');
+  const navToggle = document.getElementById('nav-toggle');
+  
+  const expMarquee = document.getElementById('exp-marquee');
+  const expTimeline = document.getElementById('exp-timeline');
+  const expLabel = document.getElementById('exp-label');
+  const expToggle = document.getElementById('exp-toggle');
+
+  let navVariant: 'a' | 'b' = 'a';
+  let expVariant: 'marquee' | 'timeline' = 'marquee';
+
+  function toggleNav() {
+    navVariant = navVariant === 'a' ? 'b' : 'a';
+    if (navVariant === 'b') {
+      navA?.classList.add('hidden');
+      navB?.classList.remove('hidden');
+      navLabel!.textContent = 'B';
+    } else {
+      navA?.classList.remove('hidden');
+      navB?.classList.add('hidden');
+      navLabel!.textContent = 'A';
+    }
+  }
+
+  function toggleExp() {
+    expVariant = expVariant === 'marquee' ? 'timeline' : 'marquee';
+    if (expVariant === 'timeline') {
+      expMarquee?.classList.add('hidden');
+      expTimeline?.classList.remove('hidden');
+      expLabel!.textContent = 'Timeline';
+    } else {
+      expMarquee?.classList.remove('hidden');
+      expTimeline?.classList.add('hidden');
+      expLabel!.textContent = 'Marquee';
+    }
+  }
+
+  navToggle?.addEventListener('click', toggleNav);
+  expToggle?.addEventListener('click', toggleExp);
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.target instanceof HTMLElement && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+    
+    if (e.key === 'n' || e.key === 'N') toggleNav();
+    if (e.key === 'e' || e.key === 'E') toggleExp();
+  });
+</script>
