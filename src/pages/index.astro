@@ -1,11 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import ManifestoSection from '../components/ManifestoSection.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import TechStackItem from '../components/TechStackItem.astro';
 import CTASection from '../components/CTASection.astro';
+import { Lightbulb, Layers, Zap } from '@lucide/astro';
 import { useTranslations } from '../i18n/translations';
 import { getCollection } from 'astro:content';
 
@@ -23,15 +22,16 @@ const techStack = [
 ];
 
 const manifesto = {
-  heading: locale === 'fr' ? 'Votre site web devrait travailler pour vous, pas contre vous.' : 'Your website should work for you, not against you.',
+  heading: locale === 'fr' ? 'Ce qui me différencie' : 'What sets me apart',
+  labels: locale === 'fr' ? ['Business first', 'Tout-en-un', 'Zéro ghosting'] : ['Business first', 'All-in-one', 'Zero ghosting'],
   paragraphs: locale === 'fr' ? [
-    "Je crée des sites web et gère l'IT pour des petites entreprises — pas pour le plaisir, pour des résultats. Chaque projet a un objectif : plus de leads, plus de ventes, moins de maux de tête.",
-    "Vous ne serez pas abandonné. Je livre à temps, communique clairement et reste jusqu'à ce que ça fonctionne.",
-    "Je mesure ce qui compte. Trafic, conversions, uptime — pas les métriques de vitrine."
+    "Je comprends la logique business. Un site web n'est pas une œuvre d'art, c'est un outil qui doit générer du chiffre.",
+    "Tout au même endroit. Je développe votre site ET je gère votre IT, pas besoin de jongler entre 5 prestataires.",
+    "Zéro ghosting. Je réponds vite, je livre à temps, et je reste jusqu'à ce que ça tourne."
   ] : [
-    "I build websites and manage IT for small businesses — not for fun, for results. Every project has a goal: more leads, more sales, less headaches.",
-    "You won't get ghosted. I deliver on time, communicate clearly, and stay until it works.",
-    "I measure what matters. Traffic, conversions, uptime — not vanity metrics."
+    "I understand business logic. A website isn't art, it's a tool that should drive revenue.",
+    "Everything in one place. I build your site AND manage your IT, no need to juggle 5 freelancers.",
+    "Zero ghosting. I reply fast, deliver on time, and stay until it works."
   ]
 };
 
@@ -43,10 +43,10 @@ const experiences = [
 ---
 
 <Layout>
-  <!-- Experience Toggle (dev only) -->
-  <div class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2">
-    <button id="exp-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle experience style (press E)">
-      Exp: <span id="exp-label">Marquee</span>
+  <!-- Cards Toggle (dev only) -->
+  <div class="fixed bottom-4 right-4 z-[100]">
+    <button id="cards-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle cards style (press C)">
+      Cards: <span id="cards-label">Compact</span>
     </button>
   </div>
 
@@ -66,10 +66,25 @@ const experiences = [
     <!-- Accent spacer -->
     <div class="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
 
-    <ManifestoSection 
-      heading={manifesto.heading}
-      paragraphs={manifesto.paragraphs}
-    />
+    <!-- Manifesto -->
+    <div class="border-b-2 border-slate-800 px-8 py-12 sm:px-16">
+      <h2 class="text-3xl font-bold leading-tight tracking-tight sm:text-4xl font-heading mb-10">
+        {manifesto.heading}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {manifesto.paragraphs.map((p, i) => (
+          <div class="bg-slate-800 p-6 flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              {i === 0 && <Lightbulb class="w-5 h-5 text-accent" />}
+              {i === 1 && <Layers class="w-5 h-5 text-accent" />}
+              {i === 2 && <Zap class="w-5 h-5 text-accent" />}
+              <span class="text-accent font-mono text-xs uppercase tracking-widest">{manifesto.labels[i]}</span>
+            </div>
+            <p class="text-slate-400 text-base leading-relaxed">{p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
 
     <!-- Featured Projects Section -->
     <div id="featured">
@@ -81,27 +96,52 @@ const experiences = [
       />
     </div>
     
-    <div class="bg-slate-800 grid w-full grid-cols-1 gap-0.5 border-y-2 border-slate-800 sm:grid-cols-2 lg:grid-cols-3">
-      {featuredProjects.map(project => (
-        <ProjectCard 
-          id={project.id}
-          title={project.data.title}
-          outcome={project.data.outcome}
-          thumbnail={project.data.thumbnail}
-          year={project.data.date.getFullYear()}
-          techStack={project.data.techStack}
-        />
-      ))}
+    <!-- Variant A: Compact (default) -->
+    <div id="cards-compact" class="border-y-2 border-slate-800">
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-px bg-slate-800">
+        {featuredProjects.map(project => (
+          <a href={`/projects/${project.id}`} class="bg-primary-dark group flex flex-col overflow-hidden hover:bg-slate-900 transition-all">
+            <div class="relative aspect-square w-full overflow-hidden">
+              <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0 group-hover:opacity-90" />
+            </div>
+            <div class="p-3 flex flex-col gap-1">
+              <h3 class="text-sm font-bold font-heading leading-tight group-hover:text-accent transition-colors">{project.data.title}</h3>
+              <span class="text-[10px] font-mono text-accent">{project.data.date.getFullYear()}</span>
+              <div class="flex flex-wrap gap-1 mt-1">
+                {(project.data.techStack || []).slice(0, 2).map(tech => (
+                  <span class="text-[8px] font-mono uppercase tracking-widest text-slate-600">{tech}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
 
-    <!-- View all projects CTA -->
-    <div class="py-12 flex justify-center border-b-2 border-slate-800">
-      <a href="/projects" class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-medium">
-        {t('featured.viewAll')}
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
+    <!-- Variant B: Magazine (hidden) -->
+    <div id="cards-magazine" class="hidden border-y-2 border-slate-800 px-8 py-10 sm:px-16">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {featuredProjects.map((project, i) => (
+          <a href={`/projects/${project.id}`} class={`group overflow-hidden bg-slate-900 border-2 border-slate-800 hover:border-slate-700 transition-all ${i === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}`}>
+            <div class={`relative w-full overflow-hidden ${i === 0 ? 'aspect-[16/10]' : 'aspect-video'}`}>
+              <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+              <div class="absolute bottom-4 left-5 right-5">
+                <h3 class={`font-bold font-heading text-white mb-1 ${i === 0 ? 'text-3xl' : 'text-lg'}`}>{project.data.title}</h3>
+                <div class="flex items-center gap-2">
+                  <span class="text-accent text-xs font-mono">{project.data.date.getFullYear()}</span>
+                  {i === 0 && <span class="text-slate-500 text-xs">{project.data.techStack?.join(' / ')}</span>}
+                </div>
+              </div>
+            </div>
+            {i === 0 && (
+              <div class="p-5">
+                <p class="text-sm text-slate-400 leading-relaxed">{project.data.outcome}</p>
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
     </div>
 
     <!-- Experiences Section -->
@@ -112,45 +152,20 @@ const experiences = [
       />
     </div>
 
-    <!-- Variant A: Marquee -->
-    <div id="exp-marquee" class="py-16 border-y-2 border-slate-800 overflow-hidden relative">
-      <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-primary-dark to-transparent z-10"></div>
-      <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-primary-dark to-transparent z-10"></div>
-      
-      <div class="flex items-center gap-16 whitespace-nowrap">
-        {[0, 1].map(() => (
-          <div class="flex items-center gap-16 animate-[marquee_20s_linear_infinite]">
-            {experiences.map((exp) => (
-              <div class="flex items-center gap-6">
-                <div class="flex flex-col">
-                  <span class="text-xl font-bold font-heading text-white">{t(exp.roleKey)}</span>
-                  <span class="text-sm text-accent">{t(exp.periodKey)}</span>
-                </div>
-                <span class="text-accent text-2xl">✦</span>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- Variant B: Vertical Timeline (hidden by default) -->
-    <div id="exp-timeline" class="hidden py-16 border-y-2 border-slate-800">
+    <!-- Timeline -->
+    <div class="py-16 border-y-2 border-slate-800">
       <div class="max-w-3xl mx-auto px-8">
         <div class="relative">
-          <!-- Vertical line -->
           <div class="absolute left-4 top-0 bottom-0 w-px bg-slate-800"></div>
           
           {experiences.map((exp, i) => (
             <div class="relative flex gap-8 pb-12 last:pb-0 group">
-              <!-- Dot -->
               <div class="relative z-10 flex-shrink-0">
                 <div class="w-8 h-8 rounded-full bg-slate-900 border-2 border-slate-800 flex items-center justify-center group-hover:border-accent transition-colors">
                   <div class="w-2 h-2 rounded-full bg-slate-600 group-hover:bg-accent transition-colors"></div>
                 </div>
               </div>
               
-              <!-- Content -->
               <div class="flex-1 pt-1">
                 <span class="text-xs font-mono text-accent uppercase tracking-wider">{t(exp.periodKey)}</span>
                 <h3 class="text-xl font-bold font-heading text-white mt-2">{t(exp.roleKey)}</h3>
@@ -187,38 +202,31 @@ const experiences = [
   </main>
 </Layout>
 
-<style>
-  @keyframes marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
-  }
-</style>
-
 <script>
-  const expMarquee = document.getElementById('exp-marquee');
-  const expTimeline = document.getElementById('exp-timeline');
-  const expLabel = document.getElementById('exp-label');
-  const expToggle = document.getElementById('exp-toggle');
+  const cardsCompact = document.getElementById('cards-compact');
+  const cardsMagazine = document.getElementById('cards-magazine');
+  const cardsLabel = document.getElementById('cards-label');
+  const cardsToggle = document.getElementById('cards-toggle');
 
-  let expVariant: 'marquee' | 'timeline' = 'marquee';
+  let showMagazine = false;
 
-  function toggleExp() {
-    expVariant = expVariant === 'marquee' ? 'timeline' : 'marquee';
-    if (expVariant === 'timeline') {
-      expMarquee?.classList.add('hidden');
-      expTimeline?.classList.remove('hidden');
-      expLabel!.textContent = 'Timeline';
+  function toggleCards() {
+    showMagazine = !showMagazine;
+    if (showMagazine) {
+      cardsCompact?.classList.add('hidden');
+      cardsMagazine?.classList.remove('hidden');
+      cardsLabel!.textContent = 'Magazine';
     } else {
-      expMarquee?.classList.remove('hidden');
-      expTimeline?.classList.add('hidden');
-      expLabel!.textContent = 'Marquee';
+      cardsCompact?.classList.remove('hidden');
+      cardsMagazine?.classList.add('hidden');
+      cardsLabel!.textContent = 'Compact';
     }
   }
 
-  expToggle?.addEventListener('click', toggleExp);
+  cardsToggle?.addEventListener('click', toggleCards);
   
   document.addEventListener('keydown', (e) => {
     if (e.target instanceof HTMLElement && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
-    if (e.key === 'e' || e.key === 'E') toggleExp();
+    if (e.key === 'c' || e.key === 'C') toggleCards();
   });
 </script>
