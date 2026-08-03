@@ -113,13 +113,6 @@ const experiences = [
 ---
 
 <Layout>
-  <!-- Cards Toggle (dev only) -->
-  <div class="fixed bottom-4 right-4 z-[100]">
-    <button id="cards-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle cards style (press C)">
-      Cards: <span id="cards-label">Compact</span>
-    </button>
-  </div>
-
   <main class="bg-primary-dark text-white min-h-screen">
     
     <Hero 
@@ -161,17 +154,15 @@ const experiences = [
       <SectionHeader 
         title={t('section.featured.title')}
         emphasis={locale === 'fr' ? 'Sélectionnés' : 'Featured'}
-        link="/en/projects"
-        linkText={t('featured.viewAll')}
       />
     </div>
     
-    <!-- Variant A: Compact (default) -->
-    <div id="cards-compact" class="border-y-2 border-slate-800">
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-px bg-slate-800">
+    <!-- Compact Cards -->
+    <div class="border-b-2 border-slate-800">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-800">
         {featuredProjects.map(project => (
           <a href={`/en/projects/${project.id}`} class="bg-primary-dark group flex flex-col overflow-hidden hover:bg-slate-900 transition-all">
-            <div class="relative aspect-square w-full overflow-hidden">
+            <div class="relative aspect-[1200/630] w-full overflow-hidden">
               <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0 group-hover:opacity-90" />
             </div>
             <div class="p-3 flex flex-col gap-1">
@@ -185,33 +176,27 @@ const experiences = [
             </div>
           </a>
         ))}
+        <!-- Placeholder card -->
+        <div class="bg-primary-dark flex flex-col overflow-hidden border-2 border-dashed border-slate-700">
+          <div class="relative aspect-[1200/630] w-full flex items-center justify-center bg-slate-900">
+            <svg class="w-12 h-12 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </div>
+          <div class="p-3 flex flex-col gap-1">
+            <h3 class="text-sm font-bold font-heading leading-tight text-slate-600">{locale === 'fr' ? 'Prochain projet' : 'Next project'}</h3>
+            <span class="text-[10px] font-mono text-slate-700">{locale === 'fr' ? 'Bientôt' : 'Coming soon'}</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Variant B: Magazine (hidden) -->
-    <div id="cards-magazine" class="hidden border-y-2 border-slate-800 px-8 py-10 sm:px-16">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {featuredProjects.map((project, i) => (
-          <a href={`/en/projects/${project.id}`} class={`group overflow-hidden bg-slate-900 border-2 border-slate-800 hover:border-slate-700 transition-all ${i === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}`}>
-            <div class={`relative w-full overflow-hidden ${i === 0 ? 'aspect-[16/10]' : 'aspect-video'}`}>
-              <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
-              <div class="absolute bottom-4 left-5 right-5">
-                <h3 class={`font-bold font-heading text-white mb-1 ${i === 0 ? 'text-3xl' : 'text-lg'}`}>{project.data.title}</h3>
-                <div class="flex items-center gap-2">
-                  <span class="text-accent text-xs font-mono">{project.data.date.getFullYear()}</span>
-                  {i === 0 && <span class="text-slate-500 text-xs">{project.data.techStack?.join(' / ')}</span>}
-                </div>
-              </div>
-            </div>
-            {i === 0 && (
-              <div class="p-5">
-                <p class="text-sm text-slate-400 leading-relaxed">{project.data.outcome}</p>
-              </div>
-            )}
-          </a>
-        ))}
-      </div>
+    <!-- View All Projects Button -->
+    <div class="px-8 py-8 sm:px-16 border-b-2 border-slate-800">
+      <a href="/en/projects" class="inline-flex items-center gap-2 bg-accent text-white font-bold uppercase text-sm px-6 py-3 hover:bg-accent/80 transition-colors">
+        {t('featured.viewAll')}
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+      </a>
     </div>
 
     <!-- Experiences Section -->
@@ -292,33 +277,6 @@ const experiences = [
 </Layout>
 
 <script>
-  const cardsCompact = document.getElementById('cards-compact');
-  const cardsMagazine = document.getElementById('cards-magazine');
-  const cardsLabel = document.getElementById('cards-label');
-  const cardsToggle = document.getElementById('cards-toggle');
-
-  let showMagazine = false;
-
-  function toggleCards() {
-    showMagazine = !showMagazine;
-    if (showMagazine) {
-      cardsCompact?.classList.add('hidden');
-      cardsMagazine?.classList.remove('hidden');
-      cardsLabel!.textContent = 'Magazine';
-    } else {
-      cardsCompact?.classList.remove('hidden');
-      cardsMagazine?.classList.add('hidden');
-      cardsLabel!.textContent = 'Compact';
-    }
-  }
-
-  cardsToggle?.addEventListener('click', toggleCards);
-  
-  document.addEventListener('keydown', (e) => {
-    if (e.target instanceof HTMLElement && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
-    if (e.key === 'c' || e.key === 'C') toggleCards();
-  });
-
   // Scroll reveal for experience items
   const observerOptions = {
     threshold: 0.15,
