@@ -37,24 +37,38 @@ const manifesto = {
 
 const experiences = [
   { 
-    role: locale === 'fr' ? 'Alternant: Marketing Analyst & Développeur Web' : 'Intern: Marketing Analyst & Web Developer',
+    role: locale === 'fr' ? 'Alternant: Marketing/Business Analyst' : 'Intern: Marketing/Business Analyst',
     company: 'eTech Consulting',
     period: locale === 'fr' ? 'Sept 2025 — Mars 2026' : 'Sept 2025 — Mar 2026',
     tasks: locale === 'fr' ? [
       "Assistant de l'équipe commerciale locale et Offshore",
       "Compréhension fonctionnelle et technique des besoins du client",
       "Conception des propositions commerciales et des plaquettes",
-      "Création intégrale d'une plateforme web dédiée à l'acquisition de clients offshore"
+      "Élaboration des offres et suivi des opportunités"
     ] : [
       "Assistant to local and Offshore commercial team",
       "Functional and technical understanding of client needs",
       "Design of commercial proposals and brochures",
-      "End-to-end creation of a web platform for offshore client acquisition"
+      "Offer development and opportunity tracking"
+    ]
+  },
+  { 
+    role: 'Développeur React',
+    company: 'Malitix (eTech Consulting)',
+    period: locale === 'fr' ? 'Sept 2025 — Mars 2026' : 'Sept 2025 — Mar 2026',
+    tasks: locale === 'fr' ? [
+      "Création intégrale d'une plateforme web dédiée à l'acquisition de clients offshore",
+      "Développement frontend React et intégration API",
+      "Conception de l'architecture technique et déploiement"
+    ] : [
+      "End-to-end creation of a web platform for offshore client acquisition",
+      "React frontend development and API integration",
+      "Technical architecture design and deployment"
     ],
     link: 'https://malitix.com'
   },
   { 
-    role: locale === 'fr' ? 'Community Manager' : 'Community Manager',
+    role: 'Community Manager',
     company: "L'Art Blanc",
     period: locale === 'fr' ? 'Juil 2024 — Jan 2026' : 'Jul 2024 — Jan 2026',
     tasks: locale === 'fr' ? [
@@ -206,41 +220,44 @@ const experiences = [
       />
     </div>
 
-    <!-- Timeline -->
+    <!-- Left/Right Timeline -->
     <div class="py-16 border-y-2 border-slate-800">
-      <div class="max-w-3xl mx-auto px-8">
+      <div class="max-w-5xl mx-auto px-8">
         <div class="relative">
-          <div class="absolute left-4 top-0 bottom-0 w-px bg-slate-800"></div>
+          <div class="absolute left-1/2 top-0 bottom-0 w-px bg-slate-800 -translate-x-1/2"></div>
           
           {experiences.map((exp, i) => (
-            <div class="relative flex gap-8 pb-12 last:pb-0 group experience-item" style={`--delay: ${i * 0.15}s`}>
+            <div class={`relative flex items-center pb-12 last:pb-0 experience-item ${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`} style={`--delay: ${i * 0.15}s`}>
+              <div class="w-1/2 px-8">
+                <div class={`${i % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                  <span class="text-xs font-mono text-accent uppercase tracking-wider">{exp.period}</span>
+                  <h3 class="text-xl font-bold font-heading text-white mt-1">{exp.role}</h3>
+                  <span class="text-sm text-slate-500 font-medium">{exp.company}</span>
+                  <ul class={`mt-3 space-y-1.5 ${i % 2 === 0 ? 'ml-auto' : ''}`}>
+                    {exp.tasks.map(task => (
+                      <li class={`text-slate-400 text-sm leading-relaxed flex items-start gap-2 ${i % 2 === 0 ? 'justify-end' : ''}`}>
+                        {i % 2 !== 0 && <span class="text-accent mt-1.5 text-[10px]">▸</span>}
+                        <span>{task}</span>
+                        {i % 2 === 0 && <span class="text-accent mt-1.5 text-[10px]">◂</span>}
+                      </li>
+                    ))}
+                  </ul>
+                  {exp.link && (
+                    <a href={exp.link} target="_blank" rel="noopener noreferrer" class={`inline-flex items-center gap-1.5 mt-3 text-xs font-mono text-accent hover:text-white transition-colors ${i % 2 === 0 ? 'ml-auto' : ''}`}>
+                      <span>{exp.link.replace('https://', '')}</span>
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+              
               <div class="relative z-10 flex-shrink-0">
                 <div class="w-8 h-8 rounded-full bg-slate-900 border-2 border-slate-800 flex items-center justify-center group-hover:border-accent transition-colors">
                   <div class="w-2 h-2 rounded-full bg-slate-600 group-hover:bg-accent transition-colors"></div>
                 </div>
               </div>
               
-              <div class="flex-1 pt-1">
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-                  <h3 class="text-xl font-bold font-heading text-white">{exp.role}</h3>
-                  <span class="text-xs font-mono text-accent uppercase tracking-wider">{exp.period}</span>
-                </div>
-                <span class="text-sm text-slate-500 font-medium">{exp.company}</span>
-                <ul class="mt-3 space-y-1.5">
-                  {exp.tasks.map(task => (
-                    <li class="text-slate-400 text-sm leading-relaxed flex items-start gap-2">
-                      <span class="text-accent mt-1.5 text-[10px]">▸</span>
-                      <span>{task}</span>
-                    </li>
-                  ))}
-                </ul>
-                {exp.link && (
-                  <a href={exp.link} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs font-mono text-accent hover:text-white transition-colors">
-                    <span>{exp.link.replace('https://', '')}</span>
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                  </a>
-                )}
-              </div>
+              <div class="w-1/2 px-8"></div>
             </div>
           ))}
         </div>
