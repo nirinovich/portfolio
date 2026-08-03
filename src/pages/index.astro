@@ -51,6 +51,9 @@ const experiences = [
         <a href="#featured" class="text-sm text-slate-400 hover:text-white transition-colors">{t('nav.work')}</a>
         <a href="/resume.pdf" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">{t('nav.resume')}</a>
         <a href="https://github.com/nirinovich" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">GitHub</a>
+        <a href={locale === 'fr' ? '/en' : '/'} class="text-sm text-slate-400 hover:text-white transition-colors border border-slate-700 px-2.5 py-1 rounded hover:bg-slate-800">
+          {t('language.switch')}
+        </a>
       </div>
     </div>
   </nav>
@@ -73,6 +76,8 @@ const experiences = [
       githubLabel="GitHub"
       workLabel={t('nav.work')}
       projectsLabel={t('nav.projects')}
+      langSwitchLabel={t('language.switch')}
+      langSwitchHref={locale === 'fr' ? '/en' : '/'}
     />
 
     <!-- Accent spacer -->

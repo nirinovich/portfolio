@@ -9,6 +9,8 @@ interface Props {
   githubLabel: string;
   workLabel?: string;
   projectsLabel?: string;
+  langSwitchLabel?: string;
+  langSwitchHref?: string;
   profileImage?: string;
 }
 
@@ -19,6 +21,8 @@ const {
   githubLabel, 
   workLabel = 'Work',
   projectsLabel = 'Projects',
+  langSwitchLabel = 'EN',
+  langSwitchHref = '/en',
   profileImage = '/profile.png' 
 } = Astro.props;
 ---
@@ -32,6 +36,9 @@ const {
       <a href="/resume.pdf" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">{resumeLabel}</a>
       <a href="https://github.com/nirinovich" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
         <Icon name="mdi:github" class="w-4 h-4" /> {githubLabel}
+      </a>
+      <a href={langSwitchHref} class="text-sm text-slate-400 hover:text-white transition-colors border border-slate-700 px-2.5 py-1 rounded hover:bg-slate-800">
+        {langSwitchLabel}
       </a>
     </div>
   </nav>
