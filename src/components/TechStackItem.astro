@@ -1,15 +1,25 @@
 ---
 // TechStackItem component - Numbered tech stack list item with hover effect
-import { Icon } from 'astro-icon/components';
-
 interface Props {
   number: number;
   name: string;
   description: string;
+  icon?: string;
   class?: string;
 }
 
-const { number, name, description, class: className = '' } = Astro.props;
+const { number, name, description, icon, class: className = '' } = Astro.props;
+
+const iconCdnMap: Record<string, string> = {
+  react: 'https://cdn.simpleicons.org/react/61DAFB',
+  astro: 'https://cdn.simpleicons.org/astro/FF5D01',
+  firebase: 'https://cdn.simpleicons.org/firebase/FFCA28',
+  typescript: 'https://cdn.simpleicons.org/typescript/3178C6',
+  tailwindcss: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+  node: 'https://cdn.simpleicons.org/nodedotjs/339933',
+};
+
+const iconUrl = icon ? iconCdnMap[icon] : null;
 ---
 
 <div class:list={[
@@ -21,6 +31,9 @@ const { number, name, description, class: className = '' } = Astro.props;
       <span class="bg-white text-primary-dark inline-flex w-fit items-center px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider">
         0{number}
       </span>
+      {iconUrl && (
+        <img src={iconUrl} alt={`${name} logo`} class="w-5 h-5" loading="lazy" />
+      )}
     </div>
     <h3 class="text-2xl font-bold leading-tight tracking-tight sm:text-3xl font-heading text-white">
       {name}
@@ -30,6 +43,8 @@ const { number, name, description, class: className = '' } = Astro.props;
     </div>
   </div>
   <span aria-hidden="true" class="relative flex h-12 w-12 shrink-0 items-center justify-center sm:h-[54px] sm:w-[54px] text-slate-700 group-hover:text-accent transition-colors">
-    <Icon name="mdi:chevron-right" class="w-8 h-8" />
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
   </span>
 </div>
