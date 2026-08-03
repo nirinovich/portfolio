@@ -162,6 +162,8 @@ const experiences = [
       <SectionHeader 
         title={t('section.featured.title')}
         emphasis={locale === 'fr' ? 'Sélectionnés' : 'Featured'}
+        link="/en/projects"
+        linkText={t('featured.viewAll')}
       />
     </div>
     
@@ -169,127 +171,120 @@ const experiences = [
     <div class="border-b-2 border-slate-800">
       <div class="relative">
         <!-- Variant S: Compact -->
-        <div id="variant-compact" class="carousel-variant hidden flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-          {[...featuredProjects, ...featuredProjects].map((project, i) => (
-            <a href={`/en/projects/${project.id}`} class="flex-shrink-0 w-64 snap-center group px-2">
-              <div class="relative aspect-[4/3] w-full overflow-hidden">
-                <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110" />
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-3">
-                  <h3 class="text-sm font-bold font-heading text-white group-hover:text-accent transition-colors">{project.data.title}</h3>
-                  <span class="text-[10px] font-mono text-accent">{project.data.date.getFullYear()}</span>
+        <div id="variant-compact" class="carousel-variant hidden overflow-x-hidden">
+          <div class="carousel-track flex w-max" data-carousel="compact">
+            {[...featuredProjects, ...featuredProjects].map((project, i) => (
+              <a href={`/en/projects/${project.id}`} class="flex-shrink-0 w-64 group px-2">
+                <div class="relative aspect-[4/3] w-full overflow-hidden">
+                  <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-3">
+                    <h3 class="text-sm font-bold font-heading text-white group-hover:text-accent transition-colors">{project.data.title}</h3>
+                    <span class="text-[10px] font-mono text-accent">{project.data.date.getFullYear()}</span>
+                  </div>
                 </div>
+              </a>
+            ))}
+            <div class="flex-shrink-0 w-64 px-2">
+              <div class="relative aspect-[4/3] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-2">
+                <svg class="w-8 h-8 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                <span class="text-xs font-mono text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
               </div>
-            </a>
-          ))}
-          <div class="flex-shrink-0 w-64 snap-center px-2">
-            <div class="relative aspect-[4/3] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-2">
-              <svg class="w-8 h-8 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              <span class="text-xs font-mono text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
             </div>
           </div>
         </div>
 
         <!-- Variant M: Medium -->
-        <div id="variant-medium" class="carousel-variant hidden flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-          {[...featuredProjects, ...featuredProjects].map((project, i) => (
-            <a href={`/en/projects/${project.id}`} class="flex-shrink-0 w-80 snap-center group px-2">
-              <div class="relative aspect-video w-full overflow-hidden">
-                <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110" />
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 class="text-base font-bold font-heading text-white group-hover:text-accent transition-colors">{project.data.title}</h3>
-                  <div class="flex items-center gap-2 mt-1">
-                    <span class="text-xs font-mono text-accent">{project.data.date.getFullYear()}</span>
-                    <span class="text-[10px] text-slate-500">{project.data.techStack?.slice(0, 2).join(' / ')}</span>
+        <div id="variant-medium" class="carousel-variant hidden overflow-x-hidden">
+          <div class="carousel-track flex w-max" data-carousel="medium">
+            {[...featuredProjects, ...featuredProjects].map((project, i) => (
+              <a href={`/en/projects/${project.id}`} class="flex-shrink-0 w-80 group px-2">
+                <div class="relative aspect-video w-full overflow-hidden">
+                  <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 class="text-base font-bold font-heading text-white group-hover:text-accent transition-colors">{project.data.title}</h3>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="text-xs font-mono text-accent">{project.data.date.getFullYear()}</span>
+                      <span class="text-[10px] text-slate-500">{project.data.techStack?.slice(0, 2).join(' / ')}</span>
+                    </div>
                   </div>
                 </div>
+              </a>
+            ))}
+            <div class="flex-shrink-0 w-80 px-2">
+              <div class="relative aspect-video w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-3">
+                <svg class="w-10 h-10 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                <span class="text-sm font-mono text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
               </div>
-            </a>
-          ))}
-          <div class="flex-shrink-0 w-80 snap-center px-2">
-            <div class="relative aspect-video w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-3">
-              <svg class="w-10 h-10 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              <span class="text-sm font-mono text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
             </div>
           </div>
         </div>
 
         <!-- Variant L: Large -->
-        <div id="variant-large" class="carousel-variant flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-          {[...featuredProjects, ...featuredProjects].map((project, i) => (
-            <a href={`/en/projects/${project.id}`} class="flex-shrink-0 w-[28rem] snap-center group px-2">
-              <div class="relative aspect-[16/9] w-full overflow-hidden">
-                <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110" />
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 class="text-xl font-bold font-heading text-white mb-1">{project.data.title}</h3>
-                  <div class="flex items-center gap-3">
-                    <span class="text-sm font-mono text-accent">{project.data.date.getFullYear()}</span>
-                    <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
-                    <span class="text-sm text-slate-400">{project.data.techStack?.slice(0, 3).join(' / ')}</span>
+        <div id="variant-large" class="carousel-variant overflow-x-hidden">
+          <div class="carousel-track flex w-max" data-carousel="large">
+            {[...featuredProjects, ...featuredProjects].map((project, i) => (
+              <a href={`/en/projects/${project.id}`} class="flex-shrink-0 w-[28rem] group px-2">
+                <div class="relative aspect-[16/9] w-full overflow-hidden">
+                  <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 class="text-xl font-bold font-heading text-white mb-1">{project.data.title}</h3>
+                    <div class="flex items-center gap-3">
+                      <span class="text-sm font-mono text-accent">{project.data.date.getFullYear()}</span>
+                      <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
+                      <span class="text-sm text-slate-400">{project.data.techStack?.slice(0, 3).join(' / ')}</span>
+                    </div>
                   </div>
                 </div>
+              </a>
+            ))}
+            <div class="flex-shrink-0 w-[28rem] px-2">
+              <div class="relative aspect-[16/9] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-4">
+                <svg class="w-12 h-12 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                <span class="text-base font-mono text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
               </div>
-            </a>
-          ))}
-          <div class="flex-shrink-0 w-[28rem] snap-center px-2">
-            <div class="relative aspect-[16/9] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-4">
-              <svg class="w-12 h-12 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              <span class="text-base font-mono text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
             </div>
           </div>
         </div>
 
         <!-- Variant XL: Extra Large -->
-        <div id="variant-xl" class="carousel-variant hidden flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-          {[...featuredProjects, ...featuredProjects].map((project, i) => (
-            <a href={`/en/projects/${project.id}`} class="flex-shrink-0 w-[36rem] snap-center group px-2">
-              <div class="relative aspect-[21/9] w-full overflow-hidden">
-                <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105" />
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 class="text-2xl sm:text-3xl font-bold font-heading text-white mb-2">{project.data.title}</h3>
-                  <div class="flex flex-wrap items-center gap-3">
-                    <span class="text-accent text-sm font-mono">{project.data.date.getFullYear()}</span>
-                    <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
-                    <span class="text-slate-400 text-sm">{project.data.techStack?.slice(0, 3).join(' / ')}</span>
+        <div id="variant-xl" class="carousel-variant hidden overflow-x-hidden">
+          <div class="carousel-track flex w-max" data-carousel="xl">
+            {[...featuredProjects, ...featuredProjects].map((project, i) => (
+              <a href={`/en/projects/${project.id}`} class="flex-shrink-0 w-[36rem] group px-2">
+                <div class="relative aspect-[21/9] w-full overflow-hidden">
+                  <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <h3 class="text-2xl sm:text-3xl font-bold font-heading text-white mb-2">{project.data.title}</h3>
+                    <div class="flex flex-wrap items-center gap-3">
+                      <span class="text-accent text-sm font-mono">{project.data.date.getFullYear()}</span>
+                      <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
+                      <span class="text-slate-400 text-sm">{project.data.techStack?.slice(0, 3).join(' / ')}</span>
+                    </div>
                   </div>
                 </div>
+              </a>
+            ))}
+            <div class="flex-shrink-0 w-[36rem] px-2">
+              <div class="relative aspect-[21/9] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-4">
+                <svg class="w-16 h-16 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                <span class="text-xl font-bold font-heading text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
               </div>
-            </a>
-          ))}
-          <div class="flex-shrink-0 w-[36rem] snap-center px-2">
-            <div class="relative aspect-[21/9] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-4">
-              <svg class="w-16 h-16 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              <span class="text-xl font-bold font-heading text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
             </div>
           </div>
         </div>
-
-        <!-- Carousel dots -->
-        <div id="carousel-dots" class="flex justify-center gap-2 py-4">
-          {[...featuredProjects, null].map((_, i) => (
-            <button data-carousel-dot={i} class={`w-2 h-2 rounded-full transition-colors ${i === 0 ? 'bg-accent' : 'bg-slate-700 hover:bg-slate-600'}`} aria-label={`Slide ${i + 1}`} />
-          ))}
-        </div>
       </div>
-    </div>
-
-    <!-- View All Projects Button -->
-    <div class="px-8 py-10 sm:px-16 flex justify-center">
-      <a href="/en/projects" class="inline-flex items-center gap-2 bg-accent text-white font-bold uppercase text-sm px-6 py-3 hover:bg-accent/80 transition-colors">
-        {t('featured.viewAll')}
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-      </a>
     </div>
 
     <!-- Experiences Section -->
@@ -373,7 +368,6 @@ const experiences = [
   // Variant switching
   const variantBtns = document.querySelectorAll('[data-variant]');
   const variants = document.querySelectorAll('.carousel-variant');
-  const dotsContainer = document.getElementById('carousel-dots');
   
   function switchVariant(name: string) {
     variantBtns.forEach(btn => {
@@ -385,44 +379,7 @@ const experiences = [
     });
     variants.forEach(v => v.classList.add('hidden'));
     const active = document.getElementById(`variant-${name}`);
-    if (active) {
-      active.classList.remove('hidden');
-      updateDots(active);
-    }
-  }
-
-  function updateDots(container: Element) {
-    if (!dotsContainer) return;
-    const items = container.querySelectorAll('a, div:not([class*="snap-center"]):last-child');
-    const count = Math.ceil(items.length);
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < count; i++) {
-      const dot = document.createElement('button');
-      dot.setAttribute('data-carousel-dot', String(i));
-      dot.className = `w-2 h-2 rounded-full transition-colors ${i === 0 ? 'bg-accent' : 'bg-slate-700 hover:bg-slate-600'}`;
-      dot.setAttribute('aria-label', `Slide ${i + 1}`);
-      dotsContainer.appendChild(dot);
-    }
-    setupCarouselDots(container);
-  }
-
-  function setupCarouselDots(container: Element) {
-    const dots = container.querySelectorAll('[data-carousel-dot]');
-    container.addEventListener('scroll', () => {
-      const scrollLeft = (container as HTMLElement).scrollLeft;
-      const cardWidth = (container as HTMLElement).offsetWidth;
-      const activeIndex = Math.round(scrollLeft / cardWidth);
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('bg-accent', i === activeIndex);
-        dot.classList.toggle('bg-slate-700', i !== activeIndex);
-      });
-    });
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        const cardWidth = (container as HTMLElement).offsetWidth;
-        container.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
-      });
-    });
+    if (active) active.classList.remove('hidden');
   }
 
   variantBtns.forEach(btn => {
@@ -431,10 +388,6 @@ const experiences = [
       if (variant) switchVariant(variant);
     });
   });
-
-  // Initialize dots for first visible variant
-  const firstVariant = document.querySelector('.carousel-variant:not(.hidden)');
-  if (firstVariant) updateDots(firstVariant);
 
   // Keyboard shortcut: 1-4 to switch variants
   document.addEventListener('keydown', (e) => {
@@ -476,13 +429,5 @@ const experiences = [
   .experience-item.revealed {
     opacity: 1;
     transform: translateX(0);
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
   }
 </style>
