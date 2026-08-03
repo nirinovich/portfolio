@@ -23,14 +23,19 @@ const techStack = [
 ];
 
 const manifesto = {
-  heading: 'Good software isn\'t cheap. Bad software is expensive.',
+  heading: 'Your website should work for you, not against you.',
   paragraphs: [
-    "I believe in values first — performance, clarity, and outcomes over features and buzzwords.",
-    "Every line of code is a liability. Bad debt compounds. I build systems that stay clean under pressure.",
-    "AI is rewriting the rules, but someone still has to manage the machine. That's where I come in.",
-    "I bridge the gap between design intent and production-grade engineering — delivering results, not just code."
+    "I build websites and manage IT for small businesses — not for fun, for results. Every project has a goal: more leads, more sales, less headaches.",
+    "You won't get ghosted. I deliver on time, communicate clearly, and stay until it works.",
+    "I measure what matters. Traffic, conversions, uptime — not vanity metrics."
   ]
 };
+
+const experiences = [
+  { role: 'Freelance Web Developer & IT Consultant', period: '2023 — Present', description: 'Building web solutions and managing IT for SMEs across Madagascar and internationally.' },
+  { role: 'Computer Science Student', period: '2021 — Present', description: 'ESTI — École Supérieure d\'Informatique. Studying software engineering and system design.' },
+  { role: 'Junior Developer', period: '2022 — 2023', description: 'Early freelance projects building websites for local businesses.' },
+];
 ---
 
 <Layout>
@@ -46,29 +51,43 @@ const manifesto = {
     </div>
   </nav>
 
-  <!-- Nav Toggle (dev only) -->
-  <button id="nav-toggle" class="fixed bottom-4 right-4 z-[100] bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle nav variant (press N)">
-    Nav: <span id="nav-label">A</span>
-  </button>
+  <!-- Nav/Experience Toggle (dev only) -->
+  <div class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2">
+    <button id="nav-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle nav variant (press N)">
+      Nav: <span id="nav-label">A</span>
+    </button>
+    <button id="exp-toggle" class="bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Toggle experience style (press E)">
+      Exp: <span id="exp-label">Marquee</span>
+    </button>
+  </div>
 
   <main class="bg-primary-dark text-white min-h-screen">
     
     <Hero 
       name="Nikita Nirinovich"
-      subtitle="with Nikita Nirinovich"
       resumeLabel={t('nav.resume')}
       githubLabel="GitHub"
+      workLabel={t('nav.work')}
+      projectsLabel={t('nav.projects')}
     />
+
+    <!-- Accent spacer -->
+    <div class="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
 
     <ManifestoSection 
       heading={manifesto.heading}
       paragraphs={manifesto.paragraphs}
     />
 
-    <SectionHeader 
-      title="Featured Projects"
-      emphasis="Projects"
-    />
+    <!-- Featured Projects Section -->
+    <div id="featured">
+      <SectionHeader 
+        title="Featured Projects"
+        emphasis="Projects"
+        link="/projects"
+        linkText="View all projects"
+      />
+    </div>
     
     <div class="bg-slate-800 grid w-full grid-cols-1 gap-0.5 border-y-2 border-slate-800 sm:grid-cols-2 lg:grid-cols-3">
       {featuredProjects.map(project => (
@@ -83,6 +102,75 @@ const manifesto = {
       ))}
     </div>
 
+    <!-- View all projects CTA -->
+    <div class="py-12 flex justify-center border-b-2 border-slate-800">
+      <a href="/projects" class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-medium">
+        View all projects
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Experiences Section -->
+    <div id="experiences">
+      <SectionHeader 
+        title="Experience"
+        emphasis="Experience"
+      />
+    </div>
+
+    <!-- Variant A: Marquee -->
+    <div id="exp-marquee" class="py-16 border-y-2 border-slate-800 overflow-hidden relative">
+      <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-primary-dark to-transparent z-10"></div>
+      <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-primary-dark to-transparent z-10"></div>
+      
+      <div class="flex items-center gap-16 whitespace-nowrap">
+        {[0, 1].map(() => (
+          <div class="flex items-center gap-16 animate-[marquee_20s_linear_infinite]">
+            {experiences.map((exp) => (
+              <div class="flex items-center gap-6">
+                <div class="flex flex-col">
+                  <span class="text-xl font-bold font-heading text-white">{exp.role}</span>
+                  <span class="text-sm text-accent">{exp.period}</span>
+                </div>
+                <span class="text-accent text-2xl">✦</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Variant B: Vertical Timeline (hidden by default) -->
+    <div id="exp-timeline" class="hidden py-16 border-y-2 border-slate-800">
+      <div class="max-w-3xl mx-auto px-8">
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="absolute left-4 top-0 bottom-0 w-px bg-slate-800"></div>
+          
+          {experiences.map((exp, i) => (
+            <div class="relative flex gap-8 pb-12 last:pb-0 group">
+              <!-- Dot -->
+              <div class="relative z-10 flex-shrink-0">
+                <div class="w-8 h-8 rounded-full bg-slate-900 border-2 border-slate-800 flex items-center justify-center group-hover:border-accent transition-colors">
+                  <div class="w-2 h-2 rounded-full bg-slate-600 group-hover:bg-accent transition-colors"></div>
+                </div>
+              </div>
+              
+              <!-- Content -->
+              <div class="flex-1 pt-1">
+                <span class="text-xs font-mono text-accent uppercase tracking-wider">{exp.period}</span>
+                <h3 class="text-xl font-bold font-heading text-white mt-2">{exp.role}</h3>
+                <p class="text-slate-400 mt-2 text-sm leading-relaxed">{exp.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- The Arsenal -->
     <SectionHeader 
       title="The Arsenal"
       emphasis="Arsenal"
@@ -107,29 +195,60 @@ const manifesto = {
   </main>
 </Layout>
 
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+</style>
+
 <script>
+  const navA = document.getElementById('nav-a');
   const navB = document.getElementById('nav-b');
   const navLabel = document.getElementById('nav-label');
-  const toggleBtn = document.getElementById('nav-toggle');
-  let variant: 'a' | 'b' = 'a';
+  const navToggle = document.getElementById('nav-toggle');
+  
+  const expMarquee = document.getElementById('exp-marquee');
+  const expTimeline = document.getElementById('exp-timeline');
+  const expLabel = document.getElementById('exp-label');
+  const expToggle = document.getElementById('exp-toggle');
+
+  let navVariant: 'a' | 'b' = 'a';
+  let expVariant: 'marquee' | 'timeline' = 'marquee';
 
   function toggleNav() {
-    variant = variant === 'a' ? 'b' : 'a';
-    if (variant === 'b') {
+    navVariant = navVariant === 'a' ? 'b' : 'a';
+    if (navVariant === 'b') {
+      navA?.classList.add('hidden');
       navB?.classList.remove('hidden');
       navLabel!.textContent = 'B';
     } else {
+      navA?.classList.remove('hidden');
       navB?.classList.add('hidden');
       navLabel!.textContent = 'A';
     }
   }
 
-  toggleBtn?.addEventListener('click', toggleNav);
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'n' || e.key === 'N') {
-      if (e.target instanceof HTMLElement && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-        toggleNav();
-      }
+  function toggleExp() {
+    expVariant = expVariant === 'marquee' ? 'timeline' : 'marquee';
+    if (expVariant === 'timeline') {
+      expMarquee?.classList.add('hidden');
+      expTimeline?.classList.remove('hidden');
+      expLabel!.textContent = 'Timeline';
+    } else {
+      expMarquee?.classList.remove('hidden');
+      expTimeline?.classList.add('hidden');
+      expLabel!.textContent = 'Marquee';
     }
+  }
+
+  navToggle?.addEventListener('click', toggleNav);
+  expToggle?.addEventListener('click', toggleExp);
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.target instanceof HTMLElement && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+    
+    if (e.key === 'n' || e.key === 'N') toggleNav();
+    if (e.key === 'e' || e.key === 'E') toggleExp();
   });
 </script>

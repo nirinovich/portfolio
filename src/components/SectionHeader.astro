@@ -1,18 +1,20 @@
 ---
-// SectionHeader component - Centered section title with accent emphasis
+// SectionHeader component - Centered section title with accent emphasis and optional link
 interface Props {
   title: string;
   emphasis?: string;
+  link?: string;
+  linkText?: string;
   class?: string;
 }
 
-const { title, emphasis, class: className = '' } = Astro.props;
+const { title, emphasis, link, linkText, class: className = '' } = Astro.props;
 
 // Split title to insert emphasis if provided
 const titleParts = emphasis ? title.split(emphasis) : [title];
 ---
 
-<h2 class:list={[
+<div class:list={[
   "mx-auto max-w-xl text-balance px-8 py-20 text-center text-3xl font-bold leading-tight tracking-tight sm:text-4xl font-heading",
   className
 ]}>
@@ -23,4 +25,14 @@ const titleParts = emphasis ? title.split(emphasis) : [title];
   ) : (
     <Fragment set:html={title} />
   )}
-</h2>
+  {link && linkText && (
+    <div class="mt-4">
+      <a href={link} class="text-sm font-medium text-slate-400 hover:text-white transition-colors inline-flex items-center gap-1.5">
+        {linkText}
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  )}
+</div>
