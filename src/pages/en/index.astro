@@ -36,9 +36,63 @@ const manifesto = {
 };
 
 const experiences = [
-  { roleKey: 'experience.1.role' as const, periodKey: 'experience.1.period' as const, descKey: 'experience.1.description' as const },
-  { roleKey: 'experience.2.role' as const, periodKey: 'experience.2.period' as const, descKey: 'experience.2.description' as const },
-  { roleKey: 'experience.3.role' as const, periodKey: 'experience.3.period' as const, descKey: 'experience.3.description' as const },
+  { 
+    role: locale === 'fr' ? 'Alternant: Marketing Analyst & Développeur Web' : 'Intern: Marketing Analyst & Web Developer',
+    company: 'eTech Consulting',
+    period: locale === 'fr' ? 'Sept 2025 — Mars 2026' : 'Sept 2025 — Mar 2026',
+    tasks: locale === 'fr' ? [
+      "Assistant de l'équipe commerciale locale et Offshore",
+      "Compréhension fonctionnelle et technique des besoins du client",
+      "Conception des propositions commerciales et des plaquettes",
+      "Création intégrale d'une plateforme web dédiée à l'acquisition de clients offshore"
+    ] : [
+      "Assistant to local and Offshore commercial team",
+      "Functional and technical understanding of client needs",
+      "Design of commercial proposals and brochures",
+      "End-to-end creation of a web platform for offshore client acquisition"
+    ],
+    link: 'https://malitix.com'
+  },
+  { 
+    role: locale === 'fr' ? 'Community Manager' : 'Community Manager',
+    company: "L'Art Blanc",
+    period: locale === 'fr' ? 'Juil 2024 — Jan 2026' : 'Jul 2024 — Jan 2026',
+    tasks: locale === 'fr' ? [
+      "Création et publication de contenu digital",
+      "Réalisation des éléments graphiques",
+      "Élaboration des campagnes publicitaires"
+    ] : [
+      "Digital content creation and publishing",
+      "Graphic design production",
+      "Advertising campaign development"
+    ]
+  },
+  { 
+    role: locale === 'fr' ? 'Développeur Web Freelance & Consultant IT' : 'Freelance Web Developer & IT Consultant',
+    company: 'Indépendant',
+    period: locale === 'fr' ? '2023 — Présent' : '2023 — Present',
+    tasks: locale === 'fr' ? [
+      "Création de solutions web sur mesure pour PME",
+      "Gestion IT et conseil technique",
+      "Développement React, Astro et solutions Firebase"
+    ] : [
+      "Custom web solutions for SMEs",
+      "IT management and technical consulting",
+      "React, Astro and Firebase development"
+    ]
+  },
+  { 
+    role: locale === 'fr' ? 'Développeur Junior' : 'Junior Developer',
+    company: 'Freelance',
+    period: locale === 'fr' ? '2022 — 2023' : '2022 — 2023',
+    tasks: locale === 'fr' ? [
+      "Premiers projets freelance de création de sites web",
+      "Sites web pour des entreprises locales"
+    ] : [
+      "First freelance web development projects",
+      "Websites for local businesses"
+    ]
+  },
 ];
 ---
 
@@ -159,7 +213,7 @@ const experiences = [
           <div class="absolute left-4 top-0 bottom-0 w-px bg-slate-800"></div>
           
           {experiences.map((exp, i) => (
-            <div class="relative flex gap-8 pb-12 last:pb-0 group">
+            <div class="relative flex gap-8 pb-12 last:pb-0 group experience-item" style={`--delay: ${i * 0.15}s`}>
               <div class="relative z-10 flex-shrink-0">
                 <div class="w-8 h-8 rounded-full bg-slate-900 border-2 border-slate-800 flex items-center justify-center group-hover:border-accent transition-colors">
                   <div class="w-2 h-2 rounded-full bg-slate-600 group-hover:bg-accent transition-colors"></div>
@@ -167,9 +221,25 @@ const experiences = [
               </div>
               
               <div class="flex-1 pt-1">
-                <span class="text-xs font-mono text-accent uppercase tracking-wider">{t(exp.periodKey)}</span>
-                <h3 class="text-xl font-bold font-heading text-white mt-2">{t(exp.roleKey)}</h3>
-                <p class="text-slate-400 mt-2 text-sm leading-relaxed">{t(exp.descKey)}</p>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
+                  <h3 class="text-xl font-bold font-heading text-white">{exp.role}</h3>
+                  <span class="text-xs font-mono text-accent uppercase tracking-wider">{exp.period}</span>
+                </div>
+                <span class="text-sm text-slate-500 font-medium">{exp.company}</span>
+                <ul class="mt-3 space-y-1.5">
+                  {exp.tasks.map(task => (
+                    <li class="text-slate-400 text-sm leading-relaxed flex items-start gap-2">
+                      <span class="text-accent mt-1.5 text-[10px]">▸</span>
+                      <span>{task}</span>
+                    </li>
+                  ))}
+                </ul>
+                {exp.link && (
+                  <a href={exp.link} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs font-mono text-accent hover:text-white transition-colors">
+                    <span>{exp.link.replace('https://', '')}</span>
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                  </a>
+                )}
               </div>
             </div>
           ))}
@@ -229,4 +299,37 @@ const experiences = [
     if (e.target instanceof HTMLElement && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
     if (e.key === 'c' || e.key === 'C') toggleCards();
   });
+
+  // Scroll reveal for experience items
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.experience-item').forEach(item => {
+    observer.observe(item);
+  });
 </script>
+
+<style>
+  .experience-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .experience-item.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
