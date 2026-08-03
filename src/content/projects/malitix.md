@@ -2,7 +2,7 @@
 title: "Malitix"
 description: "A web platform dedicated to offshore client acquisition, built for eTech's commercial team."
 date: 2026-03-01
-thumbnail: "/etech.png"
+thumbnail: "/malitix.png"
 techStack: ["React", "JavaScript", "Firebase"]
 links:
   live: "https://malitix.com"
