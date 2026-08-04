@@ -48,3 +48,20 @@
 .carousel-track:hover {
   animation-play-state: paused;
 }
+
+/* Experience Animation - Epic (3D flip) */
+.anim-epic .experience-item {
+  opacity: 0;
+  transform: perspective(800px) rotateY(-15deg) scale(0.9);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--delay, 0s);
+}
+
+.anim-epic .experience-item.revealed {
+  opacity: 1;
+  transform: perspective(800px) rotateY(0deg) scale(1);
+}
+
+#timeline-plane {
+  will-change: transform;
+}
