@@ -113,10 +113,10 @@ const experiences = [
 ---
 
 <Layout>
-  <!-- Variant Toggle -->
+  <!-- Variant Toggle (Carousel) -->
   <div class="fixed bottom-4 right-4 z-[100] flex gap-1">
-    <button data-variant="large" class="variant-btn bg-accent text-white text-xs px-3 py-1.5 transition-colors" title="Variant: Large">L</button>
-    <button data-variant="minimal" class="variant-btn bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Variant: Minimal (Logo + Title)">B</button>
+    <button data-variant="large" class="variant-btn bg-accent text-white text-xs px-3 py-1.5 transition-colors" title="Carousel: Large (L)">L</button>
+    <button data-variant="minimal" class="variant-btn bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Carousel: Minimal (B)">B</button>
   </div>
 
   <main class="bg-primary-dark text-white min-h-screen">
@@ -366,7 +366,6 @@ const experiences = [
 
   // Epic animation + Plane
   const timelineContainer = document.querySelector('.py-16.border-y-2') as HTMLElement;
-  const plane = document.getElementById('timeline-plane');
   if (timelineContainer) timelineContainer.classList.add('anim-epic');
 
   const observerOptions = {
@@ -388,18 +387,16 @@ const experiences = [
   });
 
   // Plane scroll: visits each dot, nose-up then flips down
+  const plane = document.getElementById('timeline-plane');
   if (plane && timelineContainer) {
     let lastScrollY = window.scrollY;
-    window.addEventListener('scroll', () => {
+    
+    function updatePlanePosition(isInitial = false) {
       const currentScrollY = window.scrollY;
       const isScrollingUp = currentScrollY < lastScrollY;
       lastScrollY = currentScrollY;
       
-      const wrapperRect = timelineContainer.getBoundingClientRect();
       const viewportH = window.innerHeight;
-      
-      if (wrapperRect.bottom < 0 || wrapperRect.top > viewportH) return;
-
       const experienceItems = document.querySelectorAll('.experience-item');
       if (!experienceItems.length) return;
 
@@ -420,11 +417,19 @@ const experiences = [
         const planeContainerRect = plane.parentElement!.getBoundingClientRect();
         const targetY = dotRect.top - planeContainerRect.top;
         
-        const rotation = isScrollingUp ? -45 : 135;
+        // Default to pointing down if it's the initial load
+        const rotation = isInitial ? 135 : (isScrollingUp ? -45 : 135);
         
+        // Remove transition for the instant initial placement
+        plane.style.transition = isInitial ? 'none' : 'transform 0.8s ease-in-out';
         plane.style.transform = `translateX(-50%) translateY(${targetY}px) rotate(${rotation}deg)`;
-        plane.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)';
       }
-    });
+    }
+    
+    // Set initial position instantly
+    updatePlanePosition(true);
+    
+    // Listen for scroll to animate
+    window.addEventListener('scroll', () => updatePlanePosition(false));
   }
 </script>
