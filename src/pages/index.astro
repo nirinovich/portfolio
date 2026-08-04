@@ -387,7 +387,7 @@ const experiences = [
   });
 
   // Plane scroll: visits each dot, nose-up then flips down
-  const plane = document.getElementById('timeline-plane');
+  const plane = document.getElementById('timeline-plane') as HTMLElement;
   if (plane && timelineContainer) {
     let lastScrollY = window.scrollY;
     
