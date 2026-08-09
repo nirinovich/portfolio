@@ -14,57 +14,67 @@ const allTags = [...new Set(sortedProjects.flatMap(p => p.data.techStack))];
 ---
 
 <Layout title="Projects — Nikita Nirinovich">
-  <section class="min-h-screen bg-[#f8fafc] pt-24 pb-16 px-4 md:px-8">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-10 md:mb-12">
-        <h1 class="text-3xl md:text-5xl font-bold text-[#2d3748] mb-4">Projects</h1>
-        <p class="text-lg text-[#718096]">All my projects and work.</p>
+  <main class="min-h-screen bg-primary-dark text-white">
+    <section class="border-b-2 border-slate-800">
+      <div class="px-8 py-16 sm:px-16 sm:py-20 lg:px-24">
+        <h1 class="text-4xl sm:text-5xl font-bold font-heading tracking-tight text-white">Projects</h1>
+        <p class="mt-4 text-lg text-slate-400 font-sans">All my projects and work.</p>
       </div>
+    </section>
 
-      <!-- Tag Filter -->
-      <div class="flex flex-wrap gap-2 mb-8" id="tag-filter">
-        <button
-          type="button"
-          class="tag-pill text-sm px-4 py-2 rounded-full border-2 transition-all duration-200 cursor-pointer bg-accent text-white border-accent"
-          data-tag="all"
-        >
-          All
-        </button>
-        {allTags.map(tag => (
+    <!-- Tag Filter -->
+    <section class="border-b-2 border-slate-800">
+      <div class="px-8 py-8 sm:px-16 lg:px-24">
+        <div class="flex flex-wrap gap-2" id="tag-filter">
           <button
             type="button"
-            class="tag-pill text-sm px-4 py-2 rounded-full border-2 transition-all duration-200 cursor-pointer bg-white text-[#4a5568] border-[#e2e8f0] hover:border-accent hover:text-accent"
-            data-tag={tag}
+            class="tag-pill text-xs font-mono uppercase tracking-widest px-4 py-2 border-2 transition-colors duration-200 cursor-pointer bg-accent text-white border-accent"
+            data-tag="all"
           >
-            {tag}
+            All
           </button>
-        ))}
+          {allTags.map(tag => (
+            <button
+              type="button"
+              class="tag-pill text-xs font-mono uppercase tracking-widest px-4 py-2 border-2 transition-colors duration-200 cursor-pointer bg-transparent text-slate-400 border-slate-800 hover:border-slate-600 hover:text-white"
+              data-tag={tag}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
       </div>
+    </section>
 
-      <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" id="projects-grid">
-        {sortedProjects.map(project => (
-          <div class="project-card-wrapper" data-tags={project.data.techStack.join(',')}>
-            <ProjectCard
-              title={project.data.title}
-              role={project.data.role}
-              year={project.data.date.getFullYear().toString()}
-              metric={project.data.metric}
-              metricLabel={project.data.metricLabel}
-              outcome={project.data.outcome}
-              tags={project.data.techStack}
-              client={project.data.client}
-              image={project.data.thumbnail}
-              liveUrl={project.data.links?.live}
-              slug={project.id}
-              locale={locale}
-              cardVariant={project.data.cardVariant}
-            />
-          </div>
-        ))}
+    <!-- Projects Grid -->
+    <section>
+      <div class="px-8 py-12 sm:px-16 sm:py-16 lg:px-24">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+          {sortedProjects.map(project => (
+            <div class="project-card-wrapper" data-tags={project.data.techStack.join(',')}>
+              <ProjectCard
+                title={project.data.title}
+                role={project.data.role}
+                year={project.data.date.getFullYear().toString()}
+                metric={project.data.metric}
+                metricLabel={project.data.metricLabel}
+                outcome={project.data.outcome}
+                before={project.data.before}
+                after={project.data.after}
+                tags={project.data.techStack}
+                client={project.data.client}
+                image={project.data.thumbnail}
+                liveUrl={project.data.links?.live}
+                slug={project.id}
+                locale={locale}
+                cardVariant={project.data.cardVariant}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </Layout>
 
 <script>
@@ -82,11 +92,11 @@ const allTags = [...new Set(sortedProjects.flatMap(p => p.data.techStack))];
     tagButtons.forEach(btn => {
       const btnTag = btn.getAttribute('data-tag');
       if (btnTag === selectedTag) {
-        btn.classList.remove('bg-white', 'text-[#4a5568]', 'border-[#e2e8f0]');
+        btn.classList.remove('bg-transparent', 'text-slate-400', 'border-slate-800');
         btn.classList.add('bg-accent', 'text-white', 'border-accent');
       } else {
         btn.classList.remove('bg-accent', 'text-white', 'border-accent');
-        btn.classList.add('bg-white', 'text-[#4a5568]', 'border-[#e2e8f0]');
+        btn.classList.add('bg-transparent', 'text-slate-400', 'border-slate-800');
       }
     });
 

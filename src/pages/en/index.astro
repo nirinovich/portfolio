@@ -126,12 +126,19 @@ const experiences = [
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.slice(0, 3).map((project) => (
             <ProjectCard
-              id={project.id}
               title={project.data.title}
+              role={project.data.role}
+              year={project.data.date.getFullYear().toString()}
+              metric={project.data.metric}
+              metricLabel={project.data.metricLabel}
               outcome={project.data.outcome ?? ''}
-              thumbnail={project.data.thumbnail}
-              year={project.data.date.getFullYear()}
-              techStack={project.data.techStack}
+              tags={project.data.techStack}
+              client={project.data.client}
+              image={project.data.thumbnail}
+              liveUrl={project.data.links?.live}
+              slug={project.id}
+              locale={locale}
+              cardVariant={project.data.cardVariant}
             />
           ))}
         </div>
