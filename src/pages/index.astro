@@ -2,7 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import ArsenalSection from '../components/ArsenalSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
 
 import CTASection from '../components/CTASection.astro';
 import { Lightbulb, Layers, Zap } from '@lucide/astro';
@@ -21,6 +23,25 @@ const manifesto = {
   labels: [t('manifesto.labels.0'), t('manifesto.labels.1'), t('manifesto.labels.2')],
   paragraphs: [t('manifesto.paragraphs.0'), t('manifesto.paragraphs.1'), t('manifesto.paragraphs.2')]
 };
+
+const services = [
+  {
+    title: t('services.1.title'),
+    description: t('services.1.description')
+  },
+  {
+    title: t('services.2.title'),
+    description: t('services.2.description')
+  },
+  {
+    title: t('services.3.title'),
+    description: t('services.3.description')
+  },
+  {
+    title: t('services.4.title'),
+    description: t('services.4.description')
+  }
+];
 
 const experiences = [
   { 
@@ -60,12 +81,6 @@ const experiences = [
 ---
 
 <Layout>
-  <!-- Variant Toggle (Carousel) -->
-  <div class="fixed bottom-4 right-4 z-[100] flex gap-1">
-    <button data-variant="large" class="variant-btn bg-accent text-white text-xs px-3 py-1.5 transition-colors" title="Carousel: Large (L)">L</button>
-    <button data-variant="minimal" class="variant-btn bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Carousel: Minimal (B)">B</button>
-  </div>
-
   <main class="bg-primary-dark text-white min-h-screen">
     
     <Hero 
@@ -102,7 +117,7 @@ const experiences = [
       </div>
     </div>
 
-    <!-- Featured Projects Section -->
+    <!-- Featured Projects Cards -->
     <div id="featured">
       <SectionHeader 
         title={t('section.featured.title')}
@@ -111,87 +126,19 @@ const experiences = [
         linkText={t('featured.viewAll')}
       />
     </div>
-    
-    <!-- Project Carousel -->
     <div class="border-b-2 border-slate-800">
-      <div class="relative">
-        <!-- Variant L: Large -->
-        <div id="variant-large" class="carousel-variant overflow-x-hidden">
-          <div class="carousel-track flex w-max" data-carousel="large">
-            {[1, 2].map(() => (
-              <Fragment>
-                {featuredProjects.map((project) => (
-                  <a href={`/projects/${project.id}`} class="flex-shrink-0 w-[28rem] group px-2">
-                    <div class="relative aspect-[16/9] w-full overflow-hidden">
-                      <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110" />
-                      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
-                      <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="text-xl font-bold font-heading text-white mb-1">{project.data.title}</h3>
-                        <div class="flex items-center gap-3">
-                          <span class="text-sm font-mono text-accent">{project.data.date.getFullYear()}</span>
-                          <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
-                          <span class="text-sm text-slate-400">{project.data.techStack?.slice(0, 3).join(' / ')}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                ))}
-                <div class="flex-shrink-0 w-[28rem] px-2">
-                  <div class="relative aspect-[16/9] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-4">
-                    <svg class="w-12 h-12 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                    <span class="text-base font-mono text-slate-600">{t('carousel.yourProject')}</span>
-                  </div>
-                </div>
-              </Fragment>
-            ))}
-          </div>
-        </div>
-
-        <!-- Variant B: Minimal (Logo + Title, screenshot on hover) -->
-        <div id="variant-minimal" class="carousel-variant hidden overflow-x-hidden">
-          <div class="carousel-track flex w-max" data-carousel="minimal">
-            {[1, 2].map(() => (
-              <Fragment>
-                {featuredProjects.map((project) => (
-                  <a href={`/projects/${project.id}`} class="flex-shrink-0 w-[28rem] group px-2">
-                    <div class="relative aspect-[16/9] w-full overflow-hidden bg-slate-900 border border-slate-800 transition-all duration-500 group-hover:border-accent">
-                      <!-- Default state: Logo + Title -->
-                      <div class="absolute inset-0 flex items-center gap-5 p-8 transition-opacity duration-500 group-hover:opacity-0">
-                        <div class="w-14 h-14 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center flex-shrink-0">
-                          <span class="text-2xl font-bold font-heading text-accent">{project.data.title.charAt(0)}</span>
-                        </div>
-                        <div>
-                          <h3 class="text-xl font-bold font-heading text-white">{project.data.title}</h3>
-                          <span class="text-sm font-mono text-slate-500">{project.data.date.getFullYear()}</span>
-                        </div>
-                      </div>
-                      <!-- Hover state: Screenshot -->
-                      <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-                      <div class="absolute bottom-0 left-0 right-0 p-6 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                        <h3 class="text-lg font-bold font-heading text-white mb-1">{project.data.title}</h3>
-                        <div class="flex items-center gap-3">
-                          <span class="text-sm font-mono text-accent">{project.data.date.getFullYear()}</span>
-                          <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
-                          <span class="text-sm text-slate-400">{project.data.techStack?.slice(0, 3).join(' / ')}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                ))}
-                <div class="flex-shrink-0 w-[28rem] px-2">
-                  <div class="relative aspect-[16/9] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-4">
-                    <svg class="w-12 h-12 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                    <span class="text-base font-mono text-slate-600">{t('carousel.yourProject')}</span>
-                  </div>
-                </div>
-              </Fragment>
-            ))}
-          </div>
+      <div class="mx-auto max-w-6xl px-8 pb-12 sm:px-16">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {featuredProjects.slice(0, 3).map((project) => (
+            <ProjectCard
+              id={project.id}
+              title={project.data.title}
+              outcome={project.data.outcome ?? ''}
+              thumbnail={project.data.thumbnail}
+              year={project.data.date.getFullYear()}
+              techStack={project.data.techStack}
+            />
+          ))}
         </div>
       </div>
     </div>
@@ -255,11 +202,53 @@ const experiences = [
       </div>
     </div>
 
+    <!-- Project Carousel (Variant A: Large) -->
+    <div class="border-b-2 border-slate-800 overflow-hidden">
+      <div class="carousel-track flex w-max overflow-x-hidden" data-carousel="large">
+        {[1, 2].map(() => (
+          <Fragment>
+            {featuredProjects.map((project) => (
+              <a href={`/projects/${project.id}`} class="flex-shrink-0 w-[28rem] group px-2">
+                <div class="relative aspect-[16/9] w-full overflow-hidden">
+                  <img src={project.data.thumbnail} alt={project.data.title} class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 class="text-xl font-bold font-heading text-white mb-1">{project.data.title}</h3>
+                    <div class="flex items-center gap-3">
+                      <span class="text-sm font-mono text-accent">{project.data.date.getFullYear()}</span>
+                      <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
+                      <span class="text-sm text-slate-400">{project.data.techStack?.slice(0, 3).join(' / ')}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))}
+            <div class="flex-shrink-0 w-[28rem] px-2">
+              <div class="relative aspect-[16/9] w-full border-2 border-dashed border-slate-700 flex flex-col items-center justify-center bg-slate-900 gap-4">
+                <svg class="w-12 h-12 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                <span class="text-base font-mono text-slate-600">{t('carousel.yourProject')}</span>
+              </div>
+            </div>
+          </Fragment>
+        ))}
+      </div>
+    </div>
+
     <!-- The Arsenal -->
     <ArsenalSection
       title={t('section.techStack.title')}
       emphasis={t('section.techStack.emphasis')}
       coreLabel={t('section.techStack.coreLabel')}
+    />
+
+    <!-- Services -->
+    <ServicesSection
+      title={t('section.services.title')}
+      emphasis={t('section.services.emphasis')}
+      services={services}
+      ctaLabel={t('services.cta')}
     />
 
     <CTASection 
@@ -271,36 +260,6 @@ const experiences = [
 </Layout>
 
 <script>
-  // Carousel variant switching
-  const variantBtns = document.querySelectorAll('[data-variant]');
-  const variants = document.querySelectorAll('.carousel-variant');
-  
-  function switchVariant(name: string) {
-    variantBtns.forEach(btn => {
-      const isActive = btn.getAttribute('data-variant') === name;
-      btn.classList.toggle('bg-accent', isActive);
-      btn.classList.toggle('text-white', isActive);
-      btn.classList.toggle('bg-slate-800', !isActive);
-      btn.classList.toggle('text-slate-400', !isActive);
-    });
-    variants.forEach(v => v.classList.add('hidden'));
-    const active = document.getElementById(`variant-${name}`);
-    if (active) active.classList.remove('hidden');
-  }
-
-  variantBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const variant = btn.getAttribute('data-variant');
-      if (variant) switchVariant(variant);
-    });
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.target instanceof HTMLElement && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
-    if (e.key === 'l' || e.key === 'L') switchVariant('large');
-    if (e.key === 'b' || e.key === 'B') switchVariant('minimal');
-  });
-
   // Epic animation + Plane
   const timelineContainer = document.querySelector('.py-16.border-y-2') as HTMLElement;
   if (timelineContainer) timelineContainer.classList.add('anim-epic');

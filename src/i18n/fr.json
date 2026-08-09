@@ -87,5 +87,16 @@
   "experience.5.tasks.2": "Élaboration des campagnes publicitaires",
   "section.featured.emphasis": "Sélectionnés",
   "section.experience.emphasis": "Expérience",
+  "section.services.title": "Comment je peux t'aider",
+  "section.services.emphasis": "t'aider",
+  "services.cta": "Discuter du projet",
+  "services.1.title": "Sites web & E-commerce",
+  "services.1.description": "Sites vitrines, boutiques en ligne et plateformes sur mesure — rapides, propres et faits pour convertir.",
+  "services.2.title": "Développement web sur mesure",
+  "services.2.description": "Interfaces React, API et intégrations. Du front au déploiement, je m'occupe de tout.",
+  "services.3.title": "ERP Odoo & intégrations",
+  "services.3.description": "Déploiement, configuration et connexion d'Odoo à ton site, tes stocks et tes commandes.",
+  "services.4.title": "Gestion IT & maintenance",
+  "services.4.description": "Infrastructure, déploiement, monitoring et support continu pour les PME.",
   "carousel.yourProject": "Votre projet"
 }

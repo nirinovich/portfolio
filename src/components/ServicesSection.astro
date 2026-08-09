@@ -1,0 +1,54 @@
+---
+// ServicesSection component - Four service cards linking to contact
+import SectionHeader from './SectionHeader.astro';
+import { ShoppingCart, Code, ServerCog, Wrench } from '@lucide/astro';
+
+interface Props {
+  title: string;
+  emphasis?: string;
+  services: {
+    title: string;
+    description: string;
+  }[];
+  ctaLabel: string;
+  email?: string;
+  class?: string;
+}
+
+const { title, emphasis, services, ctaLabel, email = 'nikita@nirinovich.com', class: className = '' } = Astro.props;
+
+const icons = [ShoppingCart, Code, ServerCog, Wrench];
+---
+
+<section class:list={["border-b-2 border-slate-800 px-6 py-10 sm:px-16 lg:px-24", className]}>
+  <SectionHeader title={title} emphasis={emphasis} headingLevel="h2" compact />
+
+  <div class="mx-auto max-w-5xl">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {services.map((service, i) => {
+        const Icon = icons[i % icons.length];
+        return (
+          <a
+            href={`mailto:${email}?subject=${encodeURIComponent(service.title)}`}
+            class="group flex flex-col gap-4 rounded-xl border border-slate-800 bg-slate-900/50 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-slate-600"
+          >
+            <div class="flex items-center justify-between">
+              <Icon class="h-6 w-6 text-accent" />
+              <span class="font-mono text-xs text-slate-500 transition-colors group-hover:text-accent">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-lg font-bold font-heading text-white group-hover:text-accent transition-colors">{service.title}</h3>
+              <p class="text-sm leading-relaxed text-slate-400">{service.description}</p>
+            </div>
+            <span class="mt-auto inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent">
+              {ctaLabel}
+              <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

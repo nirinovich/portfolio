@@ -52,10 +52,7 @@ export const techStackGroups: TechStackGroup[] = [
     category: 'Frontend',
     items: [
       { name: 'TypeScript', icon: 'typescript', color: '3178C6' },
-      { name: 'JavaScript', icon: 'javascript', color: 'F7DF1E' },
       { name: 'TailwindCSS', icon: 'tailwindcss', color: '06B6D4' },
-      { name: 'React Router', icon: 'reactrouter', color: 'CA4245' },
-      { name: 'Node.js', icon: 'nodedotjs', color: '5FA04E' },
       { name: 'Vite', icon: 'vite', color: '646CFF' },
     ],
   },
@@ -67,7 +64,6 @@ export const techStackGroups: TechStackGroup[] = [
       { name: 'PostgreSQL', icon: 'postgresql', color: '4169E1' },
       { name: 'Firebase', icon: 'firebase', color: 'DD2C00' },
       { name: 'Express', icon: 'express', color: 'FFFFFF' },
-      { name: 'Dokploy' },
       { name: 'Cloudflare', icon: 'cloudflare', color: 'F38020' },
     ],
   },
@@ -75,19 +71,8 @@ export const techStackGroups: TechStackGroup[] = [
     category: 'Design & Outils',
     items: [
       { name: 'Figma', icon: 'figma', color: 'F24E1E' },
-      { name: 'Google Workspace', icon: 'google', color: '4285F4' },
       { name: 'Git', icon: 'git', color: 'F03C2E' },
       { name: 'GitHub', icon: 'github', color: 'FFFFFF' },
-    ],
-  },
-  {
-    category: 'Méthodes',
-    items: [
-      { name: 'Lean Six Sigma' },
-      { name: 'Agile Scrum', icon: 'scrumalliance', color: '009FDA' },
-      { name: '2TUP' },
-      { name: 'GitHub Flow', icon: 'github', color: 'FFFFFF' },
-      { name: 'Trunk-Based Development', icon: 'git', color: 'F03C2E' },
     ],
   },
 ];

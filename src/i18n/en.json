@@ -87,5 +87,16 @@
   "experience.5.tasks.2": "Advertising campaign development",
   "section.featured.emphasis": "Featured",
   "section.experience.emphasis": "Experience",
+  "section.services.title": "How I can help you",
+  "section.services.emphasis": "help you",
+  "services.cta": "Discuss your project",
+  "services.1.title": "Websites & E-commerce",
+  "services.1.description": "Showcase sites, online stores and custom platforms — fast, clean and built to convert.",
+  "services.2.title": "Custom web development",
+  "services.2.description": "React interfaces, APIs and integrations. From frontend to deployment, I handle it all.",
+  "services.3.title": "Odoo ERP & integrations",
+  "services.3.description": "Deployment, configuration and connecting Odoo to your site, inventory and orders.",
+  "services.4.title": "IT management & maintenance",
+  "services.4.description": "Infrastructure, deployment, monitoring and ongoing support for SMEs.",
   "carousel.yourProject": "Your project"
 }
