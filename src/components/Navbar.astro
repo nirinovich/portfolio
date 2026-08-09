@@ -1,0 +1,52 @@
+---
+// Navbar component - Shared sticky top navigation (desktop, md+)
+import { Icon } from 'astro-icon/components';
+import { useTranslations, type Locale } from '../i18n/translations';
+
+const locale = (Astro.currentLocale ?? 'fr') as Locale;
+const t = useTranslations(locale);
+const prefix = locale === 'en' ? '/en' : '';
+
+const currentPath = Astro.url.pathname;
+const basePath = currentPath.replace(/^\/en(\/|$)/, '/');
+const langSwitchHref = locale === 'en'
+  ? basePath
+  : `/en${basePath === '/' ? '' : basePath}`;
+
+const links = [
+  { href: prefix + '/projects', label: t('nav.work') },
+  { href: '/resume.pdf', label: t('nav.resume'), external: true },
+  { href: 'https://github.com/nirinovich', label: 'GitHub', external: true },
+];
+---
+
+<nav class="sticky top-0 z-50 bg-primary-dark/95 backdrop-blur-sm border-b-2 border-slate-800 hidden md:flex items-center justify-between px-8 py-4 lg:px-24">
+  <a href={prefix + '/'} class="flex items-center">
+    <img src="/LogoTransparent.png" alt={t('nav.home')} class="h-8 w-auto" />
+  </a>
+
+  <div class="flex items-center gap-6">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        class="text-sm text-slate-400 hover:text-white transition-colors"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href={langSwitchHref}
+      class="flex items-center justify-center text-slate-400 hover:text-white transition-colors border border-slate-700 px-2.5 py-1 rounded hover:bg-slate-800"
+      aria-label={locale === 'fr' ? 'Switch to English' : 'Passer en français'}
+    >
+      <Icon name="mdi:translate" class="w-4 h-4" />
+    </a>
+    <a
+      href={prefix + '/contact'}
+      class="inline-flex items-center justify-center bg-accent text-white px-5 py-2.5 text-sm font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors"
+    >
+      {t('nav.contact')}
+    </a>
+  </div>
+</nav>

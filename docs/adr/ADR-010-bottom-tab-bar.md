@@ -1,7 +1,8 @@
 # ADR-010: Bottom Tab Bar Navigation
 
-**Status:** Accepted
+**Status:** Superseded
 **Date:** 2026-07-13
+**Superseded by:** Spec #12 (Unify site navigation) — the bottom tab bar is retained but re-themed to the dark aesthetic and scoped to mobile-only (`md:hidden`), alongside a shared top navbar on desktop.
 
 ## Context
 

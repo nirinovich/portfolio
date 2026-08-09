@@ -1,5 +1,5 @@
 ---
-// Hero component - Two-column hero with profile image and inline nav
+// Hero component - Two-column hero with profile image and CTAs
 import { Icon } from 'astro-icon/components';
 
 interface Props {
@@ -7,10 +7,6 @@ interface Props {
   headline?: string;
   resumeLabel: string;
   githubLabel: string;
-  workLabel?: string;
-  projectsLabel?: string;
-  langSwitchLabel?: string;
-  langSwitchHref?: string;
   profileImage?: string;
 }
 
@@ -19,32 +15,11 @@ const {
   headline = 'I build websites and manage IT for SMEs',
   resumeLabel, 
   githubLabel, 
-  workLabel = 'Work',
-  projectsLabel = 'Projects',
-  langSwitchLabel = 'EN',
-  langSwitchHref = '/en',
   profileImage = '/profile.png' 
 } = Astro.props;
 ---
 
 <header id="hero" class="border-b-2 border-slate-800 min-h-screen flex flex-col">
-  <!-- Sticky navbar -->
-  <nav class="sticky top-0 z-50 bg-primary-dark/95 backdrop-blur-sm border-b-2 border-slate-800 flex items-center justify-between px-8 py-4 sm:px-16 lg:px-24">
-    <a href="/" class="flex items-center">
-      <img src="/LogoTransparent.png" alt={name} class="h-8 w-auto" />
-    </a>
-    <div class="flex items-center gap-6">
-      <a href="#featured" class="text-sm text-slate-400 hover:text-white transition-colors">{workLabel}</a>
-      <a href="/resume.pdf" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">{resumeLabel}</a>
-      <a href="https://github.com/nirinovich" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
-        <Icon name="mdi:github" class="w-4 h-4" /> {githubLabel}
-      </a>
-      <a href={langSwitchHref} class="text-sm text-slate-400 hover:text-white transition-colors border border-slate-700 px-2.5 py-1 rounded hover:bg-slate-800">
-        {langSwitchLabel}
-      </a>
-    </div>
-  </nav>
-
   <!-- Hero content -->
   <div class="flex-1 grid w-full grid-cols-1 md:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] items-stretch">
     <div class="flex flex-col justify-center gap-6 px-8 py-16 sm:px-16 sm:py-20 lg:pl-24 lg:pr-8">

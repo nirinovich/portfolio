@@ -14,13 +14,12 @@ const langSwitchHref = locale === 'en'
 
 const tabs = [
   { href: prefix + '/', icon: 'mdi:home', key: 'nav.home' as const, match: '/' },
-  { href: prefix + '/about', icon: 'mdi:account', key: 'nav.about' as const, match: '/about' },
-  { href: prefix + '/blog', icon: 'mdi:post-outline', key: 'nav.blog' as const, match: '/blog' },
+  { href: prefix + '/projects', icon: 'mdi:briefcase-outline', key: 'nav.work' as const, match: '/projects' },
   { href: prefix + '/contact', icon: 'mdi:email-outline', key: 'nav.contact' as const, match: '/contact' },
 ];
 ---
 
-<nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-t border-[#dde3ec]/60 safe-bottom">
+<nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-primary-dark/95 backdrop-blur-xl border-t-2 border-slate-800 safe-bottom">
   <div class="max-w-lg mx-auto flex items-center justify-around px-2 py-2">
     {tabs.map(tab => {
       const isActive = basePath === tab.match || (tab.match !== '/' && basePath.startsWith(tab.match));
@@ -31,7 +30,7 @@ const tabs = [
             'flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all duration-200 min-w-[3rem]',
             isActive
               ? 'text-accent'
-              : 'text-[#718096] hover:text-accent',
+              : 'text-slate-400 hover:text-accent',
           ]}
         >
           <Icon name={tab.icon} class="w-5 h-5" />
@@ -41,7 +40,7 @@ const tabs = [
     })}
     <a
       href={langSwitchHref}
-      class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl text-[#718096] hover:text-accent transition-all duration-200 min-w-[3rem]"
+      class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl text-slate-400 hover:text-accent transition-all duration-200 min-w-[3rem]"
     >
       <Icon name="mdi:translate" class="w-5 h-5" />
       <span class="text-[10px] font-medium">{locale === 'fr' ? 'EN' : 'FR'}</span>
