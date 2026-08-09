@@ -5,6 +5,7 @@ dist/
 .codex/
 .github/
 .impeccable/
+.commandcode/
 
 # generated types
 .astro/
