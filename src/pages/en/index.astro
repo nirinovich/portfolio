@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import TechStackItem from '../../components/TechStackItem.astro';
+import ArsenalSection from '../../components/ArsenalSection.astro';
 import CTASection from '../../components/CTASection.astro';
 import { Lightbulb, Layers, Zap } from '@lucide/astro';
 import { useTranslations } from '../../i18n/translations';
@@ -15,99 +15,45 @@ const allProjects = await getCollection('projects');
 const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const featuredProjects = sortedProjects.filter(p => p.data.featured).slice(0, 6);
 
-const techStack = [
-  { name: 'TypeScript & React', desc: locale === 'fr' ? 'Frontends typés et composants UI scalables pour applications modernes.' : 'Type-safe frontends and scalable UI components for modern applications.', icon: 'react' },
-  { name: 'Astro & Tailwind', desc: locale === 'fr' ? 'Génération de sites statiques haute performance avec styling utilitaire rapide.' : 'High-performance static site generation with utility-first, rapid styling.', icon: 'astro' },
-  { name: 'Firebase & Node.js', desc: locale === 'fr' ? 'Services backend robustes, bases de données temps réel et logique serverless.' : 'Robust backend services, real-time databases, and serverless logic.', icon: 'firebase' }
-];
-
 const manifesto = {
-  heading: locale === 'fr' ? 'Ce qui me différencie' : 'What sets me apart',
-  labels: locale === 'fr' ? ['Business first', 'Tout-en-un', 'Zéro ghosting'] : ['Business first', 'All-in-one', 'Zero ghosting'],
-  paragraphs: locale === 'fr' ? [
-    "Je comprends la logique business. Un site web n'est pas une œuvre d'art, c'est un outil qui doit générer du chiffre.",
-    "Tout au même endroit. Je développe votre site ET je gère votre IT, pas besoin de jongler entre 5 prestataires.",
-    "Zéro ghosting. Je réponds vite, je livre à temps, et je reste jusqu'à ce que ça tourne."
-  ] : [
-    "I understand business logic. A website isn't art, it's a tool that should drive revenue.",
-    "Everything in one place. I build your site AND manage your IT, no need to juggle 5 freelancers.",
-    "Zero ghosting. I reply fast, deliver on time, and stay until it works."
-  ]
+  heading: t('manifesto.heading'),
+  labels: [t('manifesto.labels.0'), t('manifesto.labels.1'), t('manifesto.labels.2')],
+  paragraphs: [t('manifesto.paragraphs.0'), t('manifesto.paragraphs.1'), t('manifesto.paragraphs.2')]
 };
 
 const experiences = [
   { 
-    role: locale === 'fr' ? 'Consultant IT' : 'IT Consultant',
-    company: 'Exotika.mg',
-    period: locale === 'fr' ? '2026 — Présent' : '2026 — Present',
-    tasks: locale === 'fr' ? [
-      "Migration du site statique vers une plateforme ecommerce",
-      "Intégration de l'ERP Odoo pour la gestion des stocks et commandes",
-      "Gestion technique et optimisation des performances"
-    ] : [
-      "Migration from static site to ecommerce platform",
-      "Odoo ERP integration for inventory and order management",
-      "Technical management and performance optimization"
-    ],
+    role: t('experience.1.role'),
+    company: t('experience.1.company'),
+    period: t('experience.1.period'),
+    tasks: [t('experience.1.tasks.0'), t('experience.1.tasks.1'), t('experience.1.tasks.2')],
     link: 'https://exotika.mg'
   },
   { 
-    role: locale === 'fr' ? 'Alternant: Marketing/Business Analyst' : 'Intern: Marketing/Business Analyst',
-    company: 'eTech Consulting',
-    period: locale === 'fr' ? 'Sept 2025 — Mars 2026' : 'Sept 2025 — Mar 2026',
-    tasks: locale === 'fr' ? [
-      "Assistant de l'équipe commerciale locale et Offshore",
-      "Compréhension fonctionnelle et technique des besoins du client",
-      "Conception des propositions commerciales et des plaquettes",
-      "Élaboration des offres et suivi des opportunités"
-    ] : [
-      "Assistant to local and Offshore commercial team",
-      "Functional and technical understanding of client needs",
-      "Design of commercial proposals and brochures",
-      "Offer development and opportunity tracking"
-    ]
+    role: t('experience.2.role'),
+    company: t('experience.2.company'),
+    period: t('experience.2.period'),
+    tasks: [t('experience.2.tasks.0'), t('experience.2.tasks.1'), t('experience.2.tasks.2'), t('experience.2.tasks.3')]
   },
   { 
-    role: locale === 'fr' ? 'Indépendant: Développeur React' : 'Independent: React Developer',
-    company: 'Malitix (branche eTech Consulting)',
-    period: locale === 'fr' ? 'Sept 2025 — Mars 2026' : 'Sept 2025 — Mar 2026',
-    tasks: locale === 'fr' ? [
-      "Création intégrale d'une plateforme web dédiée à l'acquisition de clients offshore",
-      "Développement frontend React et intégration API",
-      "Conception de l'architecture technique et déploiement"
-    ] : [
-      "End-to-end creation of a web platform for offshore client acquisition",
-      "React frontend development and API integration",
-      "Technical architecture design and deployment"
-    ],
+    role: t('experience.3.role'),
+    company: t('experience.3.company'),
+    period: t('experience.3.period'),
+    tasks: [t('experience.3.tasks.0'), t('experience.3.tasks.1'), t('experience.3.tasks.2')],
     link: 'https://malitix.com'
   },
   { 
-    role: locale === 'fr' ? 'Développeur React & Javascript' : 'React & JavaScript Developer',
-    company: 'Exotika.mg',
-    period: locale === 'fr' ? 'Juin 2025 — Juil 2025' : 'Jun 2025 — Jul 2025',
-    tasks: locale === 'fr' ? [
-      "Création complète du site internet pour une boutique de vape",
-      "Déploiement sur Firebase avec intégration CMS Contentful"
-    ] : [
-      "Complete website creation for a vape shop",
-      "Firebase deployment with Contentful CMS integration"
-    ],
+    role: t('experience.4.role'),
+    company: t('experience.4.company'),
+    period: t('experience.4.period'),
+    tasks: [t('experience.4.tasks.0'), t('experience.4.tasks.1')],
     link: 'https://exotika.mg'
   },
   { 
-    role: 'Community Manager',
-    company: "L'Art Blanc",
-    period: locale === 'fr' ? 'Juil 2024 — Jan 2026' : 'Jul 2024 — Jan 2026',
-    tasks: locale === 'fr' ? [
-      "Création et publication de contenu digital",
-      "Réalisation des éléments graphiques",
-      "Élaboration des campagnes publicitaires"
-    ] : [
-      "Digital content creation and publishing",
-      "Graphic design production",
-      "Advertising campaign development"
-    ]
+    role: t('experience.5.role'),
+    company: t('experience.5.company'),
+    period: t('experience.5.period'),
+    tasks: [t('experience.5.tasks.0'), t('experience.5.tasks.1'), t('experience.5.tasks.2')]
   },
 ];
 ---
@@ -118,6 +64,8 @@ const experiences = [
     <button data-variant="large" class="variant-btn bg-accent text-white text-xs px-3 py-1.5 transition-colors" title="Variant: Large">L</button>
     <button data-variant="minimal" class="variant-btn bg-slate-800 text-slate-400 text-xs px-3 py-1.5 border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors" title="Variant: Minimal (Logo + Title)">B</button>
   </div>
+
+
 
   <main class="bg-primary-dark text-white min-h-screen">
     
@@ -159,7 +107,7 @@ const experiences = [
     <div id="featured">
       <SectionHeader 
         title={t('section.featured.title')}
-        emphasis={locale === 'fr' ? 'Sélectionnés' : 'Featured'}
+        emphasis={t('section.featured.emphasis')}
         link="/en/projects"
         linkText={t('featured.viewAll')}
       />
@@ -192,7 +140,7 @@ const experiences = [
                 <svg class="w-12 h-12 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                <span class="text-base font-mono text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
+                <span class="text-base font-mono text-slate-600">{t('carousel.yourProject')}</span>
               </div>
             </div>
           </div>
@@ -233,7 +181,7 @@ const experiences = [
                 <svg class="w-12 h-12 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                <span class="text-base font-mono text-slate-600">{locale === 'fr' ? 'Votre projet' : 'Your project'}</span>
+                <span class="text-base font-mono text-slate-600">{t('carousel.yourProject')}</span>
               </div>
             </div>
           </div>
@@ -245,7 +193,7 @@ const experiences = [
     <div id="experiences">
       <SectionHeader 
         title={t('section.experience.title')}
-        emphasis={locale === 'fr' ? 'Expérience' : 'Experience'}
+        emphasis={t('section.experience.emphasis')}
       />
     </div>
 
@@ -255,7 +203,7 @@ const experiences = [
         <!-- Plane -->
         <div id="timeline-plane" class="absolute left-1/2 top-0 z-20" style="transform: translateX(-50%) translateY(0) rotate(-90deg);">
           <div class="w-8 h-8 text-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
           </div>
         </div>
 
@@ -301,22 +249,12 @@ const experiences = [
     </div>
 
     <!-- The Arsenal -->
-    <SectionHeader 
-      title={t('section.arsenal.title')}
-      emphasis={locale === 'fr' ? 'Arsenal' : 'Arsenal'}
+    <ArsenalSection
+      title={t('section.techStack.title')}
+      emphasis={t('section.techStack.emphasis')}
+      coreLabel={t('section.techStack.coreLabel')}
     />
 
-    <div class="flex flex-col border-y-2 border-slate-800">
-      {techStack.map((item, i) => (
-        <TechStackItem 
-          number={i + 1}
-          name={item.name}
-          description={item.desc}
-          icon={item.icon}
-        />
-      ))}
-    </div>
-    
     <CTASection 
       message={t('cta.message')}
       emailLabel={t('cta.emailLabel')}
@@ -358,7 +296,7 @@ const experiences = [
 
   // Epic animation + Plane
   const timelineContainer = document.querySelector('.py-16.border-y-2') as HTMLElement;
-  const plane = document.getElementById('timeline-plane');
+  const plane = document.getElementById('timeline-plane') as HTMLElement;
   if (timelineContainer) timelineContainer.classList.add('anim-epic');
 
   const observerOptions = {
@@ -380,42 +318,61 @@ const experiences = [
   });
 
   // Plane scroll: visits each dot, nose-up then flips down
-  if (plane) {
-    const experienceSection = document.getElementById('experiences');
-    const timelineWrapper = experienceSection?.querySelector('.py-16') as HTMLElement;
-    window.addEventListener('scroll', () => {
-      if (!experienceSection || !timelineWrapper) return;
-      const wrapperRect = timelineWrapper.getBoundingClientRect();
-      const viewportH = window.innerHeight;
-      
-      if (wrapperRect.bottom < 0 || wrapperRect.top > viewportH) return;
+  if (plane && timelineContainer) {
+    const items = Array.from(document.querySelectorAll('.experience-item'));
+    const dots = items.map(item => item.querySelector('.relative.z-10'));
+    const dotsY = new Array<number>(items.length).fill(0);
+    const intersecting = new Set<Element>();
+    let activeIndex = 0;
+    let lastScrollY = window.scrollY;
+    let lastTarget = -1;
+    let lastRotation: number | null = null;
+    let placed = false;
 
-      const experienceItems = document.querySelectorAll('.experience-item');
-      if (!experienceItems.length) return;
+    // Layout is only ever read here (initial load + resize), never on scroll
+    function measureDots() {
+      const planeRect = plane.parentElement!.getBoundingClientRect();
+      dots.forEach((dot, i) => {
+        dotsY[i] = dot ? dot.getBoundingClientRect().top - planeRect.top : 0;
+      });
+    }
 
-      const items = Array.from(experienceItems);
-      let activeIndex = 0;
-
-      for (let i = 0; i < items.length; i++) {
-        const rect = items[i].getBoundingClientRect();
-        if (rect.top < viewportH * 0.8) {
-          activeIndex = i;
-        }
+    // Active dot = last item overlapping the top 80% of the viewport.
+    // Tracked via the observer, so a scroll event never triggers a reflow.
+    const dotObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) intersecting.add(entry.target);
+        else intersecting.delete(entry.target);
+      });
+      for (let i = items.length - 1; i >= 0; i--) {
+        if (intersecting.has(items[i])) { activeIndex = i; break; }
       }
+      placePlane();
+    }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
 
-      const targetItem = items[activeIndex];
-      const dot = targetItem.querySelector('.relative.z-10');
-      if (dot) {
-        const dotRect = dot.getBoundingClientRect();
-        const wrapperRect2 = timelineWrapper.getBoundingClientRect();
-        const targetY = dotRect.top - wrapperRect2.top;
-        
-        const progress = activeIndex / Math.max(1, items.length - 1);
-        const rotation = -90 + (progress * 90);
-        
-        plane.style.transform = `translateX(-50%) translateY(${targetY}px) rotate(${rotation}deg)`;
-        plane.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)';
-      }
-    });
+    function placePlane() {
+      const rotation = window.scrollY < lastScrollY ? -45 : 135;
+      lastScrollY = window.scrollY;
+
+      const targetChanged = activeIndex !== lastTarget;
+      const rotationChanged = rotation !== lastRotation;
+      if (targetChanged) lastTarget = activeIndex;
+      if (rotationChanged) lastRotation = rotation;
+
+      // Skip style writes entirely while nothing changed
+      if (!targetChanged && !rotationChanged) return;
+
+      plane.style.transition = placed ? 'transform 0.8s ease-in-out' : 'none';
+      placed = true;
+      plane.style.transform = `translateX(-50%) translateY(${dotsY[activeIndex]}px) rotate(${rotation}deg)`;
+    }
+
+    measureDots();
+    items.forEach(item => dotObserver.observe(item));
+    window.addEventListener('resize', measureDots);
+    window.addEventListener('scroll', placePlane, { passive: true });
+
+    // Instant initial placement on the first dot
+    placePlane();
   }
 </script>
