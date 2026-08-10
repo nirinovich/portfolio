@@ -42,11 +42,11 @@ const {
     
     <div class="relative flex h-full w-full items-center justify-start pl-4 pr-12 py-12">
       <!-- Name + hand-drawn arrow (overlay, doesn't affect image layout) -->
-      <div class="pointer-events-none absolute right-full top-1/2 z-10 mr-2 flex -translate-y-1/2 items-center gap-3">
-        <span class="whitespace-nowrap text-lg font-bold font-heading text-white">{name}</span>
-        <svg class="h-8 w-10 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" viewBox="0 0 40 32">
-          <path d="M2 8 C 12 24, 24 26, 36 14" />
-          <path d="M30 8 L 36.5 13.5 L 33 20" />
+      <div class="pointer-events-none absolute right-full top-1/2 z-10 mr-2 flex -translate-y-1/2 items-center gap-2">
+        <span class="whitespace-nowrap border-2 border-slate-800 bg-slate-900/80 px-4 py-2 text-lg font-bold font-heading text-white tracking-tight">{name}</span>
+        <svg class="h-10 w-14 text-accent" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 56 40">
+          <path d="M4 30 Q 26 44 50 16" />
+          <path d="M42 10 L 50.5 15.5 L 45.5 23" />
         </svg>
       </div>
 
