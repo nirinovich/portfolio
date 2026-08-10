@@ -32,6 +32,58 @@
   }
 }
 
+/* Custom scrollbar — dark track, accent thumb */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0367ff #0a1128;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: #0a1128;
+}
+*::-webkit-scrollbar-thumb {
+  background: #0367ff;
+  border: 2px solid #0a1128;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #024bcc;
+}
+
+/* Custom cursor (fine-pointer only) */
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+  }
+  .custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: #0367ff;
+    transition: opacity 0.2s;
+  }
+  .custom-cursor-ring {
+    width: 36px;
+    height: 36px;
+    margin: -18px 0 0 -18px;
+    border: 1.5px solid rgba(3, 103, 255, 0.5);
+    scale: 1;
+    transition: scale 0.2s ease, border-color 0.2s ease;
+  }
+  .custom-cursor-ring--active {
+    scale: 1.45;
+    border-color: #0367ff;
+  }
+}
+
 @keyframes carousel-scroll {
   0% {
     transform: translateX(0);

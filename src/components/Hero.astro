@@ -1,5 +1,5 @@
 ---
-// Hero component - Two-column hero with profile image and CTAs
+// Hero component - Two-column hero with profile image, hover card, and custom cursor
 import { Icon } from 'astro-icon/components';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 const { 
   name, 
   headline = 'I build websites and manage IT for SMEs',
-  role = 'Full-Stack Developer',
+  role = 'As a full-stack developer',
   resumeLabel, 
   githubLabel, 
   profileImage = '/profile.png' 
@@ -41,18 +41,52 @@ const {
     </div>
     
     <div class="relative flex h-full w-full items-center justify-start pl-4 pr-12 py-12">
-      <!-- Name + hand-drawn arrow (overlay, doesn't affect image layout) -->
-      <div class="pointer-events-none absolute right-full top-1/2 z-10 mr-2 flex -translate-y-1/2 items-center gap-2">
-        <span class="whitespace-nowrap border-2 border-slate-800 bg-slate-900/80 px-4 py-2 text-lg font-bold font-heading text-white tracking-tight">{name}</span>
-        <svg class="h-10 w-14 text-accent" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 56 40">
-          <path d="M4 30 Q 26 44 50 16" />
-          <path d="M42 10 L 50.5 15.5 L 45.5 23" />
-        </svg>
-      </div>
+      <div class="group relative">
+        <div class="w-full max-w-sm aspect-[3/4] border-2 border-slate-800 bg-slate-900 p-2 transform rotate-3 group-hover:rotate-0 transition-transform duration-500">
+           <img src={profileImage} alt={name} class="w-full h-full object-cover transition-all duration-700" />
+        </div>
 
-      <div class="w-full max-w-sm aspect-[3/4] border-2 border-slate-800 bg-slate-900 p-2 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-         <img src={profileImage} alt={name} class="w-full h-full object-cover transition-all duration-700" />
+        <!-- Hover card: name + role -->
+        <div class="pointer-events-none absolute right-full top-1/2 z-10 mr-4 -translate-y-1/2 translate-x-2 border-2 border-slate-800 bg-primary-dark p-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+          <p class="whitespace-nowrap text-lg font-bold font-heading text-white tracking-tight">{name}</p>
+          <p class="mt-1 text-xs font-mono uppercase tracking-widest text-accent">{role}</p>
+        </div>
       </div>
     </div>
   </div>
 </header>
+
+<script>
+  // Custom cursor (fine-pointer devices only)
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (finePointer) {
+    const dot = document.createElement('div');
+    dot.className = 'custom-cursor-dot';
+    const ring = document.createElement('div');
+    ring.className = 'custom-cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+
+    let x = 0, y = 0, rx = 0, ry = 0, rafId: number | null = null;
+
+    window.addEventListener('pointermove', (e) => {
+      x = e.clientX;
+      y = e.clientY;
+      dot.style.transform = `translate(${x}px, ${y}px)`;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          rafId = null;
+          rx += (x - rx) * 0.15;
+          ry += (y - ry) * 0.15;
+          ring.style.transform = `translate(${rx}px, ${ry}px)`;
+        });
+      }
+    });
+
+    // Grow ring over interactive elements
+    document.addEventListener('pointerover', (e) => {
+      const t = (e.target as HTMLElement).closest('a, button, [role="button"]');
+      ring.classList.toggle('custom-cursor-ring--active', !!t);
+    });
+  }
+</script>
