@@ -40,7 +40,7 @@ const links = [
       class="flex items-center justify-center text-slate-400 hover:text-white transition-colors border border-slate-700 px-2.5 py-1 rounded hover:bg-slate-800"
       aria-label={locale === 'fr' ? 'Switch to English' : 'Passer en français'}
     >
-      <Icon name="mdi:translate" class="w-4 h-4" />
+      <Icon name={locale === 'fr' ? 'flag:gb-4x3' : 'flag:fr-4x3'} class="w-5 h-3.5" />
     </a>
     <a
       href={prefix + '/contact'}

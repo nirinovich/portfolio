@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/compiler-binding-linux-x64-gnu": "^0.3.1",
     "@bruits/satteri-linux-x64-gnu": "^0.9.5",
+    "@iconify-json/flag": "^1.2.12",
     "@iconify-json/mdi": "^1.2.3",
     "@lucide/astro": "^1.28.0",
     "@rolldown/binding-linux-x64-gnu": "^1.1.5",
