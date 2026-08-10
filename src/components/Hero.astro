@@ -5,6 +5,7 @@ import { Icon } from 'astro-icon/components';
 interface Props {
   name: string;
   headline?: string;
+  role?: string;
   resumeLabel: string;
   githubLabel: string;
   profileImage?: string;
@@ -13,6 +14,7 @@ interface Props {
 const { 
   name, 
   headline = 'I build websites and manage IT for SMEs',
+  role = 'Full-Stack Developer',
   resumeLabel, 
   githubLabel, 
   profileImage = '/profile.png' 
@@ -23,6 +25,7 @@ const {
   <!-- Hero content -->
   <div class="flex-1 grid w-full grid-cols-1 md:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] items-stretch">
     <div class="flex flex-col justify-center gap-6 px-8 py-16 sm:px-16 sm:py-20 lg:pl-24 lg:pr-8">
+      <span class="text-xs font-mono uppercase tracking-widest text-accent">{role}</span>
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading leading-[1.1] tracking-tight text-white max-w-xl">
         {headline}
       </h1>
@@ -38,6 +41,15 @@ const {
     </div>
     
     <div class="relative flex h-full w-full items-center justify-start pl-4 pr-12 py-12">
+      <!-- Name + hand-drawn arrow (overlay, doesn't affect image layout) -->
+      <div class="pointer-events-none absolute right-full top-1/2 z-10 mr-2 flex -translate-y-1/2 items-center gap-3">
+        <span class="whitespace-nowrap text-lg font-bold font-heading text-white">{name}</span>
+        <svg class="h-8 w-10 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" viewBox="0 0 40 32">
+          <path d="M2 8 C 12 24, 24 26, 36 14" />
+          <path d="M30 8 L 36.5 13.5 L 33 20" />
+        </svg>
+      </div>
+
       <div class="w-full max-w-sm aspect-[3/4] border-2 border-slate-800 bg-slate-900 p-2 transform rotate-3 hover:rotate-0 transition-transform duration-500">
          <img src={profileImage} alt={name} class="w-full h-full object-cover transition-all duration-700" />
       </div>
