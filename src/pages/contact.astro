@@ -5,6 +5,13 @@ import { Icon } from 'astro-icon/components';
 
 const locale = (Astro.currentLocale ?? 'fr') as 'fr' | 'en';
 const t = useTranslations(locale);
+
+const services = [
+  t('services.1.title'),
+  t('services.2.title'),
+  t('services.3.title'),
+  t('services.4.title'),
+];
 ---
 
 <Layout title={`${t('contact.title')} — Nikita Nirinovich`}>
@@ -18,37 +25,70 @@ const t = useTranslations(locale);
 
     <section>
       <div class="px-8 py-16 sm:px-16 sm:py-24 lg:px-24">
-        <div class="max-w-xl">
-          <!-- Primary CTA: email -->
-          <a
-            href="mailto:nikita@nirinovich.com"
-            class="group flex items-center gap-5 border-2 border-slate-800 bg-slate-900 p-6 transition-colors hover:border-slate-600 sm:p-8"
-          >
-            <div class="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-slate-800 bg-primary-dark">
-              <Icon name="mdi:email" class="h-7 w-7 text-accent" />
-            </div>
-            <div class="min-w-0">
-              <h2 class="text-xl font-bold font-heading text-white group-hover:text-accent transition-colors">{t('contact.emailCta')}</h2>
-              <p class="truncate text-base text-slate-400">nikita@nirinovich.com</p>
-            </div>
-            <span class="ml-auto shrink-0 text-base font-mono uppercase tracking-widest text-accent">→</span>
-          </a>
-
-          <!-- Quiet signal line -->
-          <p class="mt-8 text-sm font-mono uppercase tracking-widest text-slate-500">
-            {t('contact.availability')} — {t('contact.location')} · {t('contact.responseTime')} · {t('contact.remote')} · FR · EN
-          </p>
-
-          <!-- Secondary channels -->
-          <div class="mt-12 flex gap-6">
-            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-slate-400 transition-colors hover:text-accent">
-              <Icon name="mdi:linkedin" class="h-4 w-4" />
-              LinkedIn
+        <div class="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
+          <!-- Left: the action -->
+          <div>
+            <a
+              href="mailto:nikita@nirinovich.com"
+              class="group flex items-center gap-5 border-2 border-slate-800 bg-slate-900 p-6 transition-colors hover:border-slate-600 sm:p-8"
+            >
+              <div class="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-slate-800 bg-primary-dark">
+                <Icon name="mdi:email" class="h-7 w-7 text-accent" />
+              </div>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold font-heading text-white group-hover:text-accent transition-colors">{t('contact.emailCta')}</h2>
+                <p class="truncate text-base text-slate-400">nikita@nirinovich.com</p>
+              </div>
+              <span class="ml-auto shrink-0 text-base font-mono uppercase tracking-widest text-accent">→</span>
             </a>
-            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-slate-400 transition-colors hover:text-accent">
-              <Icon name="mdi:github" class="h-4 w-4" />
-              GitHub
-            </a>
+
+            <p class="mt-8 text-sm font-mono uppercase tracking-widest text-slate-500">
+              {t('contact.availability')} — {t('contact.location')} · {t('contact.responseTime')} · {t('contact.remote')} · FR · EN
+            </p>
+
+            <div class="mt-12 flex gap-6">
+              <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-slate-400 transition-colors hover:text-accent">
+                <Icon name="mdi:linkedin" class="h-4 w-4" />
+                LinkedIn
+              </a>
+              <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-slate-400 transition-colors hover:text-accent">
+                <Icon name="mdi:github" class="h-4 w-4" />
+                GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: what I do + what happens next -->
+          <div class="flex flex-col gap-12">
+            <div>
+              <h3 class="text-xs font-mono uppercase tracking-widest text-slate-500">{t('contact.servicesLabel')}</h3>
+              <ul class="mt-4">
+                {services.map((service) => (
+                  <li class="flex items-center gap-3 border-b border-slate-800 py-3">
+                    <span class="h-1.5 w-1.5 shrink-0 bg-accent"></span>
+                    <span class="text-base font-bold font-heading text-white">{service}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-xs font-mono uppercase tracking-widest text-slate-500">{t('contact.processLabel')}</h3>
+              <ol class="mt-4">
+                <li class="flex items-center gap-3 border-b border-slate-800 py-3">
+                  <span class="w-8 shrink-0 text-sm font-mono text-accent">01</span>
+                  <span class="text-base text-slate-300">{t('contact.step1')}</span>
+                </li>
+                <li class="flex items-center gap-3 border-b border-slate-800 py-3">
+                  <span class="w-8 shrink-0 text-sm font-mono text-accent">02</span>
+                  <span class="text-base text-slate-300">{t('contact.step2')}</span>
+                </li>
+                <li class="flex items-center gap-3 py-3">
+                  <span class="w-8 shrink-0 text-sm font-mono text-accent">03</span>
+                  <span class="text-base text-slate-300">{t('contact.step3')}</span>
+                </li>
+              </ol>
+            </div>
           </div>
         </div>
       </div>
