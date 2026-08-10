@@ -48,42 +48,85 @@ function entryIsIcon(entry: TechStackEntry): entry is Extract<TechStackEntry, { 
       ))}
     </div>
 
-    <!-- Grouped stack -->
+    <!-- Grouped stack: Frontend + Design & Outils share a row (desktop), Backend full width -->
     <div class="mt-8 flex flex-col gap-6">
-      {techStackGroups.map((group) => (
-        <div class="flex flex-col gap-3">
-          <div class="flex items-center gap-3">
-            <h3 class="text-sm font-bold uppercase tracking-wider font-heading text-white">{group.category}</h3>
-            <div class="h-px flex-1 bg-slate-800"></div>
-          </div>
-          <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-            {group.items.map((item) => (
-              <div
-                class="group flex min-h-[72px] flex-col items-center justify-center gap-2 rounded-md border border-slate-800/70 bg-slate-900/40 px-2 py-3 transition-colors hover:border-slate-600 hover:bg-slate-800/40 active:bg-slate-800/60"
-              >
-                {entryIsIcon(item) ? (
-                  <>
-                    <img
-                      src={`https://cdn.simpleicons.org/${item.icon}/${item.color}`}
-                      alt=""
-                      class="h-6 w-6 object-contain"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      decoding="async"
-                    />
-                    <span class="text-center text-xs leading-tight text-slate-400 group-hover:text-white transition-colors">{item.name}</span>
-                  </>
-                ) : (
-                  <span class="rounded-sm border border-slate-700 bg-slate-900 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-slate-500 transition-colors group-hover:border-slate-500 group-hover:text-slate-300">
-                    {item.name}
-                  </span>
-                )}
+      <!-- Row: Frontend (left) + Design & Outils (right) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {techStackGroups
+          .filter(g => g.category !== 'Backend & Data')
+          .map((group) => (
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-3">
+                <h3 class="text-sm font-bold uppercase tracking-wider font-heading text-white">{group.category}</h3>
+                <div class="h-px flex-1 bg-slate-800"></div>
               </div>
-            ))}
+              <div class="grid grid-cols-3 gap-2">
+                {group.items.map((item) => (
+                  <div
+                    class="group flex min-h-[72px] flex-col items-center justify-center gap-2 rounded-md border border-slate-800/70 bg-slate-900/40 px-2 py-3 transition-colors hover:border-slate-600 hover:bg-slate-800/40 active:bg-slate-800/60"
+                  >
+                    {entryIsIcon(item) ? (
+                      <>
+                        <img
+                          src={`https://cdn.simpleicons.org/${item.icon}/${item.color}`}
+                          alt=""
+                          class="h-6 w-6 object-contain"
+                          loading="lazy"
+                          width="24"
+                          height="24"
+                          decoding="async"
+                        />
+                        <span class="text-center text-xs leading-tight text-slate-400 group-hover:text-white transition-colors">{item.name}</span>
+                      </>
+                    ) : (
+                      <span class="rounded-sm border border-slate-700 bg-slate-900 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-slate-500 transition-colors group-hover:border-slate-500 group-hover:text-slate-300">
+                        {item.name}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+      </div>
+
+      <!-- Backend & Data (full width) -->
+      {techStackGroups
+        .filter(g => g.category === 'Backend & Data')
+        .map((group) => (
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+              <h3 class="text-sm font-bold uppercase tracking-wider font-heading text-white">{group.category}</h3>
+              <div class="h-px flex-1 bg-slate-800"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+              {group.items.map((item) => (
+                <div
+                  class="group flex min-h-[72px] flex-col items-center justify-center gap-2 rounded-md border border-slate-800/70 bg-slate-900/40 px-2 py-3 transition-colors hover:border-slate-600 hover:bg-slate-800/40 active:bg-slate-800/60"
+                >
+                  {entryIsIcon(item) ? (
+                    <>
+                      <img
+                        src={`https://cdn.simpleicons.org/${item.icon}/${item.color}`}
+                        alt=""
+                        class="h-6 w-6 object-contain"
+                        loading="lazy"
+                        width="24"
+                        height="24"
+                        decoding="async"
+                      />
+                      <span class="text-center text-xs leading-tight text-slate-400 group-hover:text-white transition-colors">{item.name}</span>
+                    </>
+                  ) : (
+                    <span class="rounded-sm border border-slate-700 bg-slate-900 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-slate-500 transition-colors group-hover:border-slate-500 group-hover:text-slate-300">
+                      {item.name}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   </div>
 </div>
