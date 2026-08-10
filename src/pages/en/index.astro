@@ -8,12 +8,12 @@ import ServicesSection from '../../components/ServicesSection.astro';
 import CTASection from '../../components/CTASection.astro';
 import { Lightbulb, Layers, Zap } from '@lucide/astro';
 import { useTranslations } from '../../i18n/translations';
-import { getCollection } from 'astro:content';
+import { getProjects } from '../../lib/content';
 
 const locale = (Astro.currentLocale ?? 'en') as 'fr' | 'en';
 const t = useTranslations(locale);
 
-const allProjects = await getCollection('projects');
+const allProjects = await getProjects(locale);
 const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const featuredProjects = sortedProjects.filter(p => p.data.featured).slice(0, 6);
 

@@ -1,20 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { useTranslations } from '../../i18n/translations';
-import { getCollection, render } from 'astro:content';
-
-const locale = (Astro.currentLocale ?? 'fr') as 'fr' | 'en';
-const t = useTranslations(locale);
+import { render } from 'astro:content';
+import { getProjects } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const projects = await getProjects('fr');
   return projects.map(project => ({
     params: { slug: project.id },
-    props: { project },
+    props: { project, locale: 'fr' },
   }));
 }
 
-const { project } = Astro.props;
+const { project, locale = 'fr' } = Astro.props;
+const t = useTranslations(locale);
 const { Content } = await render(project);
 const prefix = locale === 'en' ? '/en' : '';
 ---

@@ -1,12 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { useTranslations } from '../../i18n/translations';
-import { getCollection } from 'astro:content';
+import { getPosts } from '../../lib/content';
 
 const locale = (Astro.currentLocale ?? 'fr') as 'fr' | 'en';
 const t = useTranslations(locale);
 
-const allPosts = await getCollection('blog');
+const allPosts = await getPosts(locale);
 const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const prefix = locale === 'en' ? '/en' : '';
 ---

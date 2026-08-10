@@ -2,12 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { useTranslations } from '../../i18n/translations';
-import { getCollection } from 'astro:content';
+import { getProjects } from '../../lib/content';
 
 const locale = (Astro.currentLocale ?? 'fr') as 'fr' | 'en';
 const t = useTranslations(locale);
 
-const allProjects = await getCollection('projects');
+const allProjects = await getProjects(locale);
 const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const allTags = [...new Set(sortedProjects.flatMap(p => p.data.techStack))];
