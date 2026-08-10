@@ -12,45 +12,56 @@ const t = useTranslations(locale);
     <section class="border-b-2 border-slate-800">
       <div class="px-8 py-16 sm:px-16 sm:py-20 lg:px-24">
         <h1 class="text-4xl sm:text-5xl font-bold font-heading tracking-tight text-white">{t('contact.title')}</h1>
-        <p class="mt-4 text-lg text-slate-400 font-sans">{t('contact.description')}</p>
+        <p class="mt-4 max-w-xl text-lg text-slate-400 font-sans">{t('contact.description')}</p>
+
+        <!-- Availability line -->
+        <p class="mt-8 inline-flex items-center gap-2 border-2 border-slate-800 bg-slate-900 px-3 py-1.5">
+          <span class="h-2 w-2 rounded-full bg-accent"></span>
+          <span class="text-xs font-mono uppercase tracking-widest text-slate-300">{t('contact.availability')} — {t('contact.location')}</span>
+        </p>
       </div>
     </section>
 
     <section>
       <div class="px-8 py-12 sm:px-16 sm:py-16 lg:px-24">
         <div class="max-w-3xl">
-          <div class="flex flex-col border-2 border-slate-800">
-            <a href="mailto:nikita@nirinovich.com" class="group flex items-center gap-5 border-b-2 border-slate-800 p-6 transition-colors hover:bg-slate-900 sm:p-8">
-              <div class="flex h-12 w-12 shrink-0 items-center justify-center border-2 border-slate-800 bg-slate-900">
-                <Icon name="mdi:email" class="h-6 w-6 text-accent" />
-              </div>
-              <div class="min-w-0">
-                <h3 class="text-lg font-bold font-heading text-white group-hover:text-accent transition-colors">{t('contact.email')}</h3>
-                <p class="truncate text-sm text-slate-400">nikita@nirinovich.com</p>
-              </div>
-              <span class="ml-auto shrink-0 text-[10px] font-mono uppercase tracking-widest text-slate-500 group-hover:text-accent transition-colors">→</span>
-            </a>
+          <!-- Primary CTA: email -->
+          <a
+            href="mailto:nikita@nirinovich.com"
+            class="group flex items-center gap-5 border-2 border-slate-800 bg-slate-900 p-6 transition-colors hover:border-slate-600 sm:p-8"
+          >
+            <div class="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-slate-800 bg-primary-dark">
+              <Icon name="mdi:email" class="h-7 w-7 text-accent" />
+            </div>
+            <div class="min-w-0">
+              <h2 class="text-xl font-bold font-heading text-white group-hover:text-accent transition-colors">{t('contact.emailCta')}</h2>
+              <p class="truncate text-base text-slate-400">nikita@nirinovich.com</p>
+            </div>
+            <span class="ml-auto shrink-0 text-base font-mono uppercase tracking-widest text-accent">→</span>
+          </a>
 
-            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-5 border-b-2 border-slate-800 p-6 transition-colors hover:bg-slate-900 sm:p-8">
-              <div class="flex h-12 w-12 shrink-0 items-center justify-center border-2 border-slate-800 bg-slate-900">
-                <Icon name="mdi:linkedin" class="h-6 w-6 text-accent" />
+          <!-- Secondary channels -->
+          <div class="mt-4 flex flex-col border-2 border-slate-800">
+            <a href="https://www.linkedin.com/in/nirinovich/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 border-b-2 border-slate-800 p-5 transition-colors hover:bg-slate-900 sm:p-6">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center border-2 border-slate-800 bg-slate-900">
+                <Icon name="mdi:linkedin" class="h-5 w-5 text-accent" />
               </div>
               <div class="min-w-0">
-                <h3 class="text-lg font-bold font-heading text-white group-hover:text-accent transition-colors">{t('contact.linkedin')}</h3>
+                <h3 class="text-base font-bold font-heading text-white group-hover:text-accent transition-colors">{t('contact.linkedin')}</h3>
                 <p class="truncate text-sm text-slate-400">linkedin.com/in/nirinovich</p>
               </div>
-              <span class="ml-auto shrink-0 text-[10px] font-mono uppercase tracking-widest text-slate-500 group-hover:text-accent transition-colors">→</span>
+              <span class="ml-auto shrink-0 text-xs font-mono uppercase tracking-widest text-slate-500 group-hover:text-accent transition-colors">→</span>
             </a>
 
-            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-5 p-6 transition-colors hover:bg-slate-900 sm:p-8">
-              <div class="flex h-12 w-12 shrink-0 items-center justify-center border-2 border-slate-800 bg-slate-900">
-                <Icon name="mdi:github" class="h-6 w-6 text-accent" />
+            <a href="https://github.com/nirinovich" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 p-5 transition-colors hover:bg-slate-900 sm:p-6">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center border-2 border-slate-800 bg-slate-900">
+                <Icon name="mdi:github" class="h-5 w-5 text-accent" />
               </div>
               <div class="min-w-0">
-                <h3 class="text-lg font-bold font-heading text-white group-hover:text-accent transition-colors">{t('contact.github')}</h3>
+                <h3 class="text-base font-bold font-heading text-white group-hover:text-accent transition-colors">{t('contact.github')}</h3>
                 <p class="truncate text-sm text-slate-400">github.com/nirinovich</p>
               </div>
-              <span class="ml-auto shrink-0 text-[10px] font-mono uppercase tracking-widest text-slate-500 group-hover:text-accent transition-colors">→</span>
+              <span class="ml-auto shrink-0 text-xs font-mono uppercase tracking-widest text-slate-500 group-hover:text-accent transition-colors">→</span>
             </a>
           </div>
         </div>
